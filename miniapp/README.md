@@ -1,4 +1,4 @@
-# flexi — Telegram Mini App
+# stretcher — Telegram Mini App
 
 Мобильное приложение растяжки в духе Bend: практики по зонам, плеер с таймером,
 стрики, «флексометр» и конструктор собственных растяжек. Работает как Telegram
@@ -21,7 +21,7 @@ npm run build      # статика в dist/
 1. Создай бота у [@BotFather](https://t.me/BotFather): `/newbot`.
 2. Задеплой `dist/` на любой HTTPS-хостинг (Vercel, Cloudflare Pages, GitHub Pages).
 3. В BotFather: `/newapp` (или Bot Settings → Menu Button) → укажи URL сборки.
-4. Открой бота → кнопка меню запустит flexi.
+4. Открой бота → кнопка меню запустит stretcher.
 
 Роутинг сделан на hash-роутере, поэтому подходит любой статический хостинг
 без настройки rewrite-правил.
@@ -59,7 +59,7 @@ JAVA_HOME=$(/usr/libexec/java_home -v 21) ./gradlew assembleRelease # .apk дл�
 - APK: `android/app/build/outputs/apk/release/app-release.apk` — можно сразу
   поставить на телефон для проверки.
 
-Подпись: ключ `android/keystore/flexi-upload.jks`, пароли в
+Подпись: ключ `android/keystore/stretcher-upload.jks`, пароли в
 `android/keystore.properties`. **Сохрани оба файла в надёжном месте и не
 коммить** — без ключа нельзя будет обновлять приложение в Play. Package id:
 `com.flexi.stretch`, поменять можно в `capacitor.config.json` +

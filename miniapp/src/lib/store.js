@@ -2,7 +2,8 @@
 // Telegram CloudStorage — зеркало для переносимости между устройствами.
 import { cloudGet, cloudSet } from './telegram'
 
-const KEY = 'flexi.progress.v1'
+const KEY = 'stretcher.progress.v1'
+const OLD_KEY = 'flexi.progress.v1' // миграция со старого названия
 
 const empty = { sessions: [], bookmarks: [] }
 
@@ -11,7 +12,7 @@ const listeners = new Set()
 
 function load() {
   try {
-    const raw = localStorage.getItem(KEY)
+    const raw = localStorage.getItem(KEY) ?? localStorage.getItem(OLD_KEY)
     if (raw) return { ...empty, ...JSON.parse(raw) }
   } catch {
     /* повреждённые данные — начинаем заново */

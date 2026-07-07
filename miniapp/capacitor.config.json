@@ -1,6 +1,6 @@
 {
   "appId": "com.flexi.stretch",
-  "appName": "flexi",
+  "appName": "stretcher",
   "webDir": "dist",
   "backgroundColor": "#f7f5f1",
   "android": {

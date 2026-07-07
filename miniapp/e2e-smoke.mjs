@@ -7,7 +7,7 @@ const browser = await chromium.launch()
 const page = await browser.newPage({ viewport: { width: 390, height: 844 } })
 
 async function fail(msg) {
-  await page.screenshot({ path: '/tmp/flexi-e2e-fail.png' })
+  await page.screenshot({ path: '/tmp/stretcher-e2e-fail.png' })
   console.error('FAIL:', msg)
   await browser.close()
   process.exit(1)
@@ -29,7 +29,7 @@ try {
 } catch {
   await fail('нет экрана завершения')
 }
-await page.screenshot({ path: '/tmp/flexi-done.png' })
+await page.screenshot({ path: '/tmp/stretcher-done.png' })
 
 // 4. Статистика после перезагрузки (localStorage должен сохраниться)
 await page.goto(`${BASE}/#/stats`)
@@ -41,6 +41,6 @@ await page.getByRole('button', { name: 'История' }).click()
 const row = await page.locator('.history__title').first().textContent()
 if (!row.includes('Спина')) await fail(`в истории "${row}", ожидалась «Спина»`)
 
-await page.screenshot({ path: '/tmp/flexi-stats-after.png' })
+await page.screenshot({ path: '/tmp/stretcher-stats-after.png' })
 console.log('OK: сессия записана, стрик 1 день, история заполнена')
 await browser.close()

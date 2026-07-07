@@ -1,6 +1,6 @@
 {
-  "name": "flexi — растяжка каждый день",
-  "short_name": "flexi",
+  "name": "stretcher — растяжка каждый день",
+  "short_name": "stretcher",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#f7f5f1",

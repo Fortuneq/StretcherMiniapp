@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Генерация картинок для приложения flexi через kie.ai (nano-banana-pro).
+"""Генерация картинок для приложения stretcher через kie.ai (nano-banana-pro).
 
 Повторяет минималистичный плоский стиль существующих иллюстраций упражнений
-(assets/exercises/*.png), но каждая — НОВАЯ картинка. Плюс логотип flexi.
+(assets/exercises/*.png), но каждая — НОВАЯ картинка. Плюс логотип stretcher.
 Все картинки квадратные 1:1. Позы берутся из web/src/data/routines.json
 (поле name_en), имена файлов сохраняются — это drop-in замена.
 
@@ -14,11 +14,11 @@ API (kie.ai):
 
 Примеры:
   export KIE_API_KEY=...
-  python scripts/generate_flexi_images.py --logo           # только логотип
-  python scripts/generate_flexi_images.py --one            # 1 упражнение (тест)
-  python scripts/generate_flexi_images.py --exercises      # все упражнения
-  python scripts/generate_flexi_images.py --all            # логотип + все
-  python scripts/generate_flexi_images.py --exercises -j 6 # 6 потоков
+  python scripts/generate_stretcher_images.py --logo           # только логотип
+  python scripts/generate_stretcher_images.py --one            # 1 упражнение (тест)
+  python scripts/generate_stretcher_images.py --exercises      # все упражнения
+  python scripts/generate_stretcher_images.py --all            # логотип + все
+  python scripts/generate_stretcher_images.py --exercises -j 6 # 6 потоков
   # Повторный запуск пропускает уже готовые файлы (докачка).
 """
 from __future__ import annotations
@@ -65,8 +65,8 @@ BACKGROUNDS = [
 ]
 
 LOGO_PROMPT = (
-    "minimalist flat vector app logo icon for a stretching and flexibility app "
-    "called \"flexi\": a single smooth flexible ribbon, or an abstract human "
+    "minimalist flat vector app logo icon for a stretching and stretcherbility app "
+    "called \"stretcher\": a single smooth stretcherble ribbon, or an abstract human "
     "figure bending into a gentle graceful curve, muted pastel palette with soft "
     "blue and teal, solid light background, clean modern geometric style, "
     "centered and balanced, no photorealism, suitable as an app icon"
@@ -216,10 +216,10 @@ def main() -> None:
     key = api_key()
 
     if args.logo or args.all:
-        print("→ логотип flexi…", file=sys.stderr)
+        print("→ логотип stretcher…", file=sys.stderr)
         try:
-            generate(key, LOGO_PROMPT, OUT_DIR / "flexi_logo.png")
-            print(f"  ✓ {(OUT_DIR / 'flexi_logo.png').relative_to(ROOT)}",
+            generate(key, LOGO_PROMPT, OUT_DIR / "stretcher_logo.png")
+            print(f"  ✓ {(OUT_DIR / 'stretcher_logo.png').relative_to(ROOT)}",
                   file=sys.stderr)
         except Exception as e:
             print(f"  ✗ логотип: {e}", file=sys.stderr)

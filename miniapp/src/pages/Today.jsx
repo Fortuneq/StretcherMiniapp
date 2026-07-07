@@ -27,7 +27,7 @@ export default function Today() {
           {user?.photo_url ? (
             <img src={user.photo_url} alt="" />
           ) : (
-            <span>{(user?.first_name || 'F')[0]}</span>
+            <span>{(user?.first_name || 'S')[0]}</span>
           )}
         </div>
       </header>

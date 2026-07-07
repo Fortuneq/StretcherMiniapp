@@ -1,6 +1,6 @@
 {
- "uid": "flexi-main",
- "title": "flexi · обзор",
+ "uid": "stretcher-main",
+ "title": "stretcher · обзор",
  "timezone": "browser",
  "schemaVersion": 39,
  "refresh": "30s",
@@ -36,7 +36,7 @@
    },
    "targets": [
     {
-     "expr": "flexi_users_total",
+     "expr": "stretcher_users_total",
      "refId": "A",
      "legendFormat": "__auto"
     }
@@ -70,7 +70,7 @@
    },
    "targets": [
     {
-     "expr": "flexi_premium_active",
+     "expr": "stretcher_premium_active",
      "refId": "A",
      "legendFormat": "__auto"
     }
@@ -104,7 +104,7 @@
    },
    "targets": [
     {
-     "expr": "flexi_trial_active",
+     "expr": "stretcher_trial_active",
      "refId": "A",
      "legendFormat": "__auto"
     }
@@ -138,7 +138,7 @@
    },
    "targets": [
     {
-     "expr": "sum(flexi_payments_total)",
+     "expr": "sum(stretcher_payments_total)",
      "refId": "A",
      "legendFormat": "__auto"
     }
@@ -172,7 +172,7 @@
    },
    "targets": [
     {
-     "expr": "sum(flexi_revenue_total{currency=\"XTR\"})",
+     "expr": "sum(stretcher_revenue_total{currency=\"XTR\"})",
      "refId": "A",
      "legendFormat": "__auto"
     }
@@ -208,7 +208,7 @@
    },
    "targets": [
     {
-     "expr": "sum(flexi_revenue_total{currency=\"RUB\"})",
+     "expr": "sum(stretcher_revenue_total{currency=\"RUB\"})",
      "refId": "A",
      "legendFormat": "__auto"
     }
@@ -239,7 +239,7 @@
    },
    "targets": [
     {
-     "expr": "sum(flexi_payments_total) by (plan, provider)",
+     "expr": "sum(stretcher_payments_total) by (plan, provider)",
      "refId": "A",
      "legendFormat": "{{plan}} · {{provider}}"
     }
@@ -270,7 +270,7 @@
    },
    "targets": [
     {
-     "expr": "sum(flexi_revenue_total) by (plan, currency)",
+     "expr": "sum(stretcher_revenue_total) by (plan, currency)",
      "refId": "A",
      "legendFormat": "{{plan}} · {{currency}}"
     }
@@ -302,7 +302,7 @@
    },
    "targets": [
     {
-     "expr": "sum(rate(flexi_http_requests_total[5m])) by (status)",
+     "expr": "sum(rate(stretcher_http_requests_total[5m])) by (status)",
      "refId": "A",
      "legendFormat": "{{status}}"
     }
@@ -334,12 +334,12 @@
    },
    "targets": [
     {
-     "expr": "histogram_quantile(0.5, sum(rate(flexi_http_request_duration_seconds_bucket[5m])) by (le))",
+     "expr": "histogram_quantile(0.5, sum(rate(stretcher_http_request_duration_seconds_bucket[5m])) by (le))",
      "refId": "A",
      "legendFormat": "p50"
     },
     {
-     "expr": "histogram_quantile(0.95, sum(rate(flexi_http_request_duration_seconds_bucket[5m])) by (le))",
+     "expr": "histogram_quantile(0.95, sum(rate(stretcher_http_request_duration_seconds_bucket[5m])) by (le))",
      "refId": "B",
      "legendFormat": "p95"
     }
@@ -371,12 +371,12 @@
    },
    "targets": [
     {
-     "expr": "sum(rate(flexi_http_requests_total{status=~\"4..\"}[5m]))",
+     "expr": "sum(rate(stretcher_http_requests_total{status=~\"4..\"}[5m]))",
      "refId": "A",
      "legendFormat": "4xx"
     },
     {
-     "expr": "sum(rate(flexi_http_requests_total{status=~\"5..\"}[5m]))",
+     "expr": "sum(rate(stretcher_http_requests_total{status=~\"5..\"}[5m]))",
      "refId": "B",
      "legendFormat": "5xx"
     }
@@ -385,7 +385,7 @@
   },
   {
    "type": "timeseries",
-   "title": "CPU контейнеров flexi",
+   "title": "CPU контейнеров stretcher",
    "gridPos": {
     "x": 0,
     "y": 21,
@@ -408,7 +408,7 @@
    },
    "targets": [
     {
-     "expr": "sum(rate(container_cpu_usage_seconds_total{name=~\"flexi.*\"}[5m])) by (name)",
+     "expr": "sum(rate(container_cpu_usage_seconds_total{name=~\"stretcher.*\"}[5m])) by (name)",
      "refId": "A",
      "legendFormat": "{{name}}"
     }
@@ -417,7 +417,7 @@
   },
   {
    "type": "timeseries",
-   "title": "Память контейнеров flexi",
+   "title": "Память контейнеров stretcher",
    "gridPos": {
     "x": 12,
     "y": 21,
@@ -440,7 +440,7 @@
    },
    "targets": [
     {
-     "expr": "container_memory_working_set_bytes{name=~\"flexi.*\"}",
+     "expr": "container_memory_working_set_bytes{name=~\"stretcher.*\"}",
      "refId": "A",
      "legendFormat": "{{name}}"
     }

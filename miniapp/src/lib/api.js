@@ -1,4 +1,4 @@
-// Клиент flexi API. Авторизация — подпись Telegram initData;
+// Клиент stretcher API. Авторизация — подпись Telegram initData;
 // вне Telegram запросы не ходят (приложение живёт в локальном режиме).
 const tg = window.Telegram?.WebApp ?? null
 

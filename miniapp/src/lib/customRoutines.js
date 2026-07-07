@@ -3,14 +3,15 @@
 import { canUseApi, fetchCustomRoutines, pushCustomRoutines } from './api'
 import { cloudGet, cloudSet } from './telegram'
 
-const KEY = 'flexi.custom.v1'
+const KEY = 'stretcher.custom.v1'
+const OLD_KEY = 'flexi.custom.v1' // миграция со старого названия
 
 let state = load()
 const listeners = new Set()
 
 function load() {
   try {
-    const raw = localStorage.getItem(KEY)
+    const raw = localStorage.getItem(KEY) ?? localStorage.getItem(OLD_KEY)
     if (raw) return JSON.parse(raw)
   } catch {
     /* повреждённые данные — начинаем заново */

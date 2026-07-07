@@ -1,4 +1,4 @@
-"""flexi API: пользователи, триал, подписки, платежи Telegram Stars.
+"""stretcher API: пользователи, триал, подписки, платежи Telegram Stars.
 
 Аутентификация — подпись Telegram WebApp initData (заголовок Authorization: tma <initData>).
 Хранилище — SQLite. Платежи — абстракция провайдеров: сейчас Stars (XTR), позже ЮKassa.
@@ -25,7 +25,7 @@ from prometheus_client import (
 
 BOT_TOKEN = os.environ["BOT_TOKEN"]
 WEBHOOK_SECRET = os.environ.get("WEBHOOK_SECRET", "")
-DB_PATH = os.environ.get("DB_PATH", "/data/flexi.db")
+DB_PATH = os.environ.get("DB_PATH", "/data/stretcher.db")
 APP_URL = os.environ.get("APP_URL", "https://true-scale.ru/")
 DOCS_URL = os.environ.get("DOCS_URL", "https://true-scale.ru/docs/")
 TG_API = f"https://api.telegram.org/bot{BOT_TOKEN}"
@@ -95,21 +95,21 @@ init_db()
 # --- Метрики Prometheus ---
 
 HTTP_REQUESTS = Counter(
-    "flexi_http_requests_total", "HTTP-запросы", ["method", "path", "status"]
+    "stretcher_http_requests_total", "HTTP-запросы", ["method", "path", "status"]
 )
 HTTP_DURATION = Histogram(
-    "flexi_http_request_duration_seconds", "Длительность запросов", ["method", "path"]
+    "stretcher_http_request_duration_seconds", "Длительность запросов", ["method", "path"]
 )
 PAYMENTS_TOTAL = Gauge(
-    "flexi_payments_total", "Оплаты за всё время", ["provider", "plan"]
+    "stretcher_payments_total", "Оплаты за всё время", ["provider", "plan"]
 )
 REVENUE_TOTAL = Gauge(
-    "flexi_revenue_total", "Выручка за всё время", ["provider", "plan", "currency"]
+    "stretcher_revenue_total", "Выручка за всё время", ["provider", "plan", "currency"]
 )
-USERS_TOTAL = Gauge("flexi_users_total", "Всего пользователей")
-PREMIUM_ACTIVE = Gauge("flexi_premium_active", "Активных платных подписок")
-TRIAL_ACTIVE = Gauge("flexi_trial_active", "Пользователей на триале")
-CUSTOM_ROUTINES = Gauge("flexi_custom_routines_users", "Пользователей со своими программами")
+USERS_TOTAL = Gauge("stretcher_users_total", "Всего пользователей")
+PREMIUM_ACTIVE = Gauge("stretcher_premium_active", "Активных платных подписок")
+TRIAL_ACTIVE = Gauge("stretcher_trial_active", "Пользователей на триале")
+CUSTOM_ROUTINES = Gauge("stretcher_custom_routines_users", "Пользователей со своими программами")
 
 # Группируем пути, чтобы не плодить метки на каждый запрос
 KNOWN_PATHS = {
@@ -243,7 +243,7 @@ async def create_invoice(body: dict, user: sqlite3.Row = Depends(current_user)):
         r = await client.post(
             f"{TG_API}/createInvoiceLink",
             json={
-                "title": f"Подписка flexi · {plan['title']}",
+                "title": f"Подписка stretcher · {plan['title']}",
                 "description": "Полный доступ ко всем практикам и конструктору",
                 "payload": f"sub:{user['tg_id']}:{plan_id}",
                 "currency": "XTR",
@@ -326,7 +326,7 @@ async def pay_yookassa(body: dict, user: sqlite3.Row = Depends(current_user)):
         "amount": amount,
         "capture": True,
         "confirmation": {"type": "redirect", "return_url": YOOKASSA_RETURN_URL},
-        "description": f"Подписка flexi · {plan['title']} (tg {user['tg_id']})",
+        "description": f"Подписка stretcher · {plan['title']} (tg {user['tg_id']})",
         "metadata": {
             "tg_id": str(user["tg_id"]),
             "plan": plan_id,
@@ -335,7 +335,7 @@ async def pay_yookassa(body: dict, user: sqlite3.Row = Depends(current_user)):
         "receipt": {
             "customer": customer,
             "items": [{
-                "description": f"Доступ к сервису flexi · {plan['title']}",
+                "description": f"Доступ к сервису stretcher · {plan['title']}",
                 "quantity": "1.00",
                 "amount": amount,
                 "vat_code": 1,
@@ -468,7 +468,7 @@ async def tg_webhook(
             await tg_call("sendMessage", {
                 "chat_id": chat_id,
                 "text": (
-                    "Привет! Я flexi — растяжка на каждый день.\n"
+                    "Привет! Я stretcher — растяжка на каждый день.\n"
                     "Первые сутки — полный доступ бесплатно.\n\n"
                     "Используя сервис, вы принимаете оферту и правила сервиса, "
                     "политику обработки персональных данных и даёте согласие на "

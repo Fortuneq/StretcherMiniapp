@@ -3,7 +3,7 @@
 // считаем локально от первого запуска, покупка недоступна.
 import { canUseApi, fetchMe, purchase } from './api'
 
-const TRIAL_KEY = 'flexi.trialStart.v1'
+const TRIAL_KEY = 'stretcher.trialStart.v1'
 const TRIAL_MS = 24 * 60 * 60 * 1000
 
 // Витрина планов для офлайна/ошибок сети — бэкенд отдаёт те же данные
@@ -14,7 +14,8 @@ const FALLBACK_PLANS = [
 ]
 
 function localTrialStart() {
-  let start = Number(localStorage.getItem(TRIAL_KEY))
+  // миграция со старого названия flexi
+  let start = Number(localStorage.getItem(TRIAL_KEY) ?? localStorage.getItem('flexi.trialStart.v1'))
   if (!start) {
     start = Date.now()
     try {

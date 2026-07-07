@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# Деплой flexi на gas2.
+# Деплой stretcher на gas2.
 # Правило: код попадает на сервер ТОЛЬКО через git — сначала пуш в GitHub,
-# затем git pull на сервере и сборка контейнеров из /opt/flexi.
+# затем git pull на сервере и сборка контейнеров из /opt/stretcher.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
@@ -12,28 +12,28 @@ fi
 git push origin main
 
 ssh -A gas2 'set -e
-cd /opt/flexi
+cd /opt/stretcher
 git pull --ff-only
 echo "→ Сборка образов…"
-sudo docker build -q -t flexi-api ./api
-sudo docker build -q -t flexi-webapp ./miniapp
+sudo docker build -q -t stretcher-api ./api
+sudo docker build -q -t stretcher-webapp ./miniapp
 echo "→ Перезапуск контейнеров…"
-sudo docker rm -f flexi-api flexi-app 2>/dev/null || true
-sudo docker run -d --name flexi-api --restart unless-stopped \
+sudo docker rm -f stretcher-api stretcher-app 2>/dev/null || true
+sudo docker run -d --name stretcher-api --restart unless-stopped \
   --network community_default \
-  -v /var/lib/flexi:/data \
-  --env-file /etc/flexi/api.env \
-  flexi-api
-sudo docker run -d --name flexi-app --restart unless-stopped \
+  -v /var/lib/stretcher:/data \
+  --env-file /etc/stretcher/api.env \
+  stretcher-api
+sudo docker run -d --name stretcher-app --restart unless-stopped \
   --network community_default \
-  flexi-webapp
-# Grafana flexi: конфиги примонтированы из репозитория — перезапуск подхватывает
-if sudo docker ps -a --format "{{.Names}}" | grep -q "^grafana-flexi$"; then
-  sudo docker restart grafana-flexi >/dev/null
+  stretcher-webapp
+# Grafana stretcher: конфиги примонтированы из репозитория — перезапуск подхватывает
+if sudo docker ps -a --format "{{.Names}}" | grep -q "^grafana-stretcher$"; then
+  sudo docker restart grafana-stretcher >/dev/null
 fi
 sleep 3
-sudo docker exec community-proxy-1 wget -qO- http://flexi-api:8080/api/health
+sudo docker exec community-proxy-1 wget -qO- http://stretcher-api:8080/api/health
 echo
-sudo docker exec community-proxy-1 wget -q --spider http://flexi-app:80/ && echo "webapp: ok"'
+sudo docker exec community-proxy-1 wget -q --spider http://stretcher-app:80/ && echo "webapp: ok"'
 
 echo "✓ Деплой завершён: https://true-scale.ru"
