@@ -26,3 +26,6 @@ miniapp/android/keystore.properties
 miniapp/ios/App/build/
 miniapp/ios/App/DerivedData/
 miniapp/ios/App/App.xcodeproj/xcuserdata/
+
+# Секреты
+.env
