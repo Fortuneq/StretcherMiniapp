@@ -91,6 +91,22 @@ def init_db() -> None:
                 plan TEXT NOT NULL,
                 created_at INTEGER NOT NULL
             );
+            CREATE TABLE IF NOT EXISTS leads (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                contact TEXT NOT NULL,
+                email TEXT NOT NULL,
+                plan TEXT NOT NULL,
+                buyer_type TEXT NOT NULL DEFAULT 'individual',
+                org_name TEXT,
+                inn TEXT,
+                utm TEXT,
+                payment_id TEXT UNIQUE,
+                paid INTEGER NOT NULL DEFAULT 0,
+                code TEXT UNIQUE,
+                redeemed_by INTEGER,
+                created_at INTEGER NOT NULL
+            );
             """
         )
 
@@ -112,6 +128,8 @@ PAYMENTS_TOTAL = Gauge(
 REVENUE_TOTAL = Gauge(
     "stretcher_revenue_total", "Выручка за всё время", ["provider", "plan", "currency"]
 )
+LEADS_TOTAL = Gauge("stretcher_leads_total", "Лидов с минисайта")
+LEADS_PAID = Gauge("stretcher_leads_paid", "Оплаченных лидов")
 USERS_TOTAL = Gauge("stretcher_users_total", "Всего пользователей")
 PREMIUM_ACTIVE = Gauge("stretcher_premium_active", "Активных платных подписок")
 TRIAL_ACTIVE = Gauge("stretcher_trial_active", "Пользователей на триале")
@@ -122,6 +140,7 @@ KNOWN_PATHS = {
     "/api/me", "/api/invoice", "/api/custom-routines",
     "/api/tg-webhook", "/api/yk-webhook", "/api/pay/yookassa",
     "/api/pay/yookassa/check", "/api/pay/methods",
+    "/api/lead", "/api/lead/status",
     "/api/health", "/api/metrics",
 }
 
@@ -153,6 +172,10 @@ def refresh_business_metrics() -> None:
         )
         CUSTOM_ROUTINES.set(
             conn.execute("SELECT COUNT(*) FROM custom_routines").fetchone()[0]
+        )
+        LEADS_TOTAL.set(conn.execute("SELECT COUNT(*) FROM leads").fetchone()[0])
+        LEADS_PAID.set(
+            conn.execute("SELECT COUNT(*) FROM leads WHERE paid = 1").fetchone()[0]
         )
         for provider, plan, cnt, total, currency in conn.execute(
             """SELECT provider, plan, COUNT(*), SUM(amount), currency
@@ -297,48 +320,14 @@ def put_custom(body: dict, user: sqlite3.Row = Depends(current_user)):
 
 # --- ЮKassa: оплата картой для физлиц и юрлиц ---
 
-@app.get("/api/pay/methods")
-def pay_methods():
-    return {"stars": True, "yookassa": bool(YOOKASSA_SHOP_ID and YOOKASSA_SECRET_KEY)}
-
-
-@app.post("/api/pay/yookassa")
-async def pay_yookassa(body: dict, user: sqlite3.Row = Depends(current_user)):
-    if not (YOOKASSA_SHOP_ID and YOOKASSA_SECRET_KEY):
-        raise HTTPException(503, "оплата картой пока недоступна")
-    plan_id = body.get("plan")
-    plan = PLANS.get(plan_id)
-    if not plan:
-        raise HTTPException(400, "unknown plan")
-
-    email = (body.get("email") or "").strip()
-    if not re.fullmatch(r"[^@\s]+@[^@\s]+\.[^@\s]+", email):
-        raise HTTPException(400, "нужен e-mail для чека")
-
-    buyer_type = body.get("buyer_type", "individual")
-    customer = {"email": email}
-    if buyer_type == "company":
-        org_name = (body.get("org_name") or "").strip()
-        inn = (body.get("inn") or "").strip()
-        if not org_name:
-            raise HTTPException(400, "нужно название организации")
-        if not re.fullmatch(r"\d{10}", inn):
-            raise HTTPException(400, "ИНН организации должен состоять из 10 цифр")
-        customer = {"full_name": org_name, "inn": inn, "email": email}
-    elif buyer_type != "individual":
-        raise HTTPException(400, "buyer_type: individual или company")
-
+async def create_yk_payment(plan, description, metadata, customer, return_url) -> dict:
     amount = {"value": f"{plan['rub']:.2f}", "currency": "RUB"}
     payload = {
         "amount": amount,
         "capture": True,
-        "confirmation": {"type": "redirect", "return_url": YOOKASSA_RETURN_URL},
-        "description": f"Подписка stretcher · {plan['title']} (tg {user['tg_id']})",
-        "metadata": {
-            "tg_id": str(user["tg_id"]),
-            "plan": plan_id,
-            "buyer_type": buyer_type,
-        },
+        "confirmation": {"type": "redirect", "return_url": return_url},
+        "description": description,
+        "metadata": metadata,
         "receipt": {
             "customer": customer,
             "items": [{
@@ -362,6 +351,53 @@ async def pay_yookassa(body: dict, user: sqlite3.Row = Depends(current_user)):
     data = r.json()
     if r.status_code not in (200, 201) or "confirmation" not in data:
         raise HTTPException(502, f"yookassa: {data.get('description', r.status_code)}")
+    return data
+
+
+def parse_buyer(body: dict) -> tuple[str, dict, str, str | None, str | None]:
+    """Общая валидация покупателя для чека: (buyer_type, customer, email, org, inn)."""
+    email = (body.get("email") or "").strip()
+    if not re.fullmatch(r"[^@\s]+@[^@\s]+\.[^@\s]+", email):
+        raise HTTPException(400, "нужен e-mail для чека")
+    buyer_type = body.get("buyer_type", "individual")
+    org_name = inn = None
+    customer = {"email": email}
+    if buyer_type == "company":
+        org_name = (body.get("org_name") or "").strip()
+        inn = (body.get("inn") or "").strip()
+        if not org_name:
+            raise HTTPException(400, "нужно название организации")
+        if not re.fullmatch(r"\d{10}", inn):
+            raise HTTPException(400, "ИНН организации должен состоять из 10 цифр")
+        customer = {"full_name": org_name, "inn": inn, "email": email}
+    elif buyer_type != "individual":
+        raise HTTPException(400, "buyer_type: individual или company")
+    return buyer_type, customer, email, org_name, inn
+
+
+@app.get("/api/pay/methods")
+def pay_methods():
+    return {"stars": True, "yookassa": bool(YOOKASSA_SHOP_ID and YOOKASSA_SECRET_KEY)}
+
+
+@app.post("/api/pay/yookassa")
+async def pay_yookassa(body: dict, user: sqlite3.Row = Depends(current_user)):
+    if not (YOOKASSA_SHOP_ID and YOOKASSA_SECRET_KEY):
+        raise HTTPException(503, "оплата картой пока недоступна")
+    plan_id = body.get("plan")
+    plan = PLANS.get(plan_id)
+    if not plan:
+        raise HTTPException(400, "unknown plan")
+
+    buyer_type, customer, _, _, _ = parse_buyer(body)
+
+    data = await create_yk_payment(
+        plan,
+        description=f"Подписка stretcher · {plan['title']} (tg {user['tg_id']})",
+        metadata={"tg_id": str(user["tg_id"]), "plan": plan_id, "buyer_type": buyer_type},
+        customer=customer,
+        return_url=YOOKASSA_RETURN_URL,
+    )
     with db() as conn:
         conn.execute(
             "INSERT OR IGNORE INTO yk_pending (payment_id, tg_id, plan, created_at) VALUES (?, ?, ?, ?)",
@@ -385,15 +421,75 @@ async def settle_yk_payment(payment_id: str) -> int | None:
     payment = r.json()
     meta = payment.get("metadata", {})
     status = payment.get("status")
+    if status != "succeeded":
+        if status == "canceled":
+            with db() as conn:
+                conn.execute("DELETE FROM yk_pending WHERE payment_id = ?", (payment_id,))
+        return None
+    kopeks = round(float(payment["amount"]["value"]) * 100)
+
+    # Оплата лида с минисайта: помечаем и выдаём код активации
+    if meta.get("kind") == "lead":
+        mark_lead_paid(payment_id, meta.get("plan"), kopeks)
+        return None
+
     tg_id = None
-    if status == "succeeded" and meta.get("plan") in PLANS and meta.get("tg_id"):
-        kopeks = round(float(payment["amount"]["value"]) * 100)
+    if meta.get("plan") in PLANS and meta.get("tg_id"):
         tg_id = int(meta["tg_id"])
         grant_premium(tg_id, meta["plan"], "yookassa", kopeks, "RUB", payment_id)
-    if tg_id or status == "canceled":
         with db() as conn:
             conn.execute("DELETE FROM yk_pending WHERE payment_id = ?", (payment_id,))
     return tg_id
+
+
+def mark_lead_paid(payment_id: str, plan_id: str | None, kopeks: int) -> None:
+    """Фиксирует оплату лида: код активации + строка в payments (tg_id=0 до активации)."""
+    if plan_id not in PLANS:
+        return
+    code = "act_" + uuid.uuid4().hex[:12]
+    now = int(time.time())
+    with db() as conn:
+        cur = conn.execute(
+            "UPDATE leads SET paid = 1, code = COALESCE(code, ?) WHERE payment_id = ? AND paid = 0",
+            (code, payment_id),
+        )
+        if cur.rowcount:
+            try:
+                conn.execute(
+                    """INSERT INTO payments (tg_id, plan, provider, amount, currency,
+                       charge_id, created_at) VALUES (0, ?, 'yookassa', ?, 'RUB', ?, ?)""",
+                    (plan_id, kopeks, payment_id, now),
+                )
+            except sqlite3.IntegrityError:
+                pass
+
+
+def redeem_lead(code: str, tg_id: int) -> str | None:
+    """Активация оплаченного лида по deep-link. Возвращает plan_id или None."""
+    now = int(time.time())
+    with db() as conn:
+        lead = conn.execute(
+            "SELECT id, plan, payment_id FROM leads WHERE code = ? AND paid = 1 AND redeemed_by IS NULL",
+            (code,),
+        ).fetchone()
+        if not lead or lead["plan"] not in PLANS:
+            return None
+        conn.execute("UPDATE leads SET redeemed_by = ? WHERE id = ?", (tg_id, lead["id"]))
+        row = conn.execute(
+            "SELECT premium_until FROM users WHERE tg_id = ?", (tg_id,)
+        ).fetchone()
+        base = max(now, row["premium_until"]) if row else now
+        new_until = base + PLANS[lead["plan"]]["days"] * 86400
+        conn.execute(
+            """INSERT INTO users (tg_id, created_at, premium_until) VALUES (?, ?, ?)
+               ON CONFLICT(tg_id) DO UPDATE SET premium_until = ?""",
+            (tg_id, now, new_until, new_until),
+        )
+        # выручку переписываем на реального пользователя
+        conn.execute(
+            "UPDATE payments SET tg_id = ? WHERE charge_id = ?", (tg_id, lead["payment_id"])
+        )
+    return lead["plan"]
 
 
 @app.post("/api/pay/yookassa/check")
@@ -437,6 +533,72 @@ async def yk_webhook(request: Request):
             "text": "Оплата прошла, подписка активна! Полный доступ открыт 🤸",
         })
     return {"ok": True}
+
+
+# --- Lead-минисайт: форма + оплата + активация через бота ---
+
+@app.post("/api/lead")
+async def create_lead(body: dict):
+    if not (YOOKASSA_SHOP_ID and YOOKASSA_SECRET_KEY):
+        raise HTTPException(503, "оплата пока недоступна")
+    if body.get("website"):  # honeypot для ботов
+        return {"ok": True}
+    name = (body.get("name") or "").strip()[:120]
+    contact = (body.get("contact") or "").strip()[:120]
+    if not name:
+        raise HTTPException(400, "как к тебе обращаться?")
+    if not contact:
+        raise HTTPException(400, "нужен telegram или телефон для связи")
+    plan_id = body.get("plan")
+    plan = PLANS.get(plan_id)
+    if not plan:
+        raise HTTPException(400, "unknown plan")
+    buyer_type, customer, email, org_name, inn = parse_buyer(body)
+    utm = json.dumps(body.get("utm") or {}, ensure_ascii=False)[:1000]
+
+    now = int(time.time())
+    with db() as conn:
+        lead_id = conn.execute(
+            """INSERT INTO leads (name, contact, email, plan, buyer_type, org_name,
+               inn, utm, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+            (name, contact, email, plan_id, buyer_type, org_name, inn, utm, now),
+        ).lastrowid
+
+    data = await create_yk_payment(
+        plan,
+        description=f"Подписка stretcher · {plan['title']} (лид {lead_id})",
+        metadata={"kind": "lead", "lead_id": str(lead_id), "plan": plan_id},
+        customer=customer,
+        return_url=f"{APP_URL}start/thanks.html",
+    )
+    with db() as conn:
+        conn.execute("UPDATE leads SET payment_id = ? WHERE id = ?", (data["id"], lead_id))
+    return {
+        "payment_id": data["id"],
+        "confirmation_url": data["confirmation"]["confirmation_url"],
+    }
+
+
+@app.get("/api/lead/status")
+async def lead_status(payment_id: str = ""):
+    if not re.fullmatch(r"[a-f0-9-]{36}", payment_id):
+        raise HTTPException(400, "bad payment_id")
+    with db() as conn:
+        lead = conn.execute(
+            "SELECT paid, code FROM leads WHERE payment_id = ?", (payment_id,)
+        ).fetchone()
+    if not lead:
+        raise HTTPException(404, "not found")
+    if not lead["paid"]:
+        # вебхук мог не дойти — проверяем напрямую
+        await settle_yk_payment(payment_id)
+        with db() as conn:
+            lead = conn.execute(
+                "SELECT paid, code FROM leads WHERE payment_id = ?", (payment_id,)
+            ).fetchone()
+    if lead["paid"] and lead["code"]:
+        return {"paid": True, "link": f"https://t.me/stretcher_robot?start={lead['code']}"}
+    return {"paid": False}
 
 
 # --- Вебхук бота: платежи и /start ---
@@ -509,6 +671,26 @@ async def tg_webhook(
         text = message.get("text") or ""
 
         if text.startswith("/start"):
+            # Активация оплаченного лида: /start act_XXXX
+            parts = text.split(maxsplit=1)
+            if len(parts) == 2 and parts[1].startswith("act_"):
+                plan_id = redeem_lead(parts[1].strip(), message["from"]["id"])
+                if plan_id:
+                    await tg_call("sendMessage", {
+                        "chat_id": chat_id,
+                        "text": (f"Оплата найдена — подписка «{PLANS[plan_id]['title']}» "
+                                 "активирована! Полный доступ открыт 🤸"),
+                        "reply_markup": {"inline_keyboard": [[
+                            {"text": "Открыть приложение", "web_app": {"url": APP_URL}}
+                        ]]},
+                    })
+                else:
+                    await tg_call("sendMessage", {
+                        "chat_id": chat_id,
+                        "text": ("Код активации не найден или уже использован. "
+                                 "Если ты оплатил на сайте — напиши нам, разберёмся."),
+                    })
+                return {"ok": True}
             await tg_call("sendMessage", {
                 "chat_id": chat_id,
                 "text": (
