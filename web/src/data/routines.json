@@ -1,0 +1,3755 @@
+{
+  "categories": {
+    "morning": "Утро",
+    "recovery": "Восстановление",
+    "quick": "Быстрые",
+    "full-body": "Всё тело",
+    "posture": "Осанка",
+    "office": "Офис",
+    "back": "Спина и поясница",
+    "upper": "Верх тела",
+    "hips": "Бёдра",
+    "legs": "Ноги",
+    "core": "Кор и пресс"
+  },
+  "routines": [
+    {
+      "slug": "abs",
+      "title": "Пресс",
+      "description": "Короткий блок на пресс.",
+      "category": "core",
+      "duration_min": 4,
+      "cover": "image_00077.png",
+      "exercises": [
+        {
+          "name": "Удержание скручивания",
+          "name_en": "Crunch Hold",
+          "image": "image_00077.png"
+        },
+        {
+          "name": "Удержание велосипеда",
+          "name_en": "Bicycle Crunch Hold",
+          "image": "image_00078.png"
+        },
+        {
+          "name": "Удержание касания пальцев",
+          "name_en": "Toe Touch Hold",
+          "image": "image_00079.png"
+        },
+        {
+          "name": "Подъём ноги",
+          "name_en": "Leg Lift",
+          "image": "image_00104.png"
+        },
+        {
+          "name": "Подъём ноги на боку",
+          "name_en": "Lying Side Leg Raise",
+          "image": "image_00115.png"
+        },
+        {
+          "name": "V-сидя",
+          "name_en": "V-Sit",
+          "image": "image_00080.png"
+        },
+        {
+          "name": "Мёртвый жук",
+          "name_en": "Dead Bug",
+          "image": "image_00116.png"
+        },
+        {
+          "name": "Лодочка",
+          "name_en": "Hollow Body",
+          "image": "image_00114.png"
+        }
+      ]
+    },
+    {
+      "slug": "arms",
+      "title": "Руки",
+      "description": "Укрепление рук и плеч.",
+      "category": "upper",
+      "duration_min": 4,
+      "cover": "image_00081.png",
+      "exercises": [
+        {
+          "name": "Планка на прямых руках",
+          "name_en": "Hand Plank",
+          "image": "image_00081.png"
+        },
+        {
+          "name": "Удержание отжимания",
+          "name_en": "Push Up Hold",
+          "image": "image_00093.png"
+        },
+        {
+          "name": "Обратная планка",
+          "name_en": "Reverse Plank",
+          "image": "image_00098.png"
+        },
+        {
+          "name": "Планка на одной руке",
+          "name_en": "Single Arm Plank",
+          "image": "image_00089.png"
+        },
+        {
+          "name": "Складка",
+          "name_en": "Pike",
+          "image": "image_00118.png"
+        },
+        {
+          "name": "Складка с согнутыми руками",
+          "name_en": "Bent Arm Pike",
+          "image": "image_00119.png"
+        },
+        {
+          "name": "Удержание отжимания на трицепс",
+          "name_en": "Dip Hold",
+          "image": "image_00120.png"
+        },
+        {
+          "name": "Удержание узкого отжимания",
+          "name_en": "Narrow Push Up Hold",
+          "image": "image_00094.png"
+        }
+      ]
+    },
+    {
+      "slug": "back",
+      "title": "Спина",
+      "description": "Мобильность и раскрытие спины.",
+      "category": "back",
+      "duration_min": 3,
+      "cover": "image_00091.png",
+      "exercises": [
+        {
+          "name": "Птица-собака",
+          "name_en": "Bird Dog",
+          "image": "image_00091.png",
+          "description": "Встань на четвереньки: ладони под плечами, колени под тазом. Одновременно вытяни правую руку вперёд и левую ногу назад до одной линии с корпусом. Держи спину ровной, не прогибайся в пояснице. На второй стороне поменяй руку и ногу."
+        },
+        {
+          "name": "Супермен",
+          "name_en": "Superman",
+          "image": "image_00105.png",
+          "description": "Ляг на живот, руки вытяни вперёд. На выдохе одновременно оторви от пола руки, грудь и ноги, взгляд вниз, шея — продолжение позвоночника. Удерживай положение, дыши ровно, не задерживай дыхание."
+        },
+        {
+          "name": "Аквамен",
+          "name_en": "Aquaman",
+          "image": "image_00106.png"
+        },
+        {
+          "name": "Самолётик",
+          "name_en": "Airplane",
+          "image": "image_00107.png"
+        }
+      ]
+    },
+    {
+      "slug": "cool-down",
+      "title": "Заминка",
+      "description": "Успокоить тело после нагрузки.",
+      "category": "recovery",
+      "duration_min": 8,
+      "cover": "image_00000.png",
+      "exercises": [
+        {
+          "name": "Приветствие вверх",
+          "name_en": "Upward Salute",
+          "image": "image_00000.png"
+        },
+        {
+          "name": "Касание пальцев ног",
+          "name_en": "Toe Touch",
+          "image": "image_00001.png"
+        },
+        {
+          "name": "Собака мордой вверх",
+          "name_en": "Upward Dog",
+          "image": "image_00003.png"
+        },
+        {
+          "name": "Поза ребёнка",
+          "name_en": "Child's Pose",
+          "image": "image_00014.png"
+        },
+        {
+          "name": "Колени к груди",
+          "name_en": "Knees-to-chest",
+          "image": "image_00019.png"
+        },
+        {
+          "name": "«Четвёрка» лёжа",
+          "name_en": "Lying Figure Four",
+          "image": "image_00025.png"
+        },
+        {
+          "name": "Бабочка лёжа",
+          "name_en": "Reclined Butterfly",
+          "image": "image_00042.png"
+        },
+        {
+          "name": "Скручивание позвоночника",
+          "name_en": "Spinal Twist",
+          "image": "image_00015.png"
+        },
+        {
+          "name": "Растяжка квадрицепса",
+          "name_en": "Quad Stretch",
+          "image": "image_00016.png"
+        },
+        {
+          "name": "Бабочка",
+          "name_en": "Butterfly",
+          "image": "image_00018.png"
+        },
+        {
+          "name": "Наклон сидя",
+          "name_en": "Seated Fold",
+          "image": "image_00017.png"
+        },
+        {
+          "name": "Плуг",
+          "name_en": "Plow",
+          "image": "image_00031.png"
+        }
+      ]
+    },
+    {
+      "slug": "core",
+      "title": "Кор",
+      "description": "Укрепление глубоких мышц корпуса.",
+      "category": "core",
+      "duration_min": 6,
+      "cover": "image_00081.png",
+      "exercises": [
+        {
+          "name": "Планка на прямых руках",
+          "name_en": "Hand Plank",
+          "image": "image_00081.png"
+        },
+        {
+          "name": "Планка на локтях",
+          "name_en": "Elbow Plank",
+          "image": "image_00085.png"
+        },
+        {
+          "name": "Складка на локтях",
+          "name_en": "Elbow Pike",
+          "image": "image_00117.png"
+        },
+        {
+          "name": "Боковая планка на локте",
+          "name_en": "Elbow Side Plank",
+          "image": "image_00087.png"
+        },
+        {
+          "name": "Обратная планка",
+          "name_en": "Reverse Plank",
+          "image": "image_00098.png"
+        },
+        {
+          "name": "Обратная планка с подъёмом ноги",
+          "name_en": "Reverse Plank Leg Lift",
+          "image": "image_00099.png"
+        },
+        {
+          "name": "Мост",
+          "name_en": "Bridge",
+          "image": "image_00096.png"
+        },
+        {
+          "name": "Подъём ноги",
+          "name_en": "Leg Lift",
+          "image": "image_00104.png"
+        },
+        {
+          "name": "Удержание касания пальцев",
+          "name_en": "Toe Touch Hold",
+          "image": "image_00079.png"
+        },
+        {
+          "name": "Удержание велосипеда",
+          "name_en": "Bicycle Crunch Hold",
+          "image": "image_00078.png"
+        },
+        {
+          "name": "Подъём ноги на боку",
+          "name_en": "Lying Side Leg Raise",
+          "image": "image_00115.png"
+        },
+        {
+          "name": "Супермен",
+          "name_en": "Superman",
+          "image": "image_00105.png",
+          "description": "Ляг на живот, руки вытяни вперёд. На выдохе одновременно оторви от пола руки, грудь и ноги, взгляд вниз, шея — продолжение позвоночника. Удерживай положение, дыши ровно, не задерживай дыхание."
+        }
+      ]
+    },
+    {
+      "slug": "deep-relax",
+      "title": "Глубокое расслабление",
+      "description": "Долгая мягкая практика на восстановление.",
+      "category": "recovery",
+      "duration_min": 20,
+      "cover": "image_00000.png",
+      "exercises": [
+        {
+          "name": "Приветствие вверх",
+          "name_en": "Upward Salute",
+          "image": "image_00000.png"
+        },
+        {
+          "name": "Тряпичная кукла",
+          "name_en": "Rag Doll",
+          "image": "image_00056.png"
+        },
+        {
+          "name": "Собака мордой вверх",
+          "name_en": "Upward Dog",
+          "image": "image_00003.png"
+        },
+        {
+          "name": "Поза ребёнка",
+          "name_en": "Child's Pose",
+          "image": "image_00014.png"
+        },
+        {
+          "name": "Колени к груди",
+          "name_en": "Knees-to-chest",
+          "image": "image_00019.png"
+        },
+        {
+          "name": "«Четвёрка» лёжа",
+          "name_en": "Lying Figure Four",
+          "image": "image_00025.png"
+        },
+        {
+          "name": "Скручивание позвоночника",
+          "name_en": "Spinal Twist",
+          "image": "image_00015.png"
+        },
+        {
+          "name": "Растяжка квадрицепса",
+          "name_en": "Quad Stretch",
+          "image": "image_00016.png"
+        },
+        {
+          "name": "Наклон сидя",
+          "name_en": "Seated Fold",
+          "image": "image_00017.png"
+        },
+        {
+          "name": "Бабочка",
+          "name_en": "Butterfly",
+          "image": "image_00018.png"
+        },
+        {
+          "name": "Сложенная бабочка",
+          "name_en": "Folded Butterfly",
+          "image": "image_00051.png"
+        },
+        {
+          "name": "Счастливый ребёнок",
+          "name_en": "Happy Baby",
+          "image": "image_00050.png"
+        },
+        {
+          "name": "Плуг",
+          "name_en": "Plow",
+          "image": "image_00031.png"
+        },
+        {
+          "name": "Бабочка лёжа",
+          "name_en": "Reclined Butterfly",
+          "image": "image_00042.png"
+        },
+        {
+          "name": "Ноги к стене",
+          "name_en": "Legs-up-wall",
+          "image": "image_00020.png"
+        }
+      ]
+    },
+    {
+      "slug": "desk-stretch",
+      "title": "Растяжка за столом",
+      "description": "Короткая практика прямо на рабочем месте.",
+      "category": "office",
+      "duration_min": 6,
+      "cover": "image_00032.png",
+      "exercises": [
+        {
+          "name": "«Четвёрка» сидя",
+          "name_en": "Seated Figure Four",
+          "image": "image_00032.png"
+        },
+        {
+          "name": "Растяжка задней сидя",
+          "name_en": "Seated Hamstring",
+          "image": "image_00033.png"
+        },
+        {
+          "name": "Вращение корпусом",
+          "name_en": "Trunk Rotation",
+          "image": "image_00034.png"
+        },
+        {
+          "name": "Раскрытие груди",
+          "name_en": "Chest Opener",
+          "image": "image_00035.png"
+        },
+        {
+          "name": "Обнимание одной рукой",
+          "name_en": "One Arm Hug",
+          "image": "image_00037.png"
+        },
+        {
+          "name": "Трицепс через голову",
+          "name_en": "Overhead Tricep",
+          "image": "image_00039.png"
+        },
+        {
+          "name": "Растяжка предплечья",
+          "name_en": "Forearm Stretch",
+          "image": "image_00041.png"
+        }
+      ]
+    },
+    {
+      "slug": "detox",
+      "title": "Разгрузка",
+      "description": "Скручивания и раскрытие для лёгкости.",
+      "category": "recovery",
+      "duration_min": 8,
+      "cover": "image_00026.png",
+      "exercises": [
+        {
+          "name": "Наклон с широкими ногами",
+          "name_en": "Wide Leg Bend",
+          "image": "image_00026.png"
+        },
+        {
+          "name": "Собака мордой вверх",
+          "name_en": "Upward Dog",
+          "image": "image_00003.png"
+        },
+        {
+          "name": "Собака мордой вниз",
+          "name_en": "Downward Dog",
+          "image": "image_00004.png",
+          "description": "Из упора на четвереньках подними таз вверх, выпрямляя руки и ноги, чтобы тело образовало треугольник. Тянись пятками к полу, а грудью — к бёдрам. Колени можно слегка согнуть, спина остаётся длинной."
+        },
+        {
+          "name": "Кошка-корова",
+          "name_en": "Cat Cow",
+          "image": "image_00027a.png"
+        },
+        {
+          "name": "Скручивание сидя",
+          "name_en": "Seated Twist",
+          "image": "image_00028.png"
+        },
+        {
+          "name": "Скручивание позвоночника",
+          "name_en": "Spinal Twist",
+          "image": "image_00015.png"
+        },
+        {
+          "name": "Поза саранчи",
+          "name_en": "Locust Pose",
+          "image": "image_00029.png"
+        },
+        {
+          "name": "Стойка на плечах",
+          "name_en": "Shoulder Stand",
+          "image": "image_00030.png"
+        },
+        {
+          "name": "Плуг",
+          "name_en": "Plow",
+          "image": "image_00031.png"
+        }
+      ]
+    },
+    {
+      "slug": "expert",
+      "title": "Продвинутый",
+      "description": "Длинная практика для опытных.",
+      "category": "full-body",
+      "duration_min": 30,
+      "cover": "image_00000.png",
+      "exercises": [
+        {
+          "name": "Приветствие вверх",
+          "name_en": "Upward Salute",
+          "image": "image_00000.png"
+        },
+        {
+          "name": "Тряпичная кукла",
+          "name_en": "Rag Doll",
+          "image": "image_00056.png"
+        },
+        {
+          "name": "Раскрытие груди",
+          "name_en": "Chest Opener",
+          "image": "image_00036.png"
+        },
+        {
+          "name": "Касание пальцев ног",
+          "name_en": "Toe Touch",
+          "image": "image_00001.png"
+        },
+        {
+          "name": "Трицепс через голову",
+          "name_en": "Overhead Tricep",
+          "image": "image_00040.png"
+        },
+        {
+          "name": "Наклон вперёд",
+          "name_en": "Forward Fold",
+          "image": "image_00053.png"
+        },
+        {
+          "name": "Обнимание одной рукой",
+          "name_en": "One Arm Hug",
+          "image": "image_00038.png"
+        },
+        {
+          "name": "Наклон с широкими ногами",
+          "name_en": "Wide Leg Bend",
+          "image": "image_00026.png"
+        },
+        {
+          "name": "Боковой выпад",
+          "name_en": "Side Lunge",
+          "image": "image_00023.png"
+        },
+        {
+          "name": "Растяжка в приседе",
+          "name_en": "Squat Stretch",
+          "image": "image_00068.png"
+        },
+        {
+          "name": "Выпад",
+          "name_en": "Lunge",
+          "image": "image_00002.png"
+        },
+        {
+          "name": "Обратный выпад",
+          "name_en": "Reverse Lunge",
+          "image": "image_00063.png"
+        },
+        {
+          "name": "Квадрицепс на колене",
+          "name_en": "Kneeling Quad",
+          "image": "image_00062.png"
+        },
+        {
+          "name": "Собака мордой вверх",
+          "name_en": "Upward Dog",
+          "image": "image_00003.png"
+        },
+        {
+          "name": "Поза ребёнка",
+          "name_en": "Child's Pose",
+          "image": "image_00014.png"
+        },
+        {
+          "name": "Собака мордой вниз",
+          "name_en": "Downward Dog",
+          "image": "image_00004.png",
+          "description": "Из упора на четвереньках подними таз вверх, выпрямляя руки и ноги, чтобы тело образовало треугольник. Тянись пятками к полу, а грудью — к бёдрам. Колени можно слегка согнуть, спина остаётся длинной."
+        },
+        {
+          "name": "Ваджрасана",
+          "name_en": "Thunderbolt",
+          "image": "image_00057.png"
+        },
+        {
+          "name": "Поза седла",
+          "name_en": "Saddle Pose",
+          "image": "image_00076.png"
+        },
+        {
+          "name": "Присед на носках",
+          "name_en": "Toe Squat",
+          "image": "image_00071.png"
+        },
+        {
+          "name": "Разгибание запястий",
+          "name_en": "Wrist Extension",
+          "image": "image_00072.png"
+        },
+        {
+          "name": "Поза ящерицы",
+          "name_en": "Lizard Pose",
+          "image": "image_00049.png"
+        },
+        {
+          "name": "Поза голубя",
+          "name_en": "Pigeon",
+          "image": "image_00013.png"
+        },
+        {
+          "name": "Поза лягушки",
+          "name_en": "Frog Pose",
+          "image": "image_00069.png"
+        },
+        {
+          "name": "Поза щенка",
+          "name_en": "Puppy Pose",
+          "image": "image_00075.png"
+        },
+        {
+          "name": "Скрученный сфинкс",
+          "name_en": "Twisted Sphinx",
+          "image": "image_00074.png"
+        },
+        {
+          "name": "Скручивание сидя",
+          "name_en": "Seated Twist",
+          "image": "image_00028.png"
+        },
+        {
+          "name": "Колени к груди",
+          "name_en": "Knees-to-chest",
+          "image": "image_00019.png"
+        },
+        {
+          "name": "Счастливый ребёнок",
+          "name_en": "Happy Baby",
+          "image": "image_00050.png"
+        },
+        {
+          "name": "«Четвёрка» лёжа",
+          "name_en": "Lying Figure Four",
+          "image": "image_00025.png"
+        },
+        {
+          "name": "Растяжка задней лёжа",
+          "name_en": "Lying Hamstring",
+          "image": "image_00024.png"
+        },
+        {
+          "name": "Бабочка лёжа",
+          "name_en": "Reclined Butterfly",
+          "image": "image_00042.png"
+        },
+        {
+          "name": "Скручивание позвоночника",
+          "name_en": "Spinal Twist",
+          "image": "image_00015.png"
+        },
+        {
+          "name": "Растяжка квадрицепса",
+          "name_en": "Quad Stretch",
+          "image": "image_00016.png"
+        },
+        {
+          "name": "Бабочка",
+          "name_en": "Butterfly",
+          "image": "image_00018.png"
+        },
+        {
+          "name": "Сложенная бабочка",
+          "name_en": "Folded Butterfly",
+          "image": "image_00051.png"
+        },
+        {
+          "name": "Двойной голубь",
+          "name_en": "Double Pigeon",
+          "image": "image_00070.png"
+        },
+        {
+          "name": "Наклон сидя",
+          "name_en": "Seated Fold",
+          "image": "image_00017.png"
+        },
+        {
+          "name": "Складка ноги в стороны",
+          "name_en": "Seated Straddle",
+          "image": "image_00066.png"
+        },
+        {
+          "name": "Барьерист",
+          "name_en": "Hurdler",
+          "image": "image_00064.png"
+        },
+        {
+          "name": "Стойка на плечах",
+          "name_en": "Shoulder Stand",
+          "image": "image_00030.png"
+        },
+        {
+          "name": "Плуг",
+          "name_en": "Plow",
+          "image": "image_00031.png"
+        },
+        {
+          "name": "Ноги к стене",
+          "name_en": "Legs-up-wall",
+          "image": "image_00020.png"
+        }
+      ]
+    },
+    {
+      "slug": "expert-2",
+      "title": "Продвинутый · 2",
+      "description": "Ещё один опытный комплекс.",
+      "category": "full-body",
+      "duration_min": 24,
+      "cover": "image_00100.png",
+      "exercises": [
+        {
+          "name": "Удержание приседа",
+          "name_en": "Squat Hold",
+          "image": "image_00100.png"
+        },
+        {
+          "name": "Удержание узкого приседа",
+          "name_en": "Narrow Squat Hold",
+          "image": "image_00101.png"
+        },
+        {
+          "name": "Удержание сумо-приседа",
+          "name_en": "Sumo Squat Hold",
+          "image": "image_00102.png"
+        },
+        {
+          "name": "Удержание сплит-выпада",
+          "name_en": "Split Lunge Hold",
+          "image": "image_00108.png"
+        },
+        {
+          "name": "Удержание бокового выпада",
+          "name_en": "Side Lunge Hold",
+          "image": "image_00109.png"
+        },
+        {
+          "name": "Реверанс-выпад",
+          "name_en": "Curtsy Lunge Hold",
+          "image": "image_00110.png"
+        },
+        {
+          "name": "Удержание «пистолета»",
+          "name_en": "Pistol Squat Hold",
+          "image": "image_00103.png"
+        },
+        {
+          "name": "Планка на прямых руках",
+          "name_en": "Hand Plank",
+          "image": "image_00081.png"
+        },
+        {
+          "name": "Планка с подъёмом ноги",
+          "name_en": "Hand Plank Leg Lift",
+          "image": "image_00082.png"
+        },
+        {
+          "name": "Боковая планка на руке",
+          "name_en": "Hand Side Plank",
+          "image": "image_00083.png"
+        },
+        {
+          "name": "Боковая планка с подъёмом ноги",
+          "name_en": "Hand Side Plank Leg Lift",
+          "image": "image_00084.png"
+        },
+        {
+          "name": "Планка на локтях",
+          "name_en": "Elbow Plank",
+          "image": "image_00085.png"
+        },
+        {
+          "name": "Планка на локтях с подъёмом ноги",
+          "name_en": "Elbow Plank Leg Lift",
+          "image": "image_00086.png"
+        },
+        {
+          "name": "Боковая планка на локте",
+          "name_en": "Elbow Side Plank",
+          "image": "image_00087.png"
+        },
+        {
+          "name": "Боковая планка на локте с подъёмом ноги",
+          "name_en": "Elbow Side Plank Leg Lift",
+          "image": "image_00088.png"
+        },
+        {
+          "name": "Планка на одной руке",
+          "name_en": "Single Arm Plank",
+          "image": "image_00089.png"
+        },
+        {
+          "name": "Бульдог",
+          "name_en": "Bulldog",
+          "image": "image_00090.png"
+        },
+        {
+          "name": "Птица-собака",
+          "name_en": "Bird Dog",
+          "image": "image_00091.png",
+          "description": "Встань на четвереньки: ладони под плечами, колени под тазом. Одновременно вытяни правую руку вперёд и левую ногу назад до одной линии с корпусом. Держи спину ровной, не прогибайся в пояснице. На второй стороне поменяй руку и ногу."
+        },
+        {
+          "name": "Планка «птица-собака»",
+          "name_en": "Bird Dog Plank",
+          "image": "image_00092.png"
+        },
+        {
+          "name": "Удержание отжимания",
+          "name_en": "Push Up Hold",
+          "image": "image_00093.png"
+        },
+        {
+          "name": "Удержание узкого отжимания",
+          "name_en": "Narrow Push Up Hold",
+          "image": "image_00094.png"
+        },
+        {
+          "name": "Удержание отжимания «человек-паук»",
+          "name_en": "Spiderman Push Up Hold",
+          "image": "image_00095.png"
+        },
+        {
+          "name": "Мост",
+          "name_en": "Bridge",
+          "image": "image_00096.png"
+        },
+        {
+          "name": "Мост с подъёмом ноги",
+          "name_en": "Bridge Leg Lift",
+          "image": "image_00097.png"
+        },
+        {
+          "name": "Обратная планка",
+          "name_en": "Reverse Plank",
+          "image": "image_00098.png"
+        },
+        {
+          "name": "Обратная планка с подъёмом ноги",
+          "name_en": "Reverse Plank Leg Lift",
+          "image": "image_00099.png"
+        },
+        {
+          "name": "Удержание скручивания",
+          "name_en": "Crunch Hold",
+          "image": "image_00077.png"
+        },
+        {
+          "name": "Удержание велосипеда",
+          "name_en": "Bicycle Crunch Hold",
+          "image": "image_00078.png"
+        },
+        {
+          "name": "Удержание касания пальцев",
+          "name_en": "Toe Touch Hold",
+          "image": "image_00079.png"
+        },
+        {
+          "name": "V-сидя",
+          "name_en": "V-Sit",
+          "image": "image_00080.png"
+        },
+        {
+          "name": "Подъём ноги",
+          "name_en": "Leg Lift",
+          "image": "image_00104.png"
+        },
+        {
+          "name": "Лодочка",
+          "name_en": "Hollow Body",
+          "image": "image_00114.png"
+        },
+        {
+          "name": "Мёртвый жук",
+          "name_en": "Dead Bug",
+          "image": "image_00116.png"
+        },
+        {
+          "name": "Супермен",
+          "name_en": "Superman",
+          "image": "image_00105.png",
+          "description": "Ляг на живот, руки вытяни вперёд. На выдохе одновременно оторви от пола руки, грудь и ноги, взгляд вниз, шея — продолжение позвоночника. Удерживай положение, дыши ровно, не задерживай дыхание."
+        },
+        {
+          "name": "Аквамен",
+          "name_en": "Aquaman",
+          "image": "image_00106.png"
+        },
+        {
+          "name": "Самолётик",
+          "name_en": "Airplane",
+          "image": "image_00107.png"
+        },
+        {
+          "name": "Складка",
+          "name_en": "Pike",
+          "image": "image_00118.png"
+        },
+        {
+          "name": "Складка с согнутыми руками",
+          "name_en": "Bent Arm Pike",
+          "image": "image_00119.png"
+        },
+        {
+          "name": "Планка у стены",
+          "name_en": "Wall Plank",
+          "image": "image_00123.png"
+        },
+        {
+          "name": "Складка у стены",
+          "name_en": "Wall Pike",
+          "image": "image_00122.png"
+        },
+        {
+          "name": "Стойка на руках у стены",
+          "name_en": "Wall Handstand",
+          "image": "image_00124.png"
+        }
+      ]
+    },
+    {
+      "slug": "full-body",
+      "title": "Всё тело",
+      "description": "Комплексная практика на всё тело.",
+      "category": "full-body",
+      "duration_min": 15,
+      "cover": "image_00000.png",
+      "exercises": [
+        {
+          "name": "Приветствие вверх",
+          "name_en": "Upward Salute",
+          "image": "image_00000.png"
+        },
+        {
+          "name": "Касание пальцев ног",
+          "name_en": "Toe Touch",
+          "image": "image_00001.png"
+        },
+        {
+          "name": "Раскрытие груди",
+          "name_en": "Chest Opener",
+          "image": "image_00036.png"
+        },
+        {
+          "name": "Наклон с широкими ногами",
+          "name_en": "Wide Leg Bend",
+          "image": "image_00026.png"
+        },
+        {
+          "name": "Боковой выпад",
+          "name_en": "Side Lunge",
+          "image": "image_00023.png"
+        },
+        {
+          "name": "Выпад",
+          "name_en": "Lunge",
+          "image": "image_00002.png"
+        },
+        {
+          "name": "Собака мордой вверх",
+          "name_en": "Upward Dog",
+          "image": "image_00003.png"
+        },
+        {
+          "name": "Поза ребёнка",
+          "name_en": "Child's Pose",
+          "image": "image_00014.png"
+        },
+        {
+          "name": "Собака мордой вниз",
+          "name_en": "Downward Dog",
+          "image": "image_00004.png",
+          "description": "Из упора на четвереньках подними таз вверх, выпрямляя руки и ноги, чтобы тело образовало треугольник. Тянись пятками к полу, а грудью — к бёдрам. Колени можно слегка согнуть, спина остаётся длинной."
+        },
+        {
+          "name": "Ваджрасана",
+          "name_en": "Thunderbolt",
+          "image": "image_00057.png"
+        },
+        {
+          "name": "Поза голубя",
+          "name_en": "Pigeon",
+          "image": "image_00013.png"
+        },
+        {
+          "name": "Скручивание сидя",
+          "name_en": "Seated Twist",
+          "image": "image_00028.png"
+        },
+        {
+          "name": "Колени к груди",
+          "name_en": "Knees-to-chest",
+          "image": "image_00019.png"
+        },
+        {
+          "name": "«Четвёрка» лёжа",
+          "name_en": "Lying Figure Four",
+          "image": "image_00025.png"
+        },
+        {
+          "name": "Растяжка задней лёжа",
+          "name_en": "Lying Hamstring",
+          "image": "image_00024.png"
+        },
+        {
+          "name": "Бабочка лёжа",
+          "name_en": "Reclined Butterfly",
+          "image": "image_00042.png"
+        },
+        {
+          "name": "Скручивание позвоночника",
+          "name_en": "Spinal Twist",
+          "image": "image_00015.png"
+        },
+        {
+          "name": "Растяжка квадрицепса",
+          "name_en": "Quad Stretch",
+          "image": "image_00016.png"
+        },
+        {
+          "name": "Бабочка",
+          "name_en": "Butterfly",
+          "image": "image_00018.png"
+        },
+        {
+          "name": "Наклон сидя",
+          "name_en": "Seated Fold",
+          "image": "image_00017.png"
+        },
+        {
+          "name": "Плуг",
+          "name_en": "Plow",
+          "image": "image_00031.png"
+        }
+      ]
+    },
+    {
+      "slug": "full-body-2",
+      "title": "Всё тело · 2",
+      "description": "Ещё один комплекс на всё тело.",
+      "category": "full-body",
+      "duration_min": 12,
+      "cover": "image_00077.png",
+      "exercises": [
+        {
+          "name": "Удержание скручивания",
+          "name_en": "Crunch Hold",
+          "image": "image_00077.png"
+        },
+        {
+          "name": "Удержание касания пальцев",
+          "name_en": "Toe Touch Hold",
+          "image": "image_00079.png"
+        },
+        {
+          "name": "Лодочка",
+          "name_en": "Hollow Body",
+          "image": "image_00114.png"
+        },
+        {
+          "name": "Удержание велосипеда",
+          "name_en": "Bicycle Crunch Hold",
+          "image": "image_00078.png"
+        },
+        {
+          "name": "Мост",
+          "name_en": "Bridge",
+          "image": "image_00096.png"
+        },
+        {
+          "name": "Мост с подъёмом ноги",
+          "name_en": "Bridge Leg Lift",
+          "image": "image_00097.png"
+        },
+        {
+          "name": "Боковая планка на локте",
+          "name_en": "Elbow Side Plank",
+          "image": "image_00087.png"
+        },
+        {
+          "name": "Подъём ноги на боку",
+          "name_en": "Lying Side Leg Raise",
+          "image": "image_00115.png"
+        },
+        {
+          "name": "Планка на прямых руках",
+          "name_en": "Hand Plank",
+          "image": "image_00081.png"
+        },
+        {
+          "name": "Бульдог",
+          "name_en": "Bulldog",
+          "image": "image_00090.png"
+        },
+        {
+          "name": "Удержание отжимания",
+          "name_en": "Push Up Hold",
+          "image": "image_00093.png"
+        },
+        {
+          "name": "Супермен",
+          "name_en": "Superman",
+          "image": "image_00105.png",
+          "description": "Ляг на живот, руки вытяни вперёд. На выдохе одновременно оторви от пола руки, грудь и ноги, взгляд вниз, шея — продолжение позвоночника. Удерживай положение, дыши ровно, не задерживай дыхание."
+        },
+        {
+          "name": "Самолётик",
+          "name_en": "Airplane",
+          "image": "image_00107.png"
+        },
+        {
+          "name": "Боковая планка на руке",
+          "name_en": "Hand Side Plank",
+          "image": "image_00083.png"
+        },
+        {
+          "name": "Складка",
+          "name_en": "Pike",
+          "image": "image_00118.png"
+        },
+        {
+          "name": "Складка с согнутыми руками",
+          "name_en": "Bent Arm Pike",
+          "image": "image_00119.png"
+        },
+        {
+          "name": "Удержание отжимания на трицепс",
+          "name_en": "Dip Hold",
+          "image": "image_00120.png"
+        },
+        {
+          "name": "Удержание приседа",
+          "name_en": "Squat Hold",
+          "image": "image_00100.png"
+        },
+        {
+          "name": "Удержание узкого приседа",
+          "name_en": "Narrow Squat Hold",
+          "image": "image_00101.png"
+        },
+        {
+          "name": "Удержание сумо-приседа",
+          "name_en": "Sumo Squat Hold",
+          "image": "image_00102.png"
+        },
+        {
+          "name": "Удержание сплит-выпада",
+          "name_en": "Split Lunge Hold",
+          "image": "image_00108.png"
+        },
+        {
+          "name": "Удержание бокового выпада",
+          "name_en": "Side Lunge Hold",
+          "image": "image_00109.png"
+        }
+      ]
+    },
+    {
+      "slug": "hamstrings",
+      "title": "Задняя поверхность",
+      "description": "Растяжка задней поверхности ног.",
+      "category": "legs",
+      "duration_min": 12,
+      "cover": "image_00056.png",
+      "exercises": [
+        {
+          "name": "Тряпичная кукла",
+          "name_en": "Rag Doll",
+          "image": "image_00056.png"
+        },
+        {
+          "name": "Наклон с широкими ногами",
+          "name_en": "Wide Leg Bend",
+          "image": "image_00026.png"
+        },
+        {
+          "name": "Боковой выпад",
+          "name_en": "Side Lunge",
+          "image": "image_00023.png"
+        },
+        {
+          "name": "Обратный выпад",
+          "name_en": "Reverse Lunge",
+          "image": "image_00063.png"
+        },
+        {
+          "name": "Наклон сидя",
+          "name_en": "Seated Fold",
+          "image": "image_00017.png"
+        },
+        {
+          "name": "Барьерист",
+          "name_en": "Hurdler",
+          "image": "image_00064.png"
+        },
+        {
+          "name": "Складка ноги в стороны",
+          "name_en": "Seated Straddle",
+          "image": "image_00066.png"
+        },
+        {
+          "name": "Подтягивание задней поверхности",
+          "name_en": "Hamstring Pulls",
+          "image": "image_00065.png"
+        }
+      ]
+    },
+    {
+      "slug": "hips",
+      "title": "Бёдра",
+      "description": "Раскрытие тазобедренных суставов.",
+      "category": "hips",
+      "duration_min": 13,
+      "cover": "image_00049.png",
+      "exercises": [
+        {
+          "name": "Поза ящерицы",
+          "name_en": "Lizard Pose",
+          "image": "image_00049.png"
+        },
+        {
+          "name": "Поза голубя",
+          "name_en": "Pigeon",
+          "image": "image_00013.png"
+        },
+        {
+          "name": "Сложенная бабочка",
+          "name_en": "Folded Butterfly",
+          "image": "image_00051.png"
+        },
+        {
+          "name": "Счастливый ребёнок",
+          "name_en": "Happy Baby",
+          "image": "image_00050.png"
+        },
+        {
+          "name": "«Четвёрка» лёжа",
+          "name_en": "Lying Figure Four",
+          "image": "image_00025.png"
+        },
+        {
+          "name": "Поза лягушки",
+          "name_en": "Frog Pose",
+          "image": "image_00069.png"
+        },
+        {
+          "name": "Растяжка в приседе",
+          "name_en": "Squat Stretch",
+          "image": "image_00068.png"
+        },
+        {
+          "name": "Двойной голубь",
+          "name_en": "Double Pigeon",
+          "image": "image_00070.png"
+        },
+        {
+          "name": "Бабочка лёжа",
+          "name_en": "Reclined Butterfly",
+          "image": "image_00042.png"
+        }
+      ]
+    },
+    {
+      "slug": "hips-1",
+      "title": "Бёдра · 1",
+      "description": "Мягкий блок на бёдра.",
+      "category": "hips",
+      "duration_min": 6,
+      "cover": "image_00002.png",
+      "exercises": [
+        {
+          "name": "Выпад",
+          "name_en": "Lunge",
+          "image": "image_00002.png"
+        },
+        {
+          "name": "Обратный выпад",
+          "name_en": "Reverse Lunge",
+          "image": "image_00063.png"
+        },
+        {
+          "name": "Бабочка",
+          "name_en": "Butterfly",
+          "image": "image_00018.png"
+        },
+        {
+          "name": "«Четвёрка» лёжа",
+          "name_en": "Lying Figure Four",
+          "image": "image_00025.png"
+        },
+        {
+          "name": "Растяжка квадрицепса",
+          "name_en": "Quad Stretch",
+          "image": "image_00016.png"
+        },
+        {
+          "name": "Скручивание позвоночника",
+          "name_en": "Spinal Twist",
+          "image": "image_00015.png"
+        }
+      ]
+    },
+    {
+      "slug": "hips-2",
+      "title": "Бёдра · 2",
+      "description": "Средний блок на бёдра.",
+      "category": "hips",
+      "duration_min": 10,
+      "cover": "image_00002.png",
+      "exercises": [
+        {
+          "name": "Выпад",
+          "name_en": "Lunge",
+          "image": "image_00002.png"
+        },
+        {
+          "name": "Обратный выпад",
+          "name_en": "Reverse Lunge",
+          "image": "image_00063.png"
+        },
+        {
+          "name": "Боковой выпад",
+          "name_en": "Side Lunge",
+          "image": "image_00023.png"
+        },
+        {
+          "name": "Поза ящерицы",
+          "name_en": "Lizard Pose",
+          "image": "image_00049.png"
+        },
+        {
+          "name": "Поза голубя",
+          "name_en": "Pigeon",
+          "image": "image_00013.png"
+        },
+        {
+          "name": "Барьерист",
+          "name_en": "Hurdler",
+          "image": "image_00064.png"
+        },
+        {
+          "name": "Растяжка квадрицепса",
+          "name_en": "Quad Stretch",
+          "image": "image_00016.png"
+        },
+        {
+          "name": "«Четвёрка» лёжа",
+          "name_en": "Lying Figure Four",
+          "image": "image_00025.png"
+        },
+        {
+          "name": "Скручивание позвоночника",
+          "name_en": "Spinal Twist",
+          "image": "image_00015.png"
+        },
+        {
+          "name": "Бабочка лёжа",
+          "name_en": "Reclined Butterfly",
+          "image": "image_00042.png"
+        },
+        {
+          "name": "Счастливый ребёнок",
+          "name_en": "Happy Baby",
+          "image": "image_00050.png"
+        }
+      ]
+    },
+    {
+      "slug": "hips-3",
+      "title": "Бёдра · 3",
+      "description": "Долгий блок на бёдра.",
+      "category": "hips",
+      "duration_min": 15,
+      "cover": "image_00138.png",
+      "exercises": [
+        {
+          "name": "Лягушка стоя",
+          "name_en": "Standing Frog",
+          "image": "image_00138.png"
+        },
+        {
+          "name": "Наклон с широкими ногами",
+          "name_en": "Wide Leg Bend",
+          "image": "image_00026.png"
+        },
+        {
+          "name": "Выпад",
+          "name_en": "Lunge",
+          "image": "image_00002.png"
+        },
+        {
+          "name": "Обратный выпад",
+          "name_en": "Reverse Lunge",
+          "image": "image_00063.png"
+        },
+        {
+          "name": "Боковой выпад",
+          "name_en": "Side Lunge",
+          "image": "image_00023.png"
+        },
+        {
+          "name": "Поза ящерицы",
+          "name_en": "Lizard Pose",
+          "image": "image_00049.png"
+        },
+        {
+          "name": "Поза лягушки",
+          "name_en": "Frog Pose",
+          "image": "image_00069.png"
+        },
+        {
+          "name": "Поза голубя",
+          "name_en": "Pigeon",
+          "image": "image_00013.png"
+        },
+        {
+          "name": "Наклонное 90/90",
+          "name_en": "Leaning 90/90",
+          "image": "image_00134.png"
+        },
+        {
+          "name": "90/90",
+          "name_en": "90/90",
+          "image": "image_00133.png"
+        },
+        {
+          "name": "Бабочка",
+          "name_en": "Butterfly",
+          "image": "image_00018.png"
+        },
+        {
+          "name": "Барьерист",
+          "name_en": "Hurdler",
+          "image": "image_00064.png"
+        },
+        {
+          "name": "Растяжка квадрицепса",
+          "name_en": "Quad Stretch",
+          "image": "image_00016.png"
+        },
+        {
+          "name": "«Четвёрка» лёжа",
+          "name_en": "Lying Figure Four",
+          "image": "image_00025.png"
+        },
+        {
+          "name": "Скручивание позвоночника",
+          "name_en": "Spinal Twist",
+          "image": "image_00015.png"
+        },
+        {
+          "name": "Бабочка лёжа",
+          "name_en": "Reclined Butterfly",
+          "image": "image_00042.png"
+        },
+        {
+          "name": "Обратная бабочка",
+          "name_en": "Reverse Butterfly",
+          "image": "image_00137.png"
+        },
+        {
+          "name": "Счастливый ребёнок",
+          "name_en": "Happy Baby",
+          "image": "image_00050.png"
+        },
+        {
+          "name": "Колени к груди",
+          "name_en": "Knees-to-chest",
+          "image": "image_00019.png"
+        }
+      ]
+    },
+    {
+      "slug": "lengthen",
+      "title": "Удлинение",
+      "description": "Тянемся мягко и глубоко по всему телу.",
+      "category": "quick",
+      "duration_min": 6,
+      "cover": "image_00000.png",
+      "exercises": [
+        {
+          "name": "Приветствие вверх",
+          "name_en": "Upward Salute",
+          "image": "image_00000.png"
+        },
+        {
+          "name": "Касание пальцев ног",
+          "name_en": "Toe Touch",
+          "image": "image_00001.png"
+        },
+        {
+          "name": "Раскрытие груди",
+          "name_en": "Chest Opener",
+          "image": "image_00036.png"
+        },
+        {
+          "name": "Наклон с широкими ногами",
+          "name_en": "Wide Leg Bend",
+          "image": "image_00026.png"
+        },
+        {
+          "name": "Выпад",
+          "name_en": "Lunge",
+          "image": "image_00002.png"
+        },
+        {
+          "name": "Собака мордой вверх",
+          "name_en": "Upward Dog",
+          "image": "image_00003.png"
+        },
+        {
+          "name": "Собака мордой вниз",
+          "name_en": "Downward Dog",
+          "image": "image_00004.png",
+          "description": "Из упора на четвереньках подними таз вверх, выпрямляя руки и ноги, чтобы тело образовало треугольник. Тянись пятками к полу, а грудью — к бёдрам. Колени можно слегка согнуть, спина остаётся длинной."
+        },
+        {
+          "name": "Поза ребёнка",
+          "name_en": "Child's Pose",
+          "image": "image_00014.png"
+        },
+        {
+          "name": "Колени к груди",
+          "name_en": "Knees-to-chest",
+          "image": "image_00019.png"
+        },
+        {
+          "name": "Наклон сидя",
+          "name_en": "Seated Fold",
+          "image": "image_00017.png"
+        },
+        {
+          "name": "Плуг",
+          "name_en": "Plow",
+          "image": "image_00031.png"
+        }
+      ]
+    },
+    {
+      "slug": "long-hips-1",
+      "title": "Бёдра · долгий 1",
+      "description": "Долгие удержания для бёдер.",
+      "category": "hips",
+      "duration_min": 10,
+      "cover": "image_00069.png",
+      "exercises": [
+        {
+          "name": "Поза лягушки",
+          "name_en": "Frog Pose",
+          "image": "image_00069.png"
+        },
+        {
+          "name": "Поза ящерицы",
+          "name_en": "Lizard Pose",
+          "image": "image_00049.png"
+        },
+        {
+          "name": "Складка ноги в стороны",
+          "name_en": "Seated Straddle",
+          "image": "image_00066.png"
+        },
+        {
+          "name": "Бабочка лёжа",
+          "name_en": "Reclined Butterfly",
+          "image": "image_00042.png"
+        }
+      ]
+    },
+    {
+      "slug": "long-hips-2",
+      "title": "Бёдра · долгий 2",
+      "description": "Долгие удержания, глубже.",
+      "category": "hips",
+      "duration_min": 11,
+      "cover": "image_00068.png",
+      "exercises": [
+        {
+          "name": "Растяжка в приседе",
+          "name_en": "Squat Stretch",
+          "image": "image_00068.png"
+        },
+        {
+          "name": "Выпад",
+          "name_en": "Lunge",
+          "image": "image_00002.png"
+        },
+        {
+          "name": "«Четвёрка» лёжа",
+          "name_en": "Lying Figure Four",
+          "image": "image_00025.png"
+        },
+        {
+          "name": "Счастливый ребёнок",
+          "name_en": "Happy Baby",
+          "image": "image_00050.png"
+        }
+      ]
+    },
+    {
+      "slug": "long-hips-3",
+      "title": "Бёдра · долгий 3",
+      "description": "Долгие удержания, максимум.",
+      "category": "hips",
+      "duration_min": 12,
+      "cover": "image_00062.png",
+      "exercises": [
+        {
+          "name": "Квадрицепс на колене",
+          "name_en": "Kneeling Quad",
+          "image": "image_00062.png"
+        },
+        {
+          "name": "Двойной голубь",
+          "name_en": "Double Pigeon",
+          "image": "image_00070.png"
+        },
+        {
+          "name": "Поза голубя",
+          "name_en": "Pigeon",
+          "image": "image_00013.png"
+        },
+        {
+          "name": "Сложенная бабочка",
+          "name_en": "Folded Butterfly",
+          "image": "image_00051.png"
+        }
+      ]
+    },
+    {
+      "slug": "lower-back",
+      "title": "Поясница",
+      "description": "Снять напряжение с поясницы.",
+      "category": "back",
+      "duration_min": 13,
+      "cover": "image_00056.png",
+      "exercises": [
+        {
+          "name": "Тряпичная кукла",
+          "name_en": "Rag Doll",
+          "image": "image_00056.png"
+        },
+        {
+          "name": "Выпад",
+          "name_en": "Lunge",
+          "image": "image_00002.png"
+        },
+        {
+          "name": "Поза ребёнка",
+          "name_en": "Child's Pose",
+          "image": "image_00014.png"
+        },
+        {
+          "name": "Кошка-корова",
+          "name_en": "Cat Cow",
+          "image": "image_00027a.png"
+        },
+        {
+          "name": "Ваджрасана",
+          "name_en": "Thunderbolt",
+          "image": "image_00057.png"
+        },
+        {
+          "name": "Наклон сидя",
+          "name_en": "Seated Fold",
+          "image": "image_00017.png"
+        },
+        {
+          "name": "Складка ноги в стороны",
+          "name_en": "Seated Straddle",
+          "image": "image_00066.png"
+        },
+        {
+          "name": "Колени к груди",
+          "name_en": "Knees-to-chest",
+          "image": "image_00019.png"
+        },
+        {
+          "name": "«Четвёрка» лёжа",
+          "name_en": "Lying Figure Four",
+          "image": "image_00025.png"
+        },
+        {
+          "name": "Счастливый ребёнок",
+          "name_en": "Happy Baby",
+          "image": "image_00050.png"
+        },
+        {
+          "name": "Ноги к стене",
+          "name_en": "Legs-up-wall",
+          "image": "image_00020.png"
+        }
+      ]
+    },
+    {
+      "slug": "lower-back-1",
+      "title": "Поясница · 1",
+      "description": "Мягкий блок для поясницы.",
+      "category": "back",
+      "duration_min": 5,
+      "cover": "image_00027a.png",
+      "exercises": [
+        {
+          "name": "Кошка-корова",
+          "name_en": "Cat Cow",
+          "image": "image_00027a.png"
+        },
+        {
+          "name": "Собака мордой вниз",
+          "name_en": "Downward Dog",
+          "image": "image_00004.png",
+          "description": "Из упора на четвереньках подними таз вверх, выпрямляя руки и ноги, чтобы тело образовало треугольник. Тянись пятками к полу, а грудью — к бёдрам. Колени можно слегка согнуть, спина остаётся длинной."
+        },
+        {
+          "name": "Выпад",
+          "name_en": "Lunge",
+          "image": "image_00002.png"
+        },
+        {
+          "name": "Обратный выпад",
+          "name_en": "Reverse Lunge",
+          "image": "image_00063.png"
+        },
+        {
+          "name": "Бабочка",
+          "name_en": "Butterfly",
+          "image": "image_00018.png"
+        },
+        {
+          "name": "Колени к груди",
+          "name_en": "Knees-to-chest",
+          "image": "image_00019.png"
+        },
+        {
+          "name": "Скручивание позвоночника",
+          "name_en": "Spinal Twist",
+          "image": "image_00015.png"
+        },
+        {
+          "name": "«Четвёрка» лёжа",
+          "name_en": "Lying Figure Four",
+          "image": "image_00025.png"
+        }
+      ]
+    },
+    {
+      "slug": "lower-back-2",
+      "title": "Поясница · 2",
+      "description": "Средний блок для поясницы.",
+      "category": "back",
+      "duration_min": 11,
+      "cover": "image_00027a.png",
+      "exercises": [
+        {
+          "name": "Кошка-корова",
+          "name_en": "Cat Cow",
+          "image": "image_00027a.png"
+        },
+        {
+          "name": "Собака мордой вверх",
+          "name_en": "Upward Dog",
+          "image": "image_00003.png"
+        },
+        {
+          "name": "Поза ребёнка",
+          "name_en": "Child's Pose",
+          "image": "image_00014.png"
+        },
+        {
+          "name": "Собака мордой вниз",
+          "name_en": "Downward Dog",
+          "image": "image_00004.png",
+          "description": "Из упора на четвереньках подними таз вверх, выпрямляя руки и ноги, чтобы тело образовало треугольник. Тянись пятками к полу, а грудью — к бёдрам. Колени можно слегка согнуть, спина остаётся длинной."
+        },
+        {
+          "name": "Выпад",
+          "name_en": "Lunge",
+          "image": "image_00002.png"
+        },
+        {
+          "name": "Обратный выпад",
+          "name_en": "Reverse Lunge",
+          "image": "image_00063.png"
+        },
+        {
+          "name": "Бабочка",
+          "name_en": "Butterfly",
+          "image": "image_00018.png"
+        },
+        {
+          "name": "Скручивание сидя",
+          "name_en": "Seated Twist",
+          "image": "image_00028.png"
+        },
+        {
+          "name": "Наклон сидя",
+          "name_en": "Seated Fold",
+          "image": "image_00017.png"
+        },
+        {
+          "name": "Растяжка квадрицепса",
+          "name_en": "Quad Stretch",
+          "image": "image_00016.png"
+        },
+        {
+          "name": "«Четвёрка» лёжа",
+          "name_en": "Lying Figure Four",
+          "image": "image_00025.png"
+        },
+        {
+          "name": "Скручивание позвоночника",
+          "name_en": "Spinal Twist",
+          "image": "image_00015.png"
+        },
+        {
+          "name": "Одно колено к груди",
+          "name_en": "Single Knee-to-Chest",
+          "image": "image_00131.png"
+        },
+        {
+          "name": "Счастливый ребёнок",
+          "name_en": "Happy Baby",
+          "image": "image_00050.png"
+        }
+      ]
+    },
+    {
+      "slug": "lower-back-3",
+      "title": "Поясница · 3",
+      "description": "Долгий блок для поясницы.",
+      "category": "back",
+      "duration_min": 16,
+      "cover": "image_00000.png",
+      "exercises": [
+        {
+          "name": "Приветствие вверх",
+          "name_en": "Upward Salute",
+          "image": "image_00000.png"
+        },
+        {
+          "name": "Касание пальцев ног",
+          "name_en": "Toe Touch",
+          "image": "image_00001.png"
+        },
+        {
+          "name": "Растяжка подвздошной на колене",
+          "name_en": "Kneeling Psoas",
+          "image": "image_00149.png"
+        },
+        {
+          "name": "Наклон с широкими ногами",
+          "name_en": "Wide Leg Bend",
+          "image": "image_00026.png"
+        },
+        {
+          "name": "Выпад",
+          "name_en": "Lunge",
+          "image": "image_00002.png"
+        },
+        {
+          "name": "Обратный выпад",
+          "name_en": "Reverse Lunge",
+          "image": "image_00063.png"
+        },
+        {
+          "name": "Квадрицепс на колене",
+          "name_en": "Kneeling Quad",
+          "image": "image_00062.png"
+        },
+        {
+          "name": "Кошка-корова",
+          "name_en": "Cat Cow",
+          "image": "image_00027a.png"
+        },
+        {
+          "name": "Собака мордой вверх",
+          "name_en": "Upward Dog",
+          "image": "image_00003.png"
+        },
+        {
+          "name": "Поза ребёнка",
+          "name_en": "Child's Pose",
+          "image": "image_00014.png"
+        },
+        {
+          "name": "Собака мордой вниз",
+          "name_en": "Downward Dog",
+          "image": "image_00004.png",
+          "description": "Из упора на четвереньках подними таз вверх, выпрямляя руки и ноги, чтобы тело образовало треугольник. Тянись пятками к полу, а грудью — к бёдрам. Колени можно слегка согнуть, спина остаётся длинной."
+        },
+        {
+          "name": "Поза голубя",
+          "name_en": "Pigeon",
+          "image": "image_00013.png"
+        },
+        {
+          "name": "Сложенная бабочка",
+          "name_en": "Folded Butterfly",
+          "image": "image_00051.png"
+        },
+        {
+          "name": "Скручивание сидя",
+          "name_en": "Seated Twist",
+          "image": "image_00028.png"
+        },
+        {
+          "name": "Наклон сидя",
+          "name_en": "Seated Fold",
+          "image": "image_00017.png"
+        },
+        {
+          "name": "Растяжка квадрицепса",
+          "name_en": "Quad Stretch",
+          "image": "image_00016.png"
+        },
+        {
+          "name": "«Четвёрка» лёжа",
+          "name_en": "Lying Figure Four",
+          "image": "image_00025.png"
+        },
+        {
+          "name": "Скручивание позвоночника",
+          "name_en": "Spinal Twist",
+          "image": "image_00015.png"
+        },
+        {
+          "name": "Наклон таза с прижатием",
+          "name_en": "Pelvic Tilt Press",
+          "image": "image_00130.png"
+        },
+        {
+          "name": "Одно колено к груди",
+          "name_en": "Single Knee-to-Chest",
+          "image": "image_00131.png"
+        },
+        {
+          "name": "Плуг",
+          "name_en": "Plow",
+          "image": "image_00031.png"
+        }
+      ]
+    },
+    {
+      "slug": "lower-back-hybrid-1",
+      "title": "Поясница · гибрид 1",
+      "description": "Растяжка + укрепление поясницы.",
+      "category": "back",
+      "duration_min": 6,
+      "cover": "image_00027a.png",
+      "exercises": [
+        {
+          "name": "Кошка-корова",
+          "name_en": "Cat Cow",
+          "image": "image_00027a.png"
+        },
+        {
+          "name": "Выпад",
+          "name_en": "Lunge",
+          "image": "image_00002.png"
+        },
+        {
+          "name": "Обратный выпад",
+          "name_en": "Reverse Lunge",
+          "image": "image_00063.png"
+        },
+        {
+          "name": "Собака мордой вниз",
+          "name_en": "Downward Dog",
+          "image": "image_00004.png",
+          "description": "Из упора на четвереньках подними таз вверх, выпрямляя руки и ноги, чтобы тело образовало треугольник. Тянись пятками к полу, а грудью — к бёдрам. Колени можно слегка согнуть, спина остаётся длинной."
+        },
+        {
+          "name": "Птица-собака",
+          "name_en": "Bird Dog",
+          "image": "image_00091.png",
+          "description": "Встань на четвереньки: ладони под плечами, колени под тазом. Одновременно вытяни правую руку вперёд и левую ногу назад до одной линии с корпусом. Держи спину ровной, не прогибайся в пояснице. На второй стороне поменяй руку и ногу."
+        },
+        {
+          "name": "Планка на прямых руках",
+          "name_en": "Hand Plank",
+          "image": "image_00081.png"
+        },
+        {
+          "name": "Планка на локтях",
+          "name_en": "Elbow Plank",
+          "image": "image_00085.png"
+        },
+        {
+          "name": "Скручивание позвоночника",
+          "name_en": "Spinal Twist",
+          "image": "image_00015.png"
+        },
+        {
+          "name": "«Четвёрка» лёжа",
+          "name_en": "Lying Figure Four",
+          "image": "image_00025.png"
+        },
+        {
+          "name": "Наклон таза с прижатием",
+          "name_en": "Pelvic Tilt Press",
+          "image": "image_00130.png"
+        },
+        {
+          "name": "Мост",
+          "name_en": "Bridge",
+          "image": "image_00096.png"
+        }
+      ]
+    },
+    {
+      "slug": "lower-back-hybrid-2",
+      "title": "Поясница · гибрид 2",
+      "description": "Растяжка + укрепление, дольше.",
+      "category": "back",
+      "duration_min": 11,
+      "cover": "image_00000.png",
+      "exercises": [
+        {
+          "name": "Приветствие вверх",
+          "name_en": "Upward Salute",
+          "image": "image_00000.png"
+        },
+        {
+          "name": "Касание пальцев ног",
+          "name_en": "Toe Touch",
+          "image": "image_00001.png"
+        },
+        {
+          "name": "Выпад",
+          "name_en": "Lunge",
+          "image": "image_00002.png"
+        },
+        {
+          "name": "Обратный выпад",
+          "name_en": "Reverse Lunge",
+          "image": "image_00063.png"
+        },
+        {
+          "name": "Кошка-корова",
+          "name_en": "Cat Cow",
+          "image": "image_00027a.png"
+        },
+        {
+          "name": "Собака мордой вверх",
+          "name_en": "Upward Dog",
+          "image": "image_00003.png"
+        },
+        {
+          "name": "Поза ребёнка",
+          "name_en": "Child's Pose",
+          "image": "image_00014.png"
+        },
+        {
+          "name": "Собака мордой вниз",
+          "name_en": "Downward Dog",
+          "image": "image_00004.png",
+          "description": "Из упора на четвереньках подними таз вверх, выпрямляя руки и ноги, чтобы тело образовало треугольник. Тянись пятками к полу, а грудью — к бёдрам. Колени можно слегка согнуть, спина остаётся длинной."
+        },
+        {
+          "name": "Выпад стоя со скручиванием",
+          "name_en": "Standing Lunge Twist",
+          "image": "image_00142.png"
+        },
+        {
+          "name": "Птица-собака",
+          "name_en": "Bird Dog",
+          "image": "image_00091.png",
+          "description": "Встань на четвереньки: ладони под плечами, колени под тазом. Одновременно вытяни правую руку вперёд и левую ногу назад до одной линии с корпусом. Держи спину ровной, не прогибайся в пояснице. На второй стороне поменяй руку и ногу."
+        },
+        {
+          "name": "Планка на прямых руках",
+          "name_en": "Hand Plank",
+          "image": "image_00081.png"
+        },
+        {
+          "name": "Планка на локтях",
+          "name_en": "Elbow Plank",
+          "image": "image_00085.png"
+        },
+        {
+          "name": "Скручивание позвоночника",
+          "name_en": "Spinal Twist",
+          "image": "image_00015.png"
+        },
+        {
+          "name": "«Четвёрка» лёжа",
+          "name_en": "Lying Figure Four",
+          "image": "image_00025.png"
+        },
+        {
+          "name": "Наклон таза с прижатием",
+          "name_en": "Pelvic Tilt Press",
+          "image": "image_00130.png"
+        },
+        {
+          "name": "Мост",
+          "name_en": "Bridge",
+          "image": "image_00096.png"
+        },
+        {
+          "name": "Колени к груди",
+          "name_en": "Knees-to-chest",
+          "image": "image_00019.png"
+        }
+      ]
+    },
+    {
+      "slug": "neck-1",
+      "title": "Шея · 1",
+      "description": "Короткий блок для шеи.",
+      "category": "upper",
+      "duration_min": 4,
+      "cover": "image_00143a.png",
+      "exercises": [
+        {
+          "name": "Круги плечами",
+          "name_en": "Shoulder Rolls",
+          "image": "image_00143a.png"
+        },
+        {
+          "name": "Круги шеей",
+          "name_en": "Neck Roll",
+          "image": "image_00010.png"
+        },
+        {
+          "name": "Втягивание подбородка",
+          "name_en": "Chin Retractions",
+          "image": "image_00125.png"
+        },
+        {
+          "name": "Ныряльщик",
+          "name_en": "Diver",
+          "image": "image_00145.png"
+        },
+        {
+          "name": "Руки-кактус",
+          "name_en": "Cactus Arms",
+          "image": "image_00147.png"
+        },
+        {
+          "name": "Разгибание шеи",
+          "name_en": "Neck Extension",
+          "image": "image_00154.png"
+        },
+        {
+          "name": "Сгибание шеи",
+          "name_en": "Neck Flexion",
+          "image": "image_00155.png"
+        },
+        {
+          "name": "Ухо к плечу",
+          "name_en": "Ear-to-Shoulder",
+          "image": "image_00153.png"
+        },
+        {
+          "name": "Растяжка лестничных мышц",
+          "name_en": "Scalene Stretch",
+          "image": "image_00140.png"
+        },
+        {
+          "name": "Растяжка лопаток",
+          "name_en": "Scapula Stretch",
+          "image": "image_00139.png"
+        },
+        {
+          "name": "Повороты шеи",
+          "name_en": "Neck Rotation",
+          "image": "image_00156.png"
+        }
+      ]
+    },
+    {
+      "slug": "neck-2",
+      "title": "Шея · 2",
+      "description": "Средний блок для шеи.",
+      "category": "upper",
+      "duration_min": 8,
+      "cover": "image_00143a.png",
+      "exercises": [
+        {
+          "name": "Круги плечами",
+          "name_en": "Shoulder Rolls",
+          "image": "image_00143a.png"
+        },
+        {
+          "name": "Круги шеей",
+          "name_en": "Neck Roll",
+          "image": "image_00010.png"
+        },
+        {
+          "name": "Втягивание подбородка",
+          "name_en": "Chin Retractions",
+          "image": "image_00125.png"
+        },
+        {
+          "name": "Ныряльщик",
+          "name_en": "Diver",
+          "image": "image_00145.png"
+        },
+        {
+          "name": "Руки-кактус",
+          "name_en": "Cactus Arms",
+          "image": "image_00147.png"
+        },
+        {
+          "name": "Разгибание шеи",
+          "name_en": "Neck Extension",
+          "image": "image_00154.png"
+        },
+        {
+          "name": "Сгибание шеи",
+          "name_en": "Neck Flexion",
+          "image": "image_00155.png"
+        },
+        {
+          "name": "Ухо к плечу",
+          "name_en": "Ear-to-Shoulder",
+          "image": "image_00153.png"
+        },
+        {
+          "name": "Растяжка лестничных мышц",
+          "name_en": "Scalene Stretch",
+          "image": "image_00140.png"
+        },
+        {
+          "name": "Растяжка лопаток",
+          "name_en": "Scapula Stretch",
+          "image": "image_00139.png"
+        },
+        {
+          "name": "Повороты шеи",
+          "name_en": "Neck Rotation",
+          "image": "image_00156.png"
+        },
+        {
+          "name": "Руки у стены",
+          "name_en": "Wall Arms",
+          "image": "image_00157.png"
+        },
+        {
+          "name": "Обратная растяжка плеча",
+          "name_en": "Reverse Shoulder",
+          "image": "image_00128.png"
+        },
+        {
+          "name": "Медвежьи объятия",
+          "name_en": "Bear Hug",
+          "image": "image_00150.png"
+        }
+      ]
+    },
+    {
+      "slug": "neck-3",
+      "title": "Шея · 3",
+      "description": "Долгий блок для шеи.",
+      "category": "upper",
+      "duration_min": 12,
+      "cover": "image_00143a.png",
+      "exercises": [
+        {
+          "name": "Круги плечами",
+          "name_en": "Shoulder Rolls",
+          "image": "image_00143a.png"
+        },
+        {
+          "name": "Круги шеей",
+          "name_en": "Neck Roll",
+          "image": "image_00010.png"
+        },
+        {
+          "name": "Приветствие вверх",
+          "name_en": "Upward Salute",
+          "image": "image_00000.png"
+        },
+        {
+          "name": "Втягивание подбородка",
+          "name_en": "Chin Retractions",
+          "image": "image_00125.png"
+        },
+        {
+          "name": "Ныряльщик",
+          "name_en": "Diver",
+          "image": "image_00145.png"
+        },
+        {
+          "name": "Руки-кактус",
+          "name_en": "Cactus Arms",
+          "image": "image_00147.png"
+        },
+        {
+          "name": "Разгибание шеи",
+          "name_en": "Neck Extension",
+          "image": "image_00154.png"
+        },
+        {
+          "name": "Сгибание шеи",
+          "name_en": "Neck Flexion",
+          "image": "image_00155.png"
+        },
+        {
+          "name": "Ухо к плечу",
+          "name_en": "Ear-to-Shoulder",
+          "image": "image_00153.png"
+        },
+        {
+          "name": "Растяжка лестничных мышц",
+          "name_en": "Scalene Stretch",
+          "image": "image_00140.png"
+        },
+        {
+          "name": "Растяжка лопаток",
+          "name_en": "Scapula Stretch",
+          "image": "image_00139.png"
+        },
+        {
+          "name": "Повороты шеи",
+          "name_en": "Neck Rotation",
+          "image": "image_00156.png"
+        },
+        {
+          "name": "Руки у стены",
+          "name_en": "Wall Arms",
+          "image": "image_00157.png"
+        },
+        {
+          "name": "Обнимание одной рукой",
+          "name_en": "One Arm Hug",
+          "image": "image_00038.png"
+        },
+        {
+          "name": "Грудные в дверном проёме",
+          "name_en": "Doorway Pecs",
+          "image": "image_00127.png"
+        },
+        {
+          "name": "Трицепс через голову",
+          "name_en": "Overhead Tricep",
+          "image": "image_00040.png"
+        },
+        {
+          "name": "Обратная растяжка плеча",
+          "name_en": "Reverse Shoulder",
+          "image": "image_00128.png"
+        },
+        {
+          "name": "Медвежьи объятия",
+          "name_en": "Bear Hug",
+          "image": "image_00150.png"
+        }
+      ]
+    },
+    {
+      "slug": "pelvic-tilt",
+      "title": "Наклон таза",
+      "description": "Работа с положением таза и поясницей.",
+      "category": "back",
+      "duration_min": 7,
+      "cover": "image_00130.png",
+      "exercises": [
+        {
+          "name": "Наклон таза с прижатием",
+          "name_en": "Pelvic Tilt Press",
+          "image": "image_00130.png"
+        },
+        {
+          "name": "Мост",
+          "name_en": "Bridge",
+          "image": "image_00096.png"
+        },
+        {
+          "name": "Колени к груди",
+          "name_en": "Knees-to-chest",
+          "image": "image_00019.png"
+        },
+        {
+          "name": "Одно колено к груди",
+          "name_en": "Single Knee-to-Chest",
+          "image": "image_00131.png"
+        },
+        {
+          "name": "Растяжка квадрицепса лёжа",
+          "name_en": "Lying Quad Stretch",
+          "image": "image_00132.png"
+        },
+        {
+          "name": "Выпад",
+          "name_en": "Lunge",
+          "image": "image_00002.png"
+        },
+        {
+          "name": "Кошка-корова",
+          "name_en": "Cat Cow",
+          "image": "image_00027a.png"
+        },
+        {
+          "name": "Бабочка",
+          "name_en": "Butterfly",
+          "image": "image_00018.png"
+        },
+        {
+          "name": "«Четвёрка» лёжа",
+          "name_en": "Lying Figure Four",
+          "image": "image_00025.png"
+        }
+      ]
+    },
+    {
+      "slug": "planks-1",
+      "title": "Планки · 1",
+      "description": "Начальный блок планок.",
+      "category": "core",
+      "duration_min": 2,
+      "cover": "image_00081.png",
+      "exercises": [
+        {
+          "name": "Планка на прямых руках",
+          "name_en": "Hand Plank",
+          "image": "image_00081.png"
+        },
+        {
+          "name": "Планка на локтях",
+          "name_en": "Elbow Plank",
+          "image": "image_00085.png"
+        },
+        {
+          "name": "Боковая планка на локте",
+          "name_en": "Elbow Side Plank",
+          "image": "image_00087.png"
+        }
+      ]
+    },
+    {
+      "slug": "planks-2",
+      "title": "Планки · 2",
+      "description": "Средний блок планок.",
+      "category": "core",
+      "duration_min": 3,
+      "cover": "image_00081.png",
+      "exercises": [
+        {
+          "name": "Планка на прямых руках",
+          "name_en": "Hand Plank",
+          "image": "image_00081.png"
+        },
+        {
+          "name": "Планка с подъёмом ноги",
+          "name_en": "Hand Plank Leg Lift",
+          "image": "image_00082.png"
+        },
+        {
+          "name": "Боковая планка на руке",
+          "name_en": "Hand Side Plank",
+          "image": "image_00083.png"
+        },
+        {
+          "name": "Планка на локтях",
+          "name_en": "Elbow Plank",
+          "image": "image_00085.png"
+        },
+        {
+          "name": "Планка на локтях с подъёмом ноги",
+          "name_en": "Elbow Plank Leg Lift",
+          "image": "image_00086.png"
+        },
+        {
+          "name": "Боковая планка на локте",
+          "name_en": "Elbow Side Plank",
+          "image": "image_00087.png"
+        }
+      ]
+    },
+    {
+      "slug": "planks-3",
+      "title": "Планки · 3",
+      "description": "Продвинутый блок планок.",
+      "category": "core",
+      "duration_min": 4,
+      "cover": "image_00081.png",
+      "exercises": [
+        {
+          "name": "Планка на прямых руках",
+          "name_en": "Hand Plank",
+          "image": "image_00081.png"
+        },
+        {
+          "name": "Планка с подъёмом ноги",
+          "name_en": "Hand Plank Leg Lift",
+          "image": "image_00082.png"
+        },
+        {
+          "name": "Боковая планка на руке",
+          "name_en": "Hand Side Plank",
+          "image": "image_00083.png"
+        },
+        {
+          "name": "Боковая планка с подъёмом ноги",
+          "name_en": "Hand Side Plank Leg Lift",
+          "image": "image_00084.png"
+        },
+        {
+          "name": "Планка на локтях",
+          "name_en": "Elbow Plank",
+          "image": "image_00085.png"
+        },
+        {
+          "name": "Планка на локтях с подъёмом ноги",
+          "name_en": "Elbow Plank Leg Lift",
+          "image": "image_00086.png"
+        },
+        {
+          "name": "Боковая планка на локте",
+          "name_en": "Elbow Side Plank",
+          "image": "image_00087.png"
+        },
+        {
+          "name": "Боковая планка на локте с подъёмом ноги",
+          "name_en": "Elbow Side Plank Leg Lift",
+          "image": "image_00088.png"
+        }
+      ]
+    },
+    {
+      "slug": "planks-4",
+      "title": "Планки · 4",
+      "description": "Максимальный блок планок.",
+      "category": "core",
+      "duration_min": 5,
+      "cover": "image_00081.png",
+      "exercises": [
+        {
+          "name": "Планка на прямых руках",
+          "name_en": "Hand Plank",
+          "image": "image_00081.png"
+        },
+        {
+          "name": "Планка с подъёмом ноги",
+          "name_en": "Hand Plank Leg Lift",
+          "image": "image_00082.png"
+        },
+        {
+          "name": "Планка на одной руке",
+          "name_en": "Single Arm Plank",
+          "image": "image_00089.png"
+        },
+        {
+          "name": "Планка «птица-собака»",
+          "name_en": "Bird Dog Plank",
+          "image": "image_00092.png"
+        },
+        {
+          "name": "Боковая планка на руке",
+          "name_en": "Hand Side Plank",
+          "image": "image_00083.png"
+        },
+        {
+          "name": "Боковая планка с подъёмом ноги",
+          "name_en": "Hand Side Plank Leg Lift",
+          "image": "image_00084.png"
+        },
+        {
+          "name": "Планка на локтях",
+          "name_en": "Elbow Plank",
+          "image": "image_00085.png"
+        },
+        {
+          "name": "Планка на локтях с подъёмом ноги",
+          "name_en": "Elbow Plank Leg Lift",
+          "image": "image_00086.png"
+        },
+        {
+          "name": "Боковая планка на локте",
+          "name_en": "Elbow Side Plank",
+          "image": "image_00087.png"
+        },
+        {
+          "name": "Боковая планка на локте с подъёмом ноги",
+          "name_en": "Elbow Side Plank Leg Lift",
+          "image": "image_00088.png"
+        }
+      ]
+    },
+    {
+      "slug": "post-run-2",
+      "title": "После бега",
+      "description": "Растяжка после пробежки.",
+      "category": "recovery",
+      "duration_min": 7,
+      "cover": "image_00021.png",
+      "exercises": [
+        {
+          "name": "Квадрицепс стоя",
+          "name_en": "Standing Quad",
+          "image": "image_00021.png"
+        },
+        {
+          "name": "Наклон с широкими ногами",
+          "name_en": "Wide Leg Bend",
+          "image": "image_00026.png"
+        },
+        {
+          "name": "Растяжка икры с наклоном",
+          "name_en": "Leaning Calf",
+          "image": "image_00022.png"
+        },
+        {
+          "name": "Боковой выпад",
+          "name_en": "Side Lunge",
+          "image": "image_00023.png"
+        },
+        {
+          "name": "Выпад",
+          "name_en": "Lunge",
+          "image": "image_00002.png"
+        },
+        {
+          "name": "Растяжка задней лёжа",
+          "name_en": "Lying Hamstring",
+          "image": "image_00024.png"
+        },
+        {
+          "name": "«Четвёрка» лёжа",
+          "name_en": "Lying Figure Four",
+          "image": "image_00025.png"
+        }
+      ]
+    },
+    {
+      "slug": "posture-power",
+      "title": "Осанка · сила",
+      "description": "Укрепление мышц осанки.",
+      "category": "posture",
+      "duration_min": 3,
+      "cover": "image_00100.png",
+      "exercises": [
+        {
+          "name": "Удержание приседа",
+          "name_en": "Squat Hold",
+          "image": "image_00100.png"
+        },
+        {
+          "name": "Удержание сплит-выпада",
+          "name_en": "Split Lunge Hold",
+          "image": "image_00108.png"
+        },
+        {
+          "name": "Удержание бокового выпада",
+          "name_en": "Side Lunge Hold",
+          "image": "image_00109.png"
+        },
+        {
+          "name": "Стульчик у стены",
+          "name_en": "Wall Sit",
+          "image": "image_00121.png"
+        }
+      ]
+    },
+    {
+      "slug": "posture-reset",
+      "title": "Осанка · сброс",
+      "description": "Быстро вернуть телу правильное положение.",
+      "category": "posture",
+      "duration_min": 4,
+      "cover": "image_00008a.png",
+      "exercises": [
+        {
+          "name": "Круги плечами",
+          "name_en": "Shoulder Rolls",
+          "image": "image_00008a.png"
+        },
+        {
+          "name": "Вытягивание вверх",
+          "name_en": "Overhead Reach",
+          "image": "image_00005.png"
+        },
+        {
+          "name": "Наклон в сторону",
+          "name_en": "Side Bend",
+          "image": "image_00006.png"
+        },
+        {
+          "name": "Руки-кактус",
+          "name_en": "Cactus Arms",
+          "image": "image_00007.png"
+        },
+        {
+          "name": "Сгибание шеи",
+          "name_en": "Neck Flex",
+          "image": "image_00009a.png"
+        },
+        {
+          "name": "Круги шеей",
+          "name_en": "Neck Roll",
+          "image": "image_00010.png"
+        },
+        {
+          "name": "Наклоны шеи в стороны",
+          "name_en": "Neck Laterals",
+          "image": "image_00011.png"
+        },
+        {
+          "name": "Ныряльщик",
+          "name_en": "Diver",
+          "image": "image_00012.png"
+        }
+      ]
+    },
+    {
+      "slug": "posture-stabilizer",
+      "title": "Осанка · стабилизация",
+      "description": "Стабилизировать корпус и плечи.",
+      "category": "posture",
+      "duration_min": 4,
+      "cover": "image_00077.png",
+      "exercises": [
+        {
+          "name": "Удержание скручивания",
+          "name_en": "Crunch Hold",
+          "image": "image_00077.png"
+        },
+        {
+          "name": "Мост",
+          "name_en": "Bridge",
+          "image": "image_00096.png"
+        },
+        {
+          "name": "Мёртвый жук",
+          "name_en": "Dead Bug",
+          "image": "image_00116.png"
+        },
+        {
+          "name": "Мост с подъёмом ноги",
+          "name_en": "Bridge Leg Lift",
+          "image": "image_00097.png"
+        },
+        {
+          "name": "Удержание велосипеда",
+          "name_en": "Bicycle Crunch Hold",
+          "image": "image_00078.png"
+        },
+        {
+          "name": "Птица-собака",
+          "name_en": "Bird Dog",
+          "image": "image_00091.png",
+          "description": "Встань на четвереньки: ладони под плечами, колени под тазом. Одновременно вытяни правую руку вперёд и левую ногу назад до одной линии с корпусом. Держи спину ровной, не прогибайся в пояснице. На второй стороне поменяй руку и ногу."
+        },
+        {
+          "name": "Самолётик",
+          "name_en": "Airplane",
+          "image": "image_00107.png"
+        },
+        {
+          "name": "Подъём ноги на боку",
+          "name_en": "Lying Side Leg Raise",
+          "image": "image_00115.png"
+        },
+        {
+          "name": "Боковая планка на локте",
+          "name_en": "Elbow Side Plank",
+          "image": "image_00087.png"
+        },
+        {
+          "name": "Планка на прямых руках",
+          "name_en": "Hand Plank",
+          "image": "image_00081.png"
+        }
+      ]
+    },
+    {
+      "slug": "quads-1",
+      "title": "Квадрицепсы",
+      "description": "Растяжка передней поверхности бедра.",
+      "category": "legs",
+      "duration_min": 5,
+      "cover": "image_00021.png",
+      "exercises": [
+        {
+          "name": "Квадрицепс стоя",
+          "name_en": "Standing Quad",
+          "image": "image_00021.png"
+        },
+        {
+          "name": "Выпад",
+          "name_en": "Lunge",
+          "image": "image_00002.png"
+        },
+        {
+          "name": "Квадрицепс на колене",
+          "name_en": "Kneeling Quad",
+          "image": "image_00062.png"
+        },
+        {
+          "name": "Поза ящерицы",
+          "name_en": "Lizard Pose",
+          "image": "image_00049.png"
+        },
+        {
+          "name": "Растяжка квадрицепса",
+          "name_en": "Quad Stretch",
+          "image": "image_00016.png"
+        }
+      ]
+    },
+    {
+      "slug": "quick-stretch",
+      "title": "Быстрая растяжка",
+      "description": "Короткий блок общей растяжки.",
+      "category": "quick",
+      "duration_min": 5,
+      "cover": "image_00036.png",
+      "exercises": [
+        {
+          "name": "Раскрытие груди",
+          "name_en": "Chest Opener",
+          "image": "image_00036.png"
+        },
+        {
+          "name": "Трицепс через голову",
+          "name_en": "Overhead Tricep",
+          "image": "image_00040.png"
+        },
+        {
+          "name": "Наклон с широкими ногами",
+          "name_en": "Wide Leg Bend",
+          "image": "image_00026.png"
+        },
+        {
+          "name": "Боковой выпад",
+          "name_en": "Side Lunge",
+          "image": "image_00023.png"
+        },
+        {
+          "name": "Выпад",
+          "name_en": "Lunge",
+          "image": "image_00002.png"
+        },
+        {
+          "name": "Собака мордой вверх",
+          "name_en": "Upward Dog",
+          "image": "image_00003.png"
+        },
+        {
+          "name": "Собака мордой вниз",
+          "name_en": "Downward Dog",
+          "image": "image_00004.png",
+          "description": "Из упора на четвереньках подними таз вверх, выпрямляя руки и ноги, чтобы тело образовало треугольник. Тянись пятками к полу, а грудью — к бёдрам. Колени можно слегка согнуть, спина остаётся длинной."
+        },
+        {
+          "name": "Касание пальцев ног",
+          "name_en": "Toe Touch",
+          "image": "image_00001.png"
+        }
+      ]
+    },
+    {
+      "slug": "shoulders",
+      "title": "Плечи",
+      "description": "Раскрытие плечевого пояса.",
+      "category": "upper",
+      "duration_min": 11,
+      "cover": "image_00000.png",
+      "exercises": [
+        {
+          "name": "Приветствие вверх",
+          "name_en": "Upward Salute",
+          "image": "image_00000.png"
+        },
+        {
+          "name": "Раскрытие груди",
+          "name_en": "Chest Opener",
+          "image": "image_00036.png"
+        },
+        {
+          "name": "Трицепс через голову",
+          "name_en": "Overhead Tricep",
+          "image": "image_00040.png"
+        },
+        {
+          "name": "Обнимание одной рукой",
+          "name_en": "One Arm Hug",
+          "image": "image_00038.png"
+        },
+        {
+          "name": "Собака у стены",
+          "name_en": "Wall Dog",
+          "image": "image_00052.png"
+        },
+        {
+          "name": "Наклон вперёд",
+          "name_en": "Forward Fold",
+          "image": "image_00053.png"
+        },
+        {
+          "name": "Плечо через грудь",
+          "name_en": "Shoulder Cross",
+          "image": "image_00054.png"
+        },
+        {
+          "name": "Раскрытие плеч",
+          "name_en": "Shoulder Opener",
+          "image": "image_00055.png"
+        },
+        {
+          "name": "Поза ребёнка",
+          "name_en": "Child's Pose",
+          "image": "image_00014.png"
+        }
+      ]
+    },
+    {
+      "slug": "sleep",
+      "title": "Перед сном",
+      "description": "Расслабляющая практика перед сном.",
+      "category": "recovery",
+      "duration_min": 10,
+      "cover": "image_00056.png",
+      "exercises": [
+        {
+          "name": "Тряпичная кукла",
+          "name_en": "Rag Doll",
+          "image": "image_00056.png"
+        },
+        {
+          "name": "Собака мордой вверх",
+          "name_en": "Upward Dog",
+          "image": "image_00003.png"
+        },
+        {
+          "name": "Поза ребёнка",
+          "name_en": "Child's Pose",
+          "image": "image_00014.png"
+        },
+        {
+          "name": "Колени к груди",
+          "name_en": "Knees-to-chest",
+          "image": "image_00019.png"
+        },
+        {
+          "name": "Счастливый ребёнок",
+          "name_en": "Happy Baby",
+          "image": "image_00050.png"
+        },
+        {
+          "name": "Бабочка лёжа",
+          "name_en": "Reclined Butterfly",
+          "image": "image_00042.png"
+        },
+        {
+          "name": "Скручивание позвоночника",
+          "name_en": "Spinal Twist",
+          "image": "image_00015.png"
+        },
+        {
+          "name": "Растяжка квадрицепса",
+          "name_en": "Quad Stretch",
+          "image": "image_00016.png"
+        },
+        {
+          "name": "Ноги к стене",
+          "name_en": "Legs-up-wall",
+          "image": "image_00020.png"
+        }
+      ]
+    },
+    {
+      "slug": "splits",
+      "title": "Шпагат",
+      "description": "Практика на шпагат.",
+      "category": "legs",
+      "duration_min": 14,
+      "cover": "image_00063.png",
+      "exercises": [
+        {
+          "name": "Обратный выпад",
+          "name_en": "Reverse Lunge",
+          "image": "image_00063.png"
+        },
+        {
+          "name": "Поза ящерицы",
+          "name_en": "Lizard Pose",
+          "image": "image_00049.png"
+        },
+        {
+          "name": "Подтягивание задней поверхности",
+          "name_en": "Hamstring Pulls",
+          "image": "image_00065.png"
+        },
+        {
+          "name": "Квадрицепс на колене",
+          "name_en": "Kneeling Quad",
+          "image": "image_00062.png"
+        },
+        {
+          "name": "Боковой выпад",
+          "name_en": "Side Lunge",
+          "image": "image_00023.png"
+        },
+        {
+          "name": "Выпад",
+          "name_en": "Lunge",
+          "image": "image_00002.png"
+        },
+        {
+          "name": "Продольный шпагат",
+          "name_en": "Front Split",
+          "image": "image_00067.png"
+        }
+      ]
+    },
+    {
+      "slug": "squats",
+      "title": "Приседания",
+      "description": "Сила и подвижность ног.",
+      "category": "legs",
+      "duration_min": 6,
+      "cover": "image_00100.png",
+      "exercises": [
+        {
+          "name": "Удержание приседа",
+          "name_en": "Squat Hold",
+          "image": "image_00100.png"
+        },
+        {
+          "name": "Удержание сплит-выпада",
+          "name_en": "Split Lunge Hold",
+          "image": "image_00108.png"
+        },
+        {
+          "name": "Удержание узкого приседа",
+          "name_en": "Narrow Squat Hold",
+          "image": "image_00101.png"
+        },
+        {
+          "name": "Удержание бокового выпада",
+          "name_en": "Side Lunge Hold",
+          "image": "image_00109.png"
+        },
+        {
+          "name": "Удержание сумо-приседа",
+          "name_en": "Sumo Squat Hold",
+          "image": "image_00102.png"
+        },
+        {
+          "name": "Реверанс-выпад",
+          "name_en": "Curtsy Lunge Hold",
+          "image": "image_00110.png"
+        },
+        {
+          "name": "Стульчик у стены",
+          "name_en": "Wall Sit",
+          "image": "image_00121.png"
+        }
+      ]
+    },
+    {
+      "slug": "standing-desk",
+      "title": "Стоячий стол",
+      "description": "Разминка для тех, кто работает стоя.",
+      "category": "office",
+      "duration_min": 6,
+      "cover": "image_00000.png",
+      "exercises": [
+        {
+          "name": "Приветствие вверх",
+          "name_en": "Upward Salute",
+          "image": "image_00000.png"
+        },
+        {
+          "name": "Касание пальцев ног",
+          "name_en": "Toe Touch",
+          "image": "image_00001.png"
+        },
+        {
+          "name": "Раскрытие груди",
+          "name_en": "Chest Opener",
+          "image": "image_00036.png"
+        },
+        {
+          "name": "Обнимание одной рукой",
+          "name_en": "One Arm Hug",
+          "image": "image_00038.png"
+        },
+        {
+          "name": "Трицепс через голову",
+          "name_en": "Overhead Tricep",
+          "image": "image_00040.png"
+        },
+        {
+          "name": "Собака у стены",
+          "name_en": "Wall Dog",
+          "image": "image_00052.png"
+        },
+        {
+          "name": "Квадрицепс стоя",
+          "name_en": "Standing Quad",
+          "image": "image_00021.png"
+        },
+        {
+          "name": "Растяжка икры с наклоном",
+          "name_en": "Leaning Calf",
+          "image": "image_00022.png"
+        },
+        {
+          "name": "Тряпичная кукла",
+          "name_en": "Rag Doll",
+          "image": "image_00056.png"
+        }
+      ]
+    },
+    {
+      "slug": "tech-neck",
+      "title": "Шея после ноутбука",
+      "description": "Разгрузить шею после экрана.",
+      "category": "office",
+      "duration_min": 5,
+      "cover": "image_00125.png",
+      "exercises": [
+        {
+          "name": "Втягивание подбородка",
+          "name_en": "Chin Retractions",
+          "image": "image_00125.png"
+        },
+        {
+          "name": "Грудные у стены",
+          "name_en": "Wall Pecs",
+          "image": "image_00126.png"
+        },
+        {
+          "name": "Приветствие вверх",
+          "name_en": "Upward Salute",
+          "image": "image_00000.png"
+        },
+        {
+          "name": "Собака у стены",
+          "name_en": "Wall Dog",
+          "image": "image_00052.png"
+        },
+        {
+          "name": "Грудные в дверном проёме",
+          "name_en": "Doorway Pecs",
+          "image": "image_00127.png"
+        },
+        {
+          "name": "Обнимание одной рукой",
+          "name_en": "One Arm Hug",
+          "image": "image_00038.png"
+        },
+        {
+          "name": "Обратная растяжка плеча",
+          "name_en": "Reverse Shoulder",
+          "image": "image_00128.png"
+        },
+        {
+          "name": "Наклоны шеи в стороны",
+          "name_en": "Neck Laterals",
+          "image": "image_00011.png"
+        }
+      ]
+    },
+    {
+      "slug": "twists-wrists",
+      "title": "Скручивания и запястья",
+      "description": "Мобильность корпуса и запястий.",
+      "category": "upper",
+      "duration_min": 11,
+      "cover": "image_00056.png",
+      "exercises": [
+        {
+          "name": "Тряпичная кукла",
+          "name_en": "Rag Doll",
+          "image": "image_00056.png"
+        },
+        {
+          "name": "Наклон вперёд",
+          "name_en": "Forward Fold",
+          "image": "image_00053.png"
+        },
+        {
+          "name": "Собака мордой вверх",
+          "name_en": "Upward Dog",
+          "image": "image_00003.png"
+        },
+        {
+          "name": "Скрученный сфинкс",
+          "name_en": "Twisted Sphinx",
+          "image": "image_00074.png"
+        },
+        {
+          "name": "Скручивание сидя",
+          "name_en": "Seated Twist",
+          "image": "image_00028.png"
+        },
+        {
+          "name": "Присед на носках",
+          "name_en": "Toe Squat",
+          "image": "image_00071.png"
+        },
+        {
+          "name": "Разгибание запястий",
+          "name_en": "Wrist Extension",
+          "image": "image_00072.png"
+        },
+        {
+          "name": "Сгибание запястий",
+          "name_en": "Wrist Flexion",
+          "image": "image_00073.png"
+        },
+        {
+          "name": "Скручивание позвоночника",
+          "name_en": "Spinal Twist",
+          "image": "image_00015.png"
+        },
+        {
+          "name": "Плуг",
+          "name_en": "Plow",
+          "image": "image_00031.png"
+        }
+      ]
+    },
+    {
+      "slug": "wake-up",
+      "title": "Пробуждение",
+      "description": "Мягкая утренняя разминка, чтобы разбудить тело.",
+      "category": "morning",
+      "duration_min": 5,
+      "cover": "image_00000.png",
+      "exercises": [
+        {
+          "name": "Приветствие вверх",
+          "name_en": "Upward Salute",
+          "image": "image_00000.png"
+        },
+        {
+          "name": "Касание пальцев ног",
+          "name_en": "Toe Touch",
+          "image": "image_00001.png"
+        },
+        {
+          "name": "Выпад",
+          "name_en": "Lunge",
+          "image": "image_00002.png"
+        },
+        {
+          "name": "Собака мордой вверх",
+          "name_en": "Upward Dog",
+          "image": "image_00003.png"
+        },
+        {
+          "name": "Поза ребёнка",
+          "name_en": "Child's Pose",
+          "image": "image_00014.png"
+        },
+        {
+          "name": "Собака мордой вниз",
+          "name_en": "Downward Dog",
+          "image": "image_00004.png",
+          "description": "Из упора на четвереньках подними таз вверх, выпрямляя руки и ноги, чтобы тело образовало треугольник. Тянись пятками к полу, а грудью — к бёдрам. Колени можно слегка согнуть, спина остаётся длинной."
+        },
+        {
+          "name": "Наклон с широкими ногами",
+          "name_en": "Wide Leg Bend",
+          "image": "image_00026.png"
+        }
+      ]
+    },
+    {
+      "slug": "warm-up",
+      "title": "Разогрев",
+      "description": "Быстро прогреть суставы перед активностью.",
+      "category": "morning",
+      "duration_min": 5,
+      "cover": "image_00043b.png",
+      "exercises": [
+        {
+          "name": "Прыжки «звёздочка»",
+          "name_en": "Jumping Jacks",
+          "image": "image_00043b.png"
+        },
+        {
+          "name": "Приседания без веса",
+          "name_en": "Air Squats",
+          "image": "image_00044b.png"
+        },
+        {
+          "name": "Боковой выпад",
+          "name_en": "Lateral Lunge",
+          "image": "image_00047a.png"
+        },
+        {
+          "name": "Круги руками",
+          "name_en": "Arm Circles",
+          "image": "image_00045a.png"
+        },
+        {
+          "name": "Махи руками",
+          "name_en": "Arm Swings",
+          "image": "image_00061a.png"
+        },
+        {
+          "name": "Скручивание корпуса",
+          "name_en": "Trunk Twist",
+          "image": "image_00058a.png"
+        },
+        {
+          "name": "Касание пальцев со скручиванием",
+          "name_en": "Toe Touch Twist",
+          "image": "image_00046a.png"
+        },
+        {
+          "name": "Обнимание коленей",
+          "name_en": "Knees Hugs",
+          "image": "image_00048a.png"
+        },
+        {
+          "name": "Махи ногой",
+          "name_en": "Leg Swings",
+          "image": "image_00059a.png"
+        },
+        {
+          "name": "Круги коленями",
+          "name_en": "Knee Circles",
+          "image": "image_00060a.png"
+        }
+      ]
+    },
+    {
+      "slug": "morning-five",
+      "title": "Утро за 5 минут",
+      "description": "Пять минут, чтобы проснуться и размяться.",
+      "category": "morning",
+      "duration_min": 5,
+      "cover": "image_00027a.png",
+      "exercises": [
+        {
+          "name": "Кошка-корова",
+          "name_en": "Cat Cow",
+          "image": "image_00027a.png"
+        },
+        {
+          "name": "Собака мордой вниз",
+          "name_en": "Downward Dog",
+          "image": "image_00004.png",
+          "description": "Из упора на четвереньках подними таз вверх, выпрямляя руки и ноги, чтобы тело образовало треугольник. Тянись пятками к полу, а грудью — к бёдрам. Колени можно слегка согнуть, спина остаётся длинной."
+        },
+        {
+          "name": "Приветствие вверх",
+          "name_en": "Upward Salute",
+          "image": "image_00000.png"
+        },
+        {
+          "name": "Наклон вперёд",
+          "name_en": "Forward Fold",
+          "image": "image_00053.png"
+        },
+        {
+          "name": "Наклон в сторону",
+          "name_en": "Side Bend",
+          "image": "image_00006.png"
+        },
+        {
+          "name": "Круги шеей",
+          "name_en": "Neck Roll",
+          "image": "image_00010.png"
+        }
+      ]
+    },
+    {
+      "slug": "morning-energy",
+      "title": "Энергия",
+      "description": "Бодрая разминка: разогнать кровь и суставы.",
+      "category": "morning",
+      "duration_min": 6,
+      "cover": "image_00043b.png",
+      "exercises": [
+        {
+          "name": "Прыжки «звёздочка»",
+          "name_en": "Jumping Jacks",
+          "image": "image_00043b.png"
+        },
+        {
+          "name": "Круги руками",
+          "name_en": "Arm Circles",
+          "image": "image_00045a.png"
+        },
+        {
+          "name": "Махи ногой",
+          "name_en": "Leg Swings",
+          "image": "image_00059a.png"
+        },
+        {
+          "name": "Приседания без веса",
+          "name_en": "Air Squats",
+          "image": "image_00044b.png"
+        },
+        {
+          "name": "Выпад",
+          "name_en": "Lunge",
+          "image": "image_00002.png"
+        },
+        {
+          "name": "Собака мордой вниз",
+          "name_en": "Downward Dog",
+          "image": "image_00004.png",
+          "description": "Из упора на четвереньках подними таз вверх, выпрямляя руки и ноги, чтобы тело образовало треугольник. Тянись пятками к полу, а грудью — к бёдрам. Колени можно слегка согнуть, спина остаётся длинной."
+        },
+        {
+          "name": "Приветствие вверх",
+          "name_en": "Upward Salute",
+          "image": "image_00000.png"
+        }
+      ]
+    },
+    {
+      "slug": "evening-unwind",
+      "title": "Вечерняя разгрузка",
+      "description": "Мягко снять напряжение дня перед отдыхом.",
+      "category": "recovery",
+      "duration_min": 8,
+      "cover": "image_00014.png",
+      "exercises": [
+        {
+          "name": "Поза ребёнка",
+          "name_en": "Child's Pose",
+          "image": "image_00014.png"
+        },
+        {
+          "name": "Обнимание коленей",
+          "name_en": "Knees Hugs",
+          "image": "image_00048a.png"
+        },
+        {
+          "name": "Скручивание позвоночника",
+          "name_en": "Spinal Twist",
+          "image": "image_00015.png"
+        },
+        {
+          "name": "Бабочка лёжа",
+          "name_en": "Reclined Butterfly",
+          "image": "image_00042.png"
+        },
+        {
+          "name": "Счастливый ребёнок",
+          "name_en": "Happy Baby",
+          "image": "image_00050.png"
+        },
+        {
+          "name": "Ноги к стене",
+          "name_en": "Legs-up-wall",
+          "image": "image_00020.png"
+        }
+      ]
+    },
+    {
+      "slug": "neck-shoulders-sos",
+      "title": "SOS: шея и плечи",
+      "description": "Быстрая помощь зажатым шее и плечам.",
+      "category": "office",
+      "duration_min": 5,
+      "cover": "image_00125.png",
+      "exercises": [
+        {
+          "name": "Втягивание подбородка",
+          "name_en": "Chin Retractions",
+          "image": "image_00125.png"
+        },
+        {
+          "name": "Ухо к плечу",
+          "name_en": "Ear-to-Shoulder",
+          "image": "image_00153.png"
+        },
+        {
+          "name": "Повороты шеи",
+          "name_en": "Neck Rotation",
+          "image": "image_00156.png"
+        },
+        {
+          "name": "Круги плечами",
+          "name_en": "Shoulder Rolls",
+          "image": "image_00143a.png"
+        },
+        {
+          "name": "Растяжка лестничных мышц",
+          "name_en": "Scalene Stretch",
+          "image": "image_00140.png"
+        },
+        {
+          "name": "Медвежьи объятия",
+          "name_en": "Bear Hug",
+          "image": "image_00150.png"
+        }
+      ]
+    },
+    {
+      "slug": "wrists-forearms",
+      "title": "Запястья и предплечья",
+      "description": "Разгрузка рук после клавиатуры и телефона.",
+      "category": "office",
+      "duration_min": 4,
+      "cover": "image_00072.png",
+      "exercises": [
+        {
+          "name": "Разгибание запястий",
+          "name_en": "Wrist Extension",
+          "image": "image_00072.png"
+        },
+        {
+          "name": "Сгибание запястий",
+          "name_en": "Wrist Flexion",
+          "image": "image_00073.png"
+        },
+        {
+          "name": "Растяжка предплечья",
+          "name_en": "Forearm Stretch",
+          "image": "image_00041.png"
+        },
+        {
+          "name": "Руки-кактус",
+          "name_en": "Cactus Arms",
+          "image": "image_00147.png"
+        },
+        {
+          "name": "Вытягивание вверх",
+          "name_en": "Overhead Reach",
+          "image": "image_00005.png"
+        }
+      ]
+    },
+    {
+      "slug": "chest-open",
+      "title": "Раскрытие груди",
+      "description": "Раскрыть грудной отдел и вернуть плечи назад.",
+      "category": "posture",
+      "duration_min": 6,
+      "cover": "image_00127.png",
+      "exercises": [
+        {
+          "name": "Грудные в дверном проёме",
+          "name_en": "Doorway Pecs",
+          "image": "image_00127.png"
+        },
+        {
+          "name": "Раскрытие груди",
+          "name_en": "Chest Opener",
+          "image": "image_00035.png"
+        },
+        {
+          "name": "Руки-кактус",
+          "name_en": "Cactus Arms",
+          "image": "image_00147.png"
+        },
+        {
+          "name": "Поза щенка",
+          "name_en": "Puppy Pose",
+          "image": "image_00075.png"
+        },
+        {
+          "name": "Кошка-корова",
+          "name_en": "Cat Cow",
+          "image": "image_00027a.png"
+        },
+        {
+          "name": "Скрученный сфинкс",
+          "name_en": "Twisted Sphinx",
+          "image": "image_00074.png"
+        }
+      ]
+    },
+    {
+      "slug": "hips-after-sitting",
+      "title": "Бёдра после сидения",
+      "description": "Раскрыть таз после долгого дня на стуле.",
+      "category": "hips",
+      "duration_min": 7,
+      "cover": "image_00149.png",
+      "exercises": [
+        {
+          "name": "Растяжка подвздошной на колене",
+          "name_en": "Kneeling Psoas",
+          "image": "image_00149.png"
+        },
+        {
+          "name": "Поза ящерицы",
+          "name_en": "Lizard Pose",
+          "image": "image_00049.png"
+        },
+        {
+          "name": "Поза голубя",
+          "name_en": "Pigeon",
+          "image": "image_00013.png"
+        },
+        {
+          "name": "90/90",
+          "name_en": "90/90",
+          "image": "image_00133.png"
+        },
+        {
+          "name": "Бабочка",
+          "name_en": "Butterfly",
+          "image": "image_00018.png"
+        },
+        {
+          "name": "Счастливый ребёнок",
+          "name_en": "Happy Baby",
+          "image": "image_00050.png"
+        }
+      ]
+    },
+    {
+      "slug": "splits-prep",
+      "title": "Подготовка к шпагату",
+      "description": "Постепенная дорога к продольному шпагату.",
+      "category": "legs",
+      "duration_min": 10,
+      "cover": "image_00002.png",
+      "exercises": [
+        {
+          "name": "Выпад",
+          "name_en": "Lunge",
+          "image": "image_00002.png"
+        },
+        {
+          "name": "Растяжка подвздошной на колене",
+          "name_en": "Kneeling Psoas",
+          "image": "image_00149.png"
+        },
+        {
+          "name": "Растяжка задней лёжа",
+          "name_en": "Lying Hamstring",
+          "image": "image_00024.png"
+        },
+        {
+          "name": "Барьерист",
+          "name_en": "Hurdler",
+          "image": "image_00064.png"
+        },
+        {
+          "name": "Складка ноги в стороны",
+          "name_en": "Seated Straddle",
+          "image": "image_00066.png"
+        },
+        {
+          "name": "Продольный шпагат",
+          "name_en": "Front Split",
+          "image": "image_00067.png"
+        }
+      ]
+    },
+    {
+      "slug": "runners-legs",
+      "title": "Ноги бегуна",
+      "description": "Икры, квадрицепсы и задняя поверхность после нагрузки.",
+      "category": "legs",
+      "duration_min": 7,
+      "cover": "image_00021.png",
+      "exercises": [
+        {
+          "name": "Квадрицепс стоя",
+          "name_en": "Standing Quad",
+          "image": "image_00021.png"
+        },
+        {
+          "name": "Растяжка икры с наклоном",
+          "name_en": "Leaning Calf",
+          "image": "image_00022.png"
+        },
+        {
+          "name": "Растяжка задней сидя",
+          "name_en": "Seated Hamstring",
+          "image": "image_00033.png"
+        },
+        {
+          "name": "Выпад",
+          "name_en": "Lunge",
+          "image": "image_00002.png"
+        },
+        {
+          "name": "«Четвёрка» лёжа",
+          "name_en": "Lying Figure Four",
+          "image": "image_00025.png"
+        },
+        {
+          "name": "Касание пальцев ног",
+          "name_en": "Toe Touch",
+          "image": "image_00001.png"
+        }
+      ]
+    },
+    {
+      "slug": "feet-ankles",
+      "title": "Стопы и голеностопы",
+      "description": "Подвижность стоп, икр и голеностопов.",
+      "category": "legs",
+      "duration_min": 5,
+      "cover": "image_00071.png",
+      "exercises": [
+        {
+          "name": "Присед на носках",
+          "name_en": "Toe Squat",
+          "image": "image_00071.png"
+        },
+        {
+          "name": "Ваджрасана",
+          "name_en": "Thunderbolt",
+          "image": "image_00057.png"
+        },
+        {
+          "name": "Растяжка икры с наклоном",
+          "name_en": "Leaning Calf",
+          "image": "image_00022.png"
+        },
+        {
+          "name": "Круги коленями",
+          "name_en": "Knee Circles",
+          "image": "image_00060a.png"
+        },
+        {
+          "name": "Растяжка в приседе",
+          "name_en": "Squat Stretch",
+          "image": "image_00068.png"
+        }
+      ]
+    },
+    {
+      "slug": "balance-core",
+      "title": "Баланс и кор",
+      "description": "Устойчивость, равновесие и глубокие мышцы корпуса.",
+      "category": "core",
+      "duration_min": 7,
+      "cover": "image_00091.png",
+      "exercises": [
+        {
+          "name": "Птица-собака",
+          "name_en": "Bird Dog",
+          "image": "image_00091.png",
+          "description": "Встань на четвереньки: ладони под плечами, колени под тазом. Одновременно вытяни правую руку вперёд и левую ногу назад до одной линии с корпусом. Держи спину ровной, не прогибайся в пояснице. На второй стороне поменяй руку и ногу."
+        },
+        {
+          "name": "Мёртвый жук",
+          "name_en": "Dead Bug",
+          "image": "image_00116.png"
+        },
+        {
+          "name": "Лодочка",
+          "name_en": "Hollow Body",
+          "image": "image_00114.png"
+        },
+        {
+          "name": "Планка на одной руке",
+          "name_en": "Single Arm Plank",
+          "image": "image_00089.png"
+        },
+        {
+          "name": "V-сидя",
+          "name_en": "V-Sit",
+          "image": "image_00080.png"
+        },
+        {
+          "name": "Мост",
+          "name_en": "Bridge",
+          "image": "image_00096.png"
+        }
+      ]
+    }
+  ]
+}

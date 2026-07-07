@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">flexi</string>
+    <string name="title_activity_main">flexi</string>
+    <string name="package_name">com.flexi.stretch</string>
+    <string name="custom_url_scheme">com.flexi.stretch</string>
+</resources>

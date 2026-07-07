@@ -1,0 +1,28 @@
+# Зависимости и сборки
+node_modules/
+dist/
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Системное
+.DS_Store
+*.log
+.idea/
+
+# Android: сборки, кеши и ключи подписи (ключи не коммитим!)
+miniapp/android/.gradle/
+miniapp/android/build/
+miniapp/android/app/build/
+miniapp/android/capacitor-cordova-android-plugins/build/
+miniapp/android/local.properties
+miniapp/android/keystore/
+miniapp/android/keystore.properties
+*.jks
+*.keystore
+
+# iOS
+miniapp/ios/App/build/
+miniapp/ios/App/DerivedData/
+miniapp/ios/App/App.xcodeproj/xcuserdata/
