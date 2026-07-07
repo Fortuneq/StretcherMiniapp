@@ -9,6 +9,7 @@ import Stats from './pages/Stats'
 import RoutineDetail from './pages/RoutineDetail'
 import Player from './pages/Player'
 import Paywall from './pages/Paywall'
+import Profile from './pages/Profile'
 import { showBackButton, hideBackButton } from './lib/telegram'
 
 const TAB_PATHS = ['/', '/library', '/saved', '/builder', '/stats']
@@ -43,6 +44,7 @@ export default function App() {
           <Route path="/routine/:slug" element={<RoutineDetail />} />
           <Route path="/player/:slug" element={<Player />} />
           <Route path="/paywall" element={<Paywall />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="*" element={<Today />} />
         </Routes>
       </main>

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useSyncExternalStore } from 'react'
 import Cluster from '../components/Cluster'
-import { categories, byCategory, categoryCover, dailyPicks, dailyFreeExercise, exerciseImg, todayHeader, plural } from '../lib/data'
+import { categories, byCategory, categoryCover, dailyPicks, dailyFreeExercise, exerciseImg, routines, todayHeader, plural } from '../lib/data'
 import { getStats } from '../lib/store'
 import { getAccess, subscribeAccess } from '../lib/access'
 import { getUser } from '../lib/telegram'
@@ -13,6 +13,7 @@ export default function Today() {
   const stats = getStats()
   const user = getUser()
   const access = useSyncExternalStore(subscribeAccess, getAccess)
+  const routinesCount = routines.length
   const isFree = access.status === 'free'
   const trialHoursLeft = Math.max(0, Math.ceil((access.trialUntil - Date.now()) / 3600000))
 
@@ -23,13 +24,13 @@ export default function Today() {
           <span className="today-head__date">{date}</span>
           <h1 className="today-head__title">{weekday}</h1>
         </div>
-        <div className="today-head__avatar">
+        <Link className="today-head__avatar" to="/profile" aria-label="Профиль">
           {user?.photo_url ? (
             <img src={user.photo_url} alt="" />
           ) : (
             <span>{(user?.first_name || 'S')[0]}</span>
           )}
-        </div>
+        </Link>
       </header>
 
       {access.status === 'trial' && (
@@ -85,6 +86,11 @@ export default function Today() {
           </Link>
         ))}
       </div>
+
+      <Link className="all-link" to="/library">
+        Все практики — {routinesCount} {plural(routinesCount, 'программа', 'программы', 'программ')}
+        <span>→</span>
+      </Link>
 
       <section className="areas">
         <h2 className="section-label">По зонам</h2>

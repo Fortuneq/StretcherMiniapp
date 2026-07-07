@@ -1415,3 +1415,94 @@ p {
   line-height: 1.5;
 }
 .paywall__legal a { color: var(--ink-soft); }
+
+/* Профиль и ссылка «все практики» */
+.all-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--card);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-sm);
+  padding: 14px 16px;
+  margin: 14px 0 6px;
+  text-decoration: none;
+  color: var(--ink);
+  font-weight: 700;
+}
+.all-link span { color: var(--muted); }
+
+.profile-head { text-align: center; padding: 18px 0 6px; }
+.profile-head__avatar {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 12px;
+  background: var(--card);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  font-weight: 800;
+}
+.profile-head__avatar img { width: 100%; height: 100%; object-fit: cover; }
+.profile-head h1 { margin: 0; font-size: 24px; }
+.profile-head__nick { margin: 2px 0 0; color: var(--muted); font-size: 14px; }
+
+.subcard {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  background: var(--card);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-sm);
+  padding: 14px 16px;
+  margin: 18px 0;
+}
+.subcard--active { border: 2px solid var(--ink); }
+.subcard__icon { flex-shrink: 0; color: var(--ink-soft); }
+.subcard__body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.subcard__body strong { font-weight: 800; }
+.subcard__body span { font-size: 13px; color: var(--ink-soft); }
+.subcard .btn { flex: 1 0 100%; text-align: center; padding: 12px 14px; font-size: 15px; }
+.page--profile { padding-bottom: calc(var(--tabbar-h) + var(--safe-b) + 24px); }
+
+.profile-stats {
+  display: flex;
+  justify-content: space-around;
+  background: var(--card);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-sm);
+  padding: 16px 8px;
+  margin-bottom: 18px;
+}
+
+.profile-links {
+  display: flex;
+  flex-direction: column;
+  background: var(--card);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.profile-links a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  color: var(--ink);
+  font-weight: 600;
+  border-bottom: 1px solid var(--line);
+}
+.profile-links a:last-child { border-bottom: none; }
+.profile-links em {
+  font-style: normal;
+  color: var(--muted);
+  font-weight: 700;
+}
+.profile-note { text-align: center; font-size: 13px; color: var(--muted); }
