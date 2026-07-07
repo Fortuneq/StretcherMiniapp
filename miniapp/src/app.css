@@ -1506,3 +1506,18 @@ p {
   font-weight: 700;
 }
 .profile-note { text-align: center; font-size: 13px; color: var(--muted); }
+
+.danger-link {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  color: #b3423a;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  padding: 8px 0;
+  margin-bottom: 6px;
+  cursor: pointer;
+}

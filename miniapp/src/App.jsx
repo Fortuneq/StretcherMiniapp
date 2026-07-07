@@ -12,21 +12,23 @@ import Paywall from './pages/Paywall'
 import Profile from './pages/Profile'
 import { showBackButton, hideBackButton } from './lib/telegram'
 
-const TAB_PATHS = ['/', '/library', '/saved', '/builder', '/stats']
+// Внутренние экраны с кнопкой «назад» Telegram. Всё остальное (табы, плеер со
+// своим крестиком, служебные пути вида #tgWebAppData=…) — без неё: тогда
+// Telegram показывает «Закрыть» в шапке.
+const INNER_PREFIXES = ['/routine/', '/paywall', '/profile']
 
 export default function App() {
   const location = useLocation()
   const navigate = useNavigate()
 
-  const isTab = TAB_PATHS.includes(location.pathname)
+  const isInner = INNER_PREFIXES.some((p) => location.pathname.startsWith(p))
   const isPlayer = location.pathname.startsWith('/player')
 
-  // Кнопка «назад» Telegram на внутренних экранах (кроме плеера — там свой крестик)
   useEffect(() => {
-    if (isTab || isPlayer) hideBackButton()
-    else showBackButton(() => navigate(-1))
+    if (isInner) showBackButton(() => navigate(-1))
+    else hideBackButton()
     return hideBackButton
-  }, [location.pathname, isTab, isPlayer, navigate])
+  }, [location.pathname, isInner, navigate])
 
   useEffect(() => {
     window.scrollTo(0, 0)

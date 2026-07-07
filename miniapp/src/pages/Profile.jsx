@@ -1,9 +1,10 @@
-import { useSyncExternalStore } from 'react'
+import { useState, useSyncExternalStore } from 'react'
 import { Link } from 'react-router-dom'
 import { getAccess, subscribeAccess } from '../lib/access'
 import { getStats } from '../lib/store'
 import { getCustomRoutines, subscribeCustom } from '../lib/customRoutines'
-import { getUser } from '../lib/telegram'
+import { getUser, haptic } from '../lib/telegram'
+import { canUseApi, revokeConsent } from '../lib/api'
 import { plural } from '../lib/data'
 import { CheckIcon, LockIcon } from '../components/Icons'
 
@@ -16,6 +17,27 @@ export default function Profile() {
   const custom = useSyncExternalStore(subscribeCustom, getCustomRoutines)
   const user = getUser()
   const stats = getStats()
+  const [busy, setBusy] = useState(false)
+
+  // Отзыв согласия = удаление профиля и данных (152-ФЗ)
+  async function revoke() {
+    const ok = window.confirm(
+      'Отозвать согласие на обработку персональных данных?\n\n' +
+        'Профиль, подписка и сохранённые программы будут удалены, ' +
+        'приложение перестанет быть доступным до повторного принятия условий.',
+    )
+    if (!ok) return
+    setBusy(true)
+    try {
+      haptic('medium')
+      await revokeConsent()
+      localStorage.clear()
+      window.location.reload()
+    } catch {
+      setBusy(false)
+      window.alert('Не получилось связаться с сервером. Попробуй ещё раз или используй /delete_me в боте.')
+    }
+  }
 
   const sub =
     access.status === 'premium'
@@ -89,8 +111,13 @@ export default function Profile() {
         <a href="/docs/consent.html" target="_blank" rel="noreferrer">Согласие на обработку ПДн</a>
       </nav>
 
+      {canUseApi && (
+        <button type="button" className="danger-link" disabled={busy} onClick={revoke}>
+          {busy ? 'Удаляем…' : 'Отозвать согласие на обработку ПДн и удалить данные'}
+        </button>
+      )}
       <p className="profile-note">
-        Удалить аккаунт и данные: команда /delete_me в боте @stretcher_robot.
+        То же самое можно сделать командой /delete_me в боте @stretcher_robot.
       </p>
     </div>
   )

@@ -60,6 +60,15 @@ export default function Player() {
     if (!routine) navigate('/', { replace: true })
   }, [routine, navigate])
 
+  // Следующая иллюстрация грузится заранее — переход без мигания
+  useEffect(() => {
+    const next = routine?.exercises[index + 1]
+    if (next) {
+      const img = new Image()
+      img.src = exerciseImg(next.image)
+    }
+  }, [index, routine])
+
   function goTo(next) {
     if (next >= total) {
       finish()

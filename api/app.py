@@ -25,6 +25,7 @@ from prometheus_client import (
 
 BOT_TOKEN = os.environ["BOT_TOKEN"]
 WEBHOOK_SECRET = os.environ.get("WEBHOOK_SECRET", "")
+ADMIN_CHAT_ID = int(os.environ.get("ADMIN_CHAT_ID", "0"))  # уведомления о лидах
 DB_PATH = os.environ.get("DB_PATH", "/data/stretcher.db")
 APP_URL = os.environ.get("APP_URL", "https://true-scale.ru/")
 DOCS_URL = os.environ.get("DOCS_URL", "https://true-scale.ru/docs/")
@@ -91,6 +92,12 @@ def init_db() -> None:
                 plan TEXT NOT NULL,
                 created_at INTEGER NOT NULL
             );
+            CREATE TABLE IF NOT EXISTS consents (
+                tg_id INTEGER PRIMARY KEY,
+                granted_at INTEGER NOT NULL,
+                revoked_at INTEGER,
+                revoke_reason TEXT
+            );
             CREATE TABLE IF NOT EXISTS leads (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name TEXT NOT NULL,
@@ -130,6 +137,8 @@ REVENUE_TOTAL = Gauge(
 )
 LEADS_TOTAL = Gauge("stretcher_leads_total", "Лидов с минисайта")
 LEADS_PAID = Gauge("stretcher_leads_paid", "Оплаченных лидов")
+CONSENTS_ACTIVE = Gauge("stretcher_consents_active", "Активных согласий на обработку ПДн")
+CONSENTS_REVOKED = Gauge("stretcher_consents_revoked", "Отозванных согласий (удалили данные)")
 USERS_TOTAL = Gauge("stretcher_users_total", "Всего пользователей")
 PREMIUM_ACTIVE = Gauge("stretcher_premium_active", "Активных платных подписок")
 TRIAL_ACTIVE = Gauge("stretcher_trial_active", "Пользователей на триале")
@@ -140,7 +149,7 @@ KNOWN_PATHS = {
     "/api/me", "/api/invoice", "/api/custom-routines",
     "/api/tg-webhook", "/api/yk-webhook", "/api/pay/yookassa",
     "/api/pay/yookassa/check", "/api/pay/methods",
-    "/api/lead", "/api/lead/status",
+    "/api/lead", "/api/lead/status", "/api/consent/revoke",
     "/api/health", "/api/metrics",
 }
 
@@ -176,6 +185,16 @@ def refresh_business_metrics() -> None:
         LEADS_TOTAL.set(conn.execute("SELECT COUNT(*) FROM leads").fetchone()[0])
         LEADS_PAID.set(
             conn.execute("SELECT COUNT(*) FROM leads WHERE paid = 1").fetchone()[0]
+        )
+        CONSENTS_ACTIVE.set(
+            conn.execute(
+                "SELECT COUNT(*) FROM consents WHERE revoked_at IS NULL"
+            ).fetchone()[0]
+        )
+        CONSENTS_REVOKED.set(
+            conn.execute(
+                "SELECT COUNT(*) FROM consents WHERE revoked_at IS NOT NULL"
+            ).fetchone()[0]
         )
         for provider, plan, cnt, total, currency in conn.execute(
             """SELECT provider, plan, COUNT(*), SUM(amount), currency
@@ -225,9 +244,33 @@ def current_user(authorization: str = Header("")) -> sqlite3.Row:
                  username = excluded.username, first_name = excluded.first_name""",
             (tg_user["id"], tg_user.get("username"), tg_user.get("first_name"), now),
         )
+        # Использование сервиса = принятие оферты и согласие на обработку ПДн;
+        # после отзыва повторное использование возобновляет согласие.
+        conn.execute(
+            """INSERT INTO consents (tg_id, granted_at) VALUES (?, ?)
+               ON CONFLICT(tg_id) DO UPDATE SET
+                 granted_at = CASE WHEN revoked_at IS NOT NULL THEN ? ELSE granted_at END,
+                 revoked_at = NULL, revoke_reason = NULL""",
+            (tg_user["id"], now, now),
+        )
         return conn.execute(
             "SELECT * FROM users WHERE tg_id = ?", (tg_user["id"],)
         ).fetchone()
+
+
+def delete_user_data(tg_id: int, reason: str) -> None:
+    """Отзыв согласия: удаляем профиль и данные, фиксируем отзыв в consents.
+    payments храним — первичные учётные документы по 54-ФЗ."""
+    now = int(time.time())
+    with db() as conn:
+        conn.execute("DELETE FROM custom_routines WHERE tg_id = ?", (tg_id,))
+        conn.execute("DELETE FROM users WHERE tg_id = ?", (tg_id,))
+        conn.execute(
+            """INSERT INTO consents (tg_id, granted_at, revoked_at, revoke_reason)
+               VALUES (?, ?, ?, ?)
+               ON CONFLICT(tg_id) DO UPDATE SET revoked_at = ?, revoke_reason = ?""",
+            (tg_id, now, now, reason, now, reason),
+        )
 
 
 def entitlement(user: sqlite3.Row) -> dict:
@@ -285,6 +328,12 @@ async def create_invoice(body: dict, user: sqlite3.Row = Depends(current_user)):
     if not data.get("ok"):
         raise HTTPException(502, f"telegram: {data.get('description')}")
     return {"link": data["result"]}
+
+
+@app.post("/api/consent/revoke")
+async def revoke_consent(user: sqlite3.Row = Depends(current_user)):
+    delete_user_data(user["tg_id"], "app_button")
+    return {"ok": True}
 
 
 @app.get("/api/custom-routines")
@@ -430,7 +479,17 @@ async def settle_yk_payment(payment_id: str) -> int | None:
 
     # Оплата лида с минисайта: помечаем и выдаём код активации
     if meta.get("kind") == "lead":
-        mark_lead_paid(payment_id, meta.get("plan"), kopeks)
+        if mark_lead_paid(payment_id, meta.get("plan"), kopeks):
+            with db() as conn:
+                lead = conn.execute(
+                    "SELECT id, name, contact, plan FROM leads WHERE payment_id = ?",
+                    (payment_id,),
+                ).fetchone()
+            if lead:
+                await notify_admin(
+                    f"💰 Лид #{lead['id']} оплатил: {lead['name']} ({lead['contact']}) — "
+                    f"{PLANS[lead['plan']]['title']}, {PLANS[lead['plan']]['rub']} ₽"
+                )
         return None
 
     tg_id = None
@@ -442,10 +501,11 @@ async def settle_yk_payment(payment_id: str) -> int | None:
     return tg_id
 
 
-def mark_lead_paid(payment_id: str, plan_id: str | None, kopeks: int) -> None:
-    """Фиксирует оплату лида: код активации + строка в payments (tg_id=0 до активации)."""
+def mark_lead_paid(payment_id: str, plan_id: str | None, kopeks: int) -> bool:
+    """Фиксирует оплату лида: код активации + строка в payments (tg_id=0 до активации).
+    Возвращает True, если оплата зафиксирована впервые."""
     if plan_id not in PLANS:
-        return
+        return False
     code = "act_" + uuid.uuid4().hex[:12]
     now = int(time.time())
     with db() as conn:
@@ -462,6 +522,7 @@ def mark_lead_paid(payment_id: str, plan_id: str | None, kopeks: int) -> None:
                 )
             except sqlite3.IntegrityError:
                 pass
+        return bool(cur.rowcount)
 
 
 def redeem_lead(code: str, tg_id: int) -> str | None:
@@ -573,6 +634,12 @@ async def create_lead(body: dict):
     )
     with db() as conn:
         conn.execute("UPDATE leads SET payment_id = ? WHERE id = ?", (data["id"], lead_id))
+    utm_note = f", {utm}" if utm != "{}" else ""
+    await notify_admin(
+        f"🆕 Лид #{lead_id}: {name} ({contact}, {email}) — "
+        f"{plan['title']}, {plan['rub']} ₽, "
+        f"{'юрлицо ' + str(org_name) if buyer_type == 'company' else 'физлицо'}{utm_note}"
+    )
     return {
         "payment_id": data["id"],
         "confirmation_url": data["confirmation"]["confirmation_url"],
@@ -606,6 +673,15 @@ async def lead_status(payment_id: str = ""):
 async def tg_call(method: str, payload: dict) -> None:
     async with httpx.AsyncClient() as client:
         await client.post(f"{TG_API}/{method}", json=payload, timeout=15)
+
+
+async def notify_admin(text: str) -> None:
+    if not ADMIN_CHAT_ID:
+        return
+    try:
+        await tg_call("sendMessage", {"chat_id": ADMIN_CHAT_ID, "text": text})
+    except Exception:
+        pass  # уведомление не должно ломать основной поток
 
 
 def grant_premium(tg_id: int, plan_id: str, provider: str, amount: int,
@@ -711,11 +787,7 @@ async def tg_webhook(
             return {"ok": True}
 
         if text.startswith("/delete_me"):
-            tg_id = message["from"]["id"]
-            with db() as conn:
-                conn.execute("DELETE FROM custom_routines WHERE tg_id = ?", (tg_id,))
-                conn.execute("DELETE FROM users WHERE tg_id = ?", (tg_id,))
-                # payments храним: первичные учётные документы по 54-ФЗ
+            delete_user_data(message["from"]["id"], "delete_me")
             await tg_call("sendMessage", {
                 "chat_id": chat_id,
                 "text": (

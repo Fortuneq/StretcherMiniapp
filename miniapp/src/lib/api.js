@@ -59,6 +59,11 @@ export async function fetchPayMethods() {
   }
 }
 
+// Отзыв согласия на обработку ПДн: сервер удаляет профиль и данные
+export function revokeConsent() {
+  return request('/consent/revoke', { method: 'POST', body: '{}' })
+}
+
 // Проверка незавершённых карточных платежей (fallback без вебхука)
 export function checkYookassa() {
   return request('/pay/yookassa/check', { method: 'POST', body: '{}' })
