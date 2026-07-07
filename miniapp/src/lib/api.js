@@ -59,6 +59,11 @@ export async function fetchPayMethods() {
   }
 }
 
+// Проверка незавершённых карточных платежей (fallback без вебхука)
+export function checkYookassa() {
+  return request('/pay/yookassa/check', { method: 'POST', body: '{}' })
+}
+
 // Оплата картой через ЮKassa: создаём платёж и открываем страницу оплаты.
 // details: { email, org_name?, inn? }
 export async function payYookassa(plan, buyerType, details) {

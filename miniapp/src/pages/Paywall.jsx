@@ -2,7 +2,7 @@ import { useEffect, useState, useSyncExternalStore } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { CheckIcon } from '../components/Icons'
 import { getAccess, subscribeAccess, buyPlan, refreshAccess } from '../lib/access'
-import { canUseApi, fetchPayMethods, payYookassa } from '../lib/api'
+import { canUseApi, checkYookassa, fetchPayMethods, payYookassa } from '../lib/api'
 import { haptic } from '../lib/telegram'
 import { plural } from '../lib/data'
 
@@ -75,6 +75,11 @@ export default function Paywall() {
 
   async function checkPaid() {
     haptic('light')
+    try {
+      await checkYookassa() // опрашивает ЮKassa по нашим незавершённым платежам
+    } catch {
+      /* сеть/сервер — ниже покажем «не подтверждена» */
+    }
     await refreshAccess()
     if (getAccess().status === 'premium') {
       haptic('success')

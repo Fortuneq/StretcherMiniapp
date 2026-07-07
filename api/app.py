@@ -85,6 +85,12 @@ def init_db() -> None:
                 data TEXT NOT NULL,
                 updated_at INTEGER NOT NULL
             );
+            CREATE TABLE IF NOT EXISTS yk_pending (
+                payment_id TEXT PRIMARY KEY,
+                tg_id INTEGER NOT NULL,
+                plan TEXT NOT NULL,
+                created_at INTEGER NOT NULL
+            );
             """
         )
 
@@ -115,6 +121,7 @@ CUSTOM_ROUTINES = Gauge("stretcher_custom_routines_users", "Пользовате
 KNOWN_PATHS = {
     "/api/me", "/api/invoice", "/api/custom-routines",
     "/api/tg-webhook", "/api/yk-webhook", "/api/pay/yookassa",
+    "/api/pay/yookassa/check", "/api/pay/methods",
     "/api/health", "/api/metrics",
 }
 
@@ -355,10 +362,61 @@ async def pay_yookassa(body: dict, user: sqlite3.Row = Depends(current_user)):
     data = r.json()
     if r.status_code not in (200, 201) or "confirmation" not in data:
         raise HTTPException(502, f"yookassa: {data.get('description', r.status_code)}")
+    with db() as conn:
+        conn.execute(
+            "INSERT OR IGNORE INTO yk_pending (payment_id, tg_id, plan, created_at) VALUES (?, ?, ?, ?)",
+            (data["id"], user["tg_id"], plan_id, int(time.time())),
+        )
     return {
         "payment_id": data["id"],
         "confirmation_url": data["confirmation"]["confirmation_url"],
     }
+
+
+async def settle_yk_payment(payment_id: str) -> int | None:
+    """Проверяет платёж в ЮKassa; при успехе активирует подписку и возвращает
+    tg_id покупателя. Идемпотентно."""
+    async with httpx.AsyncClient() as client:
+        r = await client.get(
+            f"{YK_API}/payments/{payment_id}",
+            auth=(YOOKASSA_SHOP_ID, YOOKASSA_SECRET_KEY),
+            timeout=20,
+        )
+    payment = r.json()
+    meta = payment.get("metadata", {})
+    status = payment.get("status")
+    tg_id = None
+    if status == "succeeded" and meta.get("plan") in PLANS and meta.get("tg_id"):
+        kopeks = round(float(payment["amount"]["value"]) * 100)
+        tg_id = int(meta["tg_id"])
+        grant_premium(tg_id, meta["plan"], "yookassa", kopeks, "RUB", payment_id)
+    if tg_id or status == "canceled":
+        with db() as conn:
+            conn.execute("DELETE FROM yk_pending WHERE payment_id = ?", (payment_id,))
+    return tg_id
+
+
+@app.post("/api/pay/yookassa/check")
+async def yk_check(user: sqlite3.Row = Depends(current_user)):
+    """Fallback без вебхука: опрашиваем незавершённые платежи пользователя."""
+    if not (YOOKASSA_SHOP_ID and YOOKASSA_SECRET_KEY):
+        raise HTTPException(503, "not configured")
+    cutoff = int(time.time()) - 24 * 3600
+    with db() as conn:
+        rows = conn.execute(
+            """SELECT payment_id FROM yk_pending
+               WHERE tg_id = ? AND created_at > ? ORDER BY created_at DESC LIMIT 5""",
+            (user["tg_id"], cutoff),
+        ).fetchall()
+    paid = False
+    for row in rows:
+        if await settle_yk_payment(row["payment_id"]) is not None:
+            paid = True
+    with db() as conn:
+        fresh = conn.execute(
+            "SELECT * FROM users WHERE tg_id = ?", (user["tg_id"],)
+        ).fetchone()
+    return {"paid": paid, **entitlement(fresh)}
 
 
 @app.post("/api/yk-webhook")
@@ -372,26 +430,12 @@ async def yk_webhook(request: Request):
     if not payment_id:
         return {"ok": True}
     # Телу вебхука не доверяем — статус подтверждаем прямым запросом к ЮKassa
-    async with httpx.AsyncClient() as client:
-        r = await client.get(
-            f"{YK_API}/payments/{payment_id}",
-            auth=(YOOKASSA_SHOP_ID, YOOKASSA_SECRET_KEY),
-            timeout=20,
-        )
-    payment = r.json()
-    if payment.get("status") != "succeeded":
-        return {"ok": True}
-    meta = payment.get("metadata", {})
-    plan_id = meta.get("plan")
-    tg_id = meta.get("tg_id")
-    if not (plan_id in PLANS and tg_id):
-        return {"ok": True}
-    kopeks = round(float(payment["amount"]["value"]) * 100)
-    grant_premium(int(tg_id), plan_id, "yookassa", kopeks, "RUB", payment_id)
-    await tg_call("sendMessage", {
-        "chat_id": int(tg_id),
-        "text": "Оплата прошла, подписка активна! Полный доступ открыт 🤸",
-    })
+    tg_id = await settle_yk_payment(payment_id)
+    if tg_id is not None:
+        await tg_call("sendMessage", {
+            "chat_id": tg_id,
+            "text": "Оплата прошла, подписка активна! Полный доступ открыт 🤸",
+        })
     return {"ok": True}
 
 
