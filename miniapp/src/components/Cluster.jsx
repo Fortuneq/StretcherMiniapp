@@ -12,12 +12,18 @@ const LAYOUT = [
   { x: 108, y: 128, s: 48 },
 ]
 
-export default function Cluster({ exercises }) {
+const BASE_WIDTH = 226
+
+export default function Cluster({ exercises, scale = 1 }) {
   const items = exercises.slice(0, LAYOUT.length)
   // Высота — по нижней точке реально показанных кружков, чтобы не было пустоты
-  const height = Math.max(...items.map((_, i) => LAYOUT[i].y + LAYOUT[i].s)) + 6
+  const height = (Math.max(...items.map((_, i) => LAYOUT[i].y + LAYOUT[i].s)) + 6) * scale
   return (
-    <div className="cluster" style={{ height }} aria-hidden="true">
+    <div
+      className="cluster"
+      style={{ height, width: BASE_WIDTH * scale }}
+      aria-hidden="true"
+    >
       {items.map((e, i) => {
         const p = LAYOUT[i]
         return (
@@ -26,7 +32,12 @@ export default function Cluster({ exercises }) {
             src={exerciseImg(e.image)}
             alt=""
             className="cluster__dot"
-            style={{ left: p.x, top: p.y, width: p.s, height: p.s }}
+            style={{
+              left: p.x * scale,
+              top: p.y * scale,
+              width: p.s * scale,
+              height: p.s * scale,
+            }}
             loading="lazy"
           />
         )

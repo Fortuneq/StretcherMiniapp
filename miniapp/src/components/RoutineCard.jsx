@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom'
 import { useSyncExternalStore } from 'react'
-import { categories, exerciseImg } from '../lib/data'
+import { categories } from '../lib/data'
 import { getAccess, subscribeAccess } from '../lib/access'
 import { LockIcon } from './Icons'
+import Cluster from './Cluster'
 
 export default function RoutineCard({ routine }) {
   const access = useSyncExternalStore(subscribeAccess, getAccess)
@@ -10,7 +11,7 @@ export default function RoutineCard({ routine }) {
   return (
     <Link className="rcard" to={`/routine/${routine.slug}`}>
       <div className="rcard__img">
-        <img src={exerciseImg(routine.cover)} alt="" loading="lazy" />
+        <Cluster exercises={routine.exercises} scale={0.62} />
         {locked && (
           <span className="lock-badge">
             <LockIcon width={14} height={14} />
