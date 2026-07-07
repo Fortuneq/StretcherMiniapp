@@ -19,9 +19,12 @@
   },
   "devDependencies": {
     "@capacitor/cli": "^8.4.1",
-    "@rolldown/binding-darwin-arm64": "^1.1.4",
     "@vitejs/plugin-react": "^6.0.3",
     "playwright": "^1.61.1",
     "vite": "^8.1.1"
+  },
+  "optionalDependencies": {
+    "@rolldown/binding-darwin-arm64": "^1.1.4",
+    "@rolldown/binding-linux-x64-gnu": "^1.1.4"
   }
 }
