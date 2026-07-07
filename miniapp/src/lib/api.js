@@ -39,11 +39,33 @@ export function pushCustomRoutines(routines) {
   })
 }
 
-// Оплата: получаем ссылку на инвойс и открываем нативное окно Telegram.
+// Оплата Stars: получаем ссылку на инвойс и открываем нативное окно Telegram.
 // Резолвится в true, если оплата прошла.
 export async function purchase(plan) {
   const { link } = await createInvoice(plan)
   return new Promise((resolve) => {
     tg.openInvoice(link, (status) => resolve(status === 'paid'))
   })
+}
+
+// Доступные способы оплаты (без авторизации)
+export async function fetchPayMethods() {
+  try {
+    const res = await fetch(`${BASE}/pay/methods`)
+    if (!res.ok) throw new Error()
+    return res.json()
+  } catch {
+    return { stars: true, yookassa: false }
+  }
+}
+
+// Оплата картой через ЮKassa: создаём платёж и открываем страницу оплаты.
+// details: { email, org_name?, inn? }
+export async function payYookassa(plan, buyerType, details) {
+  const { confirmation_url } = await request('/pay/yookassa', {
+    method: 'POST',
+    body: JSON.stringify({ plan, buyer_type: buyerType, ...details }),
+  })
+  if (tg?.openLink) tg.openLink(confirmation_url)
+  else window.open(confirmation_url, '_blank')
 }

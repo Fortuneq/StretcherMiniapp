@@ -7,18 +7,34 @@ import hashlib
 import hmac
 import json
 import os
+import re
 import sqlite3
 import time
+import uuid
 from urllib.parse import parse_qsl
 
 import httpx
-from fastapi import Depends, FastAPI, Header, HTTPException, Request
+from fastapi import Depends, FastAPI, Header, HTTPException, Request, Response
+from prometheus_client import (
+    CONTENT_TYPE_LATEST,
+    Counter,
+    Histogram,
+    Gauge,
+    generate_latest,
+)
 
 BOT_TOKEN = os.environ["BOT_TOKEN"]
 WEBHOOK_SECRET = os.environ.get("WEBHOOK_SECRET", "")
 DB_PATH = os.environ.get("DB_PATH", "/data/flexi.db")
 APP_URL = os.environ.get("APP_URL", "https://true-scale.ru/")
+DOCS_URL = os.environ.get("DOCS_URL", "https://true-scale.ru/docs/")
 TG_API = f"https://api.telegram.org/bot{BOT_TOKEN}"
+
+# ЮKassa: без ключей провайдер выключен (оплата картой недоступна)
+YOOKASSA_SHOP_ID = os.environ.get("YOOKASSA_SHOP_ID", "")
+YOOKASSA_SECRET_KEY = os.environ.get("YOOKASSA_SECRET_KEY", "")
+YOOKASSA_RETURN_URL = os.environ.get("YOOKASSA_RETURN_URL", "https://t.me/stretcher_robot")
+YK_API = "https://api.yookassa.ru/v3"
 
 TRIAL_HOURS = 24
 INIT_DATA_MAX_AGE = 24 * 3600
@@ -74,6 +90,77 @@ def init_db() -> None:
 
 
 init_db()
+
+
+# --- Метрики Prometheus ---
+
+HTTP_REQUESTS = Counter(
+    "flexi_http_requests_total", "HTTP-запросы", ["method", "path", "status"]
+)
+HTTP_DURATION = Histogram(
+    "flexi_http_request_duration_seconds", "Длительность запросов", ["method", "path"]
+)
+PAYMENTS_TOTAL = Gauge(
+    "flexi_payments_total", "Оплаты за всё время", ["provider", "plan"]
+)
+REVENUE_TOTAL = Gauge(
+    "flexi_revenue_total", "Выручка за всё время", ["provider", "plan", "currency"]
+)
+USERS_TOTAL = Gauge("flexi_users_total", "Всего пользователей")
+PREMIUM_ACTIVE = Gauge("flexi_premium_active", "Активных платных подписок")
+TRIAL_ACTIVE = Gauge("flexi_trial_active", "Пользователей на триале")
+CUSTOM_ROUTINES = Gauge("flexi_custom_routines_users", "Пользователей со своими программами")
+
+# Группируем пути, чтобы не плодить метки на каждый запрос
+KNOWN_PATHS = {
+    "/api/me", "/api/invoice", "/api/custom-routines",
+    "/api/tg-webhook", "/api/yk-webhook", "/api/pay/yookassa",
+    "/api/health", "/api/metrics",
+}
+
+
+@app.middleware("http")
+async def metrics_middleware(request: Request, call_next):
+    path = request.url.path if request.url.path in KNOWN_PATHS else "other"
+    start = time.monotonic()
+    response = await call_next(request)
+    HTTP_DURATION.labels(request.method, path).observe(time.monotonic() - start)
+    HTTP_REQUESTS.labels(request.method, path, response.status_code).inc()
+    return response
+
+
+def refresh_business_metrics() -> None:
+    now = int(time.time())
+    with db() as conn:
+        USERS_TOTAL.set(conn.execute("SELECT COUNT(*) FROM users").fetchone()[0])
+        PREMIUM_ACTIVE.set(
+            conn.execute(
+                "SELECT COUNT(*) FROM users WHERE premium_until > ?", (now,)
+            ).fetchone()[0]
+        )
+        TRIAL_ACTIVE.set(
+            conn.execute(
+                "SELECT COUNT(*) FROM users WHERE premium_until <= ? AND created_at + ? > ?",
+                (now, TRIAL_HOURS * 3600, now),
+            ).fetchone()[0]
+        )
+        CUSTOM_ROUTINES.set(
+            conn.execute("SELECT COUNT(*) FROM custom_routines").fetchone()[0]
+        )
+        for provider, plan, cnt, total, currency in conn.execute(
+            """SELECT provider, plan, COUNT(*), SUM(amount), currency
+               FROM payments GROUP BY provider, plan, currency"""
+        ):
+            PAYMENTS_TOTAL.labels(provider, plan).set(cnt)
+            # Stars храним в звёздах, ЮKassa — в копейках
+            value = total / 100 if currency == "RUB" else total
+            REVENUE_TOTAL.labels(provider, plan, currency).set(value)
+
+
+@app.get("/api/metrics")
+def metrics():
+    refresh_business_metrics()
+    return Response(generate_latest(), media_type=CONTENT_TYPE_LATEST)
 
 
 # --- Аутентификация по initData ---
@@ -201,6 +288,113 @@ def put_custom(body: dict, user: sqlite3.Row = Depends(current_user)):
     return {"ok": True, "updated_at": now}
 
 
+# --- ЮKassa: оплата картой для физлиц и юрлиц ---
+
+@app.get("/api/pay/methods")
+def pay_methods():
+    return {"stars": True, "yookassa": bool(YOOKASSA_SHOP_ID and YOOKASSA_SECRET_KEY)}
+
+
+@app.post("/api/pay/yookassa")
+async def pay_yookassa(body: dict, user: sqlite3.Row = Depends(current_user)):
+    if not (YOOKASSA_SHOP_ID and YOOKASSA_SECRET_KEY):
+        raise HTTPException(503, "оплата картой пока недоступна")
+    plan_id = body.get("plan")
+    plan = PLANS.get(plan_id)
+    if not plan:
+        raise HTTPException(400, "unknown plan")
+
+    email = (body.get("email") or "").strip()
+    if not re.fullmatch(r"[^@\s]+@[^@\s]+\.[^@\s]+", email):
+        raise HTTPException(400, "нужен e-mail для чека")
+
+    buyer_type = body.get("buyer_type", "individual")
+    customer = {"email": email}
+    if buyer_type == "company":
+        org_name = (body.get("org_name") or "").strip()
+        inn = (body.get("inn") or "").strip()
+        if not org_name:
+            raise HTTPException(400, "нужно название организации")
+        if not re.fullmatch(r"\d{10}", inn):
+            raise HTTPException(400, "ИНН организации должен состоять из 10 цифр")
+        customer = {"full_name": org_name, "inn": inn, "email": email}
+    elif buyer_type != "individual":
+        raise HTTPException(400, "buyer_type: individual или company")
+
+    amount = {"value": f"{plan['rub']:.2f}", "currency": "RUB"}
+    payload = {
+        "amount": amount,
+        "capture": True,
+        "confirmation": {"type": "redirect", "return_url": YOOKASSA_RETURN_URL},
+        "description": f"Подписка flexi · {plan['title']} (tg {user['tg_id']})",
+        "metadata": {
+            "tg_id": str(user["tg_id"]),
+            "plan": plan_id,
+            "buyer_type": buyer_type,
+        },
+        "receipt": {
+            "customer": customer,
+            "items": [{
+                "description": f"Доступ к сервису flexi · {plan['title']}",
+                "quantity": "1.00",
+                "amount": amount,
+                "vat_code": 1,
+                "payment_subject": "service",
+                "payment_mode": "full_payment",
+            }],
+        },
+    }
+    async with httpx.AsyncClient() as client:
+        r = await client.post(
+            f"{YK_API}/payments",
+            json=payload,
+            auth=(YOOKASSA_SHOP_ID, YOOKASSA_SECRET_KEY),
+            headers={"Idempotence-Key": str(uuid.uuid4())},
+            timeout=20,
+        )
+    data = r.json()
+    if r.status_code not in (200, 201) or "confirmation" not in data:
+        raise HTTPException(502, f"yookassa: {data.get('description', r.status_code)}")
+    return {
+        "payment_id": data["id"],
+        "confirmation_url": data["confirmation"]["confirmation_url"],
+    }
+
+
+@app.post("/api/yk-webhook")
+async def yk_webhook(request: Request):
+    if not (YOOKASSA_SHOP_ID and YOOKASSA_SECRET_KEY):
+        raise HTTPException(503, "not configured")
+    event = await request.json()
+    if event.get("event") != "payment.succeeded":
+        return {"ok": True}
+    payment_id = event.get("object", {}).get("id", "")
+    if not payment_id:
+        return {"ok": True}
+    # Телу вебхука не доверяем — статус подтверждаем прямым запросом к ЮKassa
+    async with httpx.AsyncClient() as client:
+        r = await client.get(
+            f"{YK_API}/payments/{payment_id}",
+            auth=(YOOKASSA_SHOP_ID, YOOKASSA_SECRET_KEY),
+            timeout=20,
+        )
+    payment = r.json()
+    if payment.get("status") != "succeeded":
+        return {"ok": True}
+    meta = payment.get("metadata", {})
+    plan_id = meta.get("plan")
+    tg_id = meta.get("tg_id")
+    if not (plan_id in PLANS and tg_id):
+        return {"ok": True}
+    kopeks = round(float(payment["amount"]["value"]) * 100)
+    grant_premium(int(tg_id), plan_id, "yookassa", kopeks, "RUB", payment_id)
+    await tg_call("sendMessage", {
+        "chat_id": int(tg_id),
+        "text": "Оплата прошла, подписка активна! Полный доступ открыт 🤸",
+    })
+    return {"ok": True}
+
+
 # --- Вебхук бота: платежи и /start ---
 
 async def tg_call(method: str, payload: dict) -> None:
@@ -268,14 +462,42 @@ async def tg_webhook(
             })
             return {"ok": True}
 
-        if (message.get("text") or "").startswith("/start"):
+        text = message.get("text") or ""
+
+        if text.startswith("/start"):
             await tg_call("sendMessage", {
                 "chat_id": chat_id,
-                "text": ("Привет! Я flexi — растяжка на каждый день.\n"
-                         "Первые сутки — полный доступ бесплатно."),
-                "reply_markup": {"inline_keyboard": [[
-                    {"text": "Открыть приложение", "web_app": {"url": APP_URL}}
-                ]]},
+                "text": (
+                    "Привет! Я flexi — растяжка на каждый день.\n"
+                    "Первые сутки — полный доступ бесплатно.\n\n"
+                    "Используя сервис, вы принимаете оферту и правила сервиса, "
+                    "политику обработки персональных данных и даёте согласие на "
+                    "обработку персональных данных (документы — по кнопкам ниже).\n"
+                    "Удалить свои данные можно в любой момент командой /delete_me."
+                ),
+                "reply_markup": {"inline_keyboard": [
+                    [{"text": "Открыть приложение", "web_app": {"url": APP_URL}}],
+                    [{"text": "📄 Оферта и правила сервиса", "url": f"{DOCS_URL}oferta.html"}],
+                    [{"text": "🔒 Политика обработки ПДн", "url": f"{DOCS_URL}privacy.html"}],
+                    [{"text": "📝 Согласие на обработку ПДн", "url": f"{DOCS_URL}consent.html"}],
+                ]},
+            })
+            return {"ok": True}
+
+        if text.startswith("/delete_me"):
+            tg_id = message["from"]["id"]
+            with db() as conn:
+                conn.execute("DELETE FROM custom_routines WHERE tg_id = ?", (tg_id,))
+                conn.execute("DELETE FROM users WHERE tg_id = ?", (tg_id,))
+                # payments храним: первичные учётные документы по 54-ФЗ
+            await tg_call("sendMessage", {
+                "chat_id": chat_id,
+                "text": (
+                    "Персональные данные удалены: профиль, подписка и сохранённые "
+                    "программы стёрты. Дальнейшее использование приложения станет "
+                    "возможным после повторного принятия оферты и политики ПДн — "
+                    "просто открой приложение заново."
+                ),
             })
     return {"ok": True}
 

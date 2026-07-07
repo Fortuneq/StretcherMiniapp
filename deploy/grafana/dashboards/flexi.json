@@ -1,0 +1,451 @@
+{
+ "uid": "flexi-main",
+ "title": "flexi · обзор",
+ "timezone": "browser",
+ "schemaVersion": 39,
+ "refresh": "30s",
+ "time": {
+  "from": "now-24h",
+  "to": "now"
+ },
+ "panels": [
+  {
+   "type": "stat",
+   "title": "Пользователи",
+   "gridPos": {
+    "x": 0,
+    "y": 0,
+    "w": 4,
+    "h": 5
+   },
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prom"
+   },
+   "options": {
+    "reduceOptions": {
+     "calcs": [
+      "lastNotNull"
+     ]
+    },
+    "graphMode": "area"
+   },
+   "fieldConfig": {
+    "defaults": {},
+    "overrides": []
+   },
+   "targets": [
+    {
+     "expr": "flexi_users_total",
+     "refId": "A",
+     "legendFormat": "__auto"
+    }
+   ],
+   "id": 1
+  },
+  {
+   "type": "stat",
+   "title": "Премиум активен",
+   "gridPos": {
+    "x": 4,
+    "y": 0,
+    "w": 4,
+    "h": 5
+   },
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prom"
+   },
+   "options": {
+    "reduceOptions": {
+     "calcs": [
+      "lastNotNull"
+     ]
+    },
+    "graphMode": "area"
+   },
+   "fieldConfig": {
+    "defaults": {},
+    "overrides": []
+   },
+   "targets": [
+    {
+     "expr": "flexi_premium_active",
+     "refId": "A",
+     "legendFormat": "__auto"
+    }
+   ],
+   "id": 2
+  },
+  {
+   "type": "stat",
+   "title": "На триале",
+   "gridPos": {
+    "x": 8,
+    "y": 0,
+    "w": 4,
+    "h": 5
+   },
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prom"
+   },
+   "options": {
+    "reduceOptions": {
+     "calcs": [
+      "lastNotNull"
+     ]
+    },
+    "graphMode": "area"
+   },
+   "fieldConfig": {
+    "defaults": {},
+    "overrides": []
+   },
+   "targets": [
+    {
+     "expr": "flexi_trial_active",
+     "refId": "A",
+     "legendFormat": "__auto"
+    }
+   ],
+   "id": 3
+  },
+  {
+   "type": "stat",
+   "title": "Оплат всего",
+   "gridPos": {
+    "x": 12,
+    "y": 0,
+    "w": 4,
+    "h": 5
+   },
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prom"
+   },
+   "options": {
+    "reduceOptions": {
+     "calcs": [
+      "lastNotNull"
+     ]
+    },
+    "graphMode": "area"
+   },
+   "fieldConfig": {
+    "defaults": {},
+    "overrides": []
+   },
+   "targets": [
+    {
+     "expr": "sum(flexi_payments_total)",
+     "refId": "A",
+     "legendFormat": "__auto"
+    }
+   ],
+   "id": 4
+  },
+  {
+   "type": "stat",
+   "title": "Выручка Stars, ⭐",
+   "gridPos": {
+    "x": 16,
+    "y": 0,
+    "w": 4,
+    "h": 5
+   },
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prom"
+   },
+   "options": {
+    "reduceOptions": {
+     "calcs": [
+      "lastNotNull"
+     ]
+    },
+    "graphMode": "area"
+   },
+   "fieldConfig": {
+    "defaults": {},
+    "overrides": []
+   },
+   "targets": [
+    {
+     "expr": "sum(flexi_revenue_total{currency=\"XTR\"})",
+     "refId": "A",
+     "legendFormat": "__auto"
+    }
+   ],
+   "id": 5
+  },
+  {
+   "type": "stat",
+   "title": "Выручка ЮKassa, ₽",
+   "gridPos": {
+    "x": 20,
+    "y": 0,
+    "w": 4,
+    "h": 5
+   },
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prom"
+   },
+   "options": {
+    "reduceOptions": {
+     "calcs": [
+      "lastNotNull"
+     ]
+    },
+    "graphMode": "area"
+   },
+   "fieldConfig": {
+    "defaults": {
+     "unit": "currencyRUB"
+    },
+    "overrides": []
+   },
+   "targets": [
+    {
+     "expr": "sum(flexi_revenue_total{currency=\"RUB\"})",
+     "refId": "A",
+     "legendFormat": "__auto"
+    }
+   ],
+   "id": 6
+  },
+  {
+   "type": "timeseries",
+   "title": "Оплаты по тарифам (всего)",
+   "gridPos": {
+    "x": 0,
+    "y": 5,
+    "w": 12,
+    "h": 8
+   },
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prom"
+   },
+   "fieldConfig": {
+    "defaults": {
+     "custom": {
+      "fillOpacity": 12,
+      "lineWidth": 2
+     }
+    },
+    "overrides": []
+   },
+   "targets": [
+    {
+     "expr": "sum(flexi_payments_total) by (plan, provider)",
+     "refId": "A",
+     "legendFormat": "{{plan}} · {{provider}}"
+    }
+   ],
+   "id": 7
+  },
+  {
+   "type": "timeseries",
+   "title": "Выручка по тарифам (всего)",
+   "gridPos": {
+    "x": 12,
+    "y": 5,
+    "w": 12,
+    "h": 8
+   },
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prom"
+   },
+   "fieldConfig": {
+    "defaults": {
+     "custom": {
+      "fillOpacity": 12,
+      "lineWidth": 2
+     }
+    },
+    "overrides": []
+   },
+   "targets": [
+    {
+     "expr": "sum(flexi_revenue_total) by (plan, currency)",
+     "refId": "A",
+     "legendFormat": "{{plan}} · {{currency}}"
+    }
+   ],
+   "id": 8
+  },
+  {
+   "type": "timeseries",
+   "title": "RPS по статусам",
+   "gridPos": {
+    "x": 0,
+    "y": 13,
+    "w": 8,
+    "h": 8
+   },
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prom"
+   },
+   "fieldConfig": {
+    "defaults": {
+     "custom": {
+      "fillOpacity": 12,
+      "lineWidth": 2
+     },
+     "unit": "reqps"
+    },
+    "overrides": []
+   },
+   "targets": [
+    {
+     "expr": "sum(rate(flexi_http_requests_total[5m])) by (status)",
+     "refId": "A",
+     "legendFormat": "{{status}}"
+    }
+   ],
+   "id": 9
+  },
+  {
+   "type": "timeseries",
+   "title": "Латентность p50 / p95",
+   "gridPos": {
+    "x": 8,
+    "y": 13,
+    "w": 8,
+    "h": 8
+   },
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prom"
+   },
+   "fieldConfig": {
+    "defaults": {
+     "custom": {
+      "fillOpacity": 12,
+      "lineWidth": 2
+     },
+     "unit": "s"
+    },
+    "overrides": []
+   },
+   "targets": [
+    {
+     "expr": "histogram_quantile(0.5, sum(rate(flexi_http_request_duration_seconds_bucket[5m])) by (le))",
+     "refId": "A",
+     "legendFormat": "p50"
+    },
+    {
+     "expr": "histogram_quantile(0.95, sum(rate(flexi_http_request_duration_seconds_bucket[5m])) by (le))",
+     "refId": "B",
+     "legendFormat": "p95"
+    }
+   ],
+   "id": 10
+  },
+  {
+   "type": "timeseries",
+   "title": "Ошибки 4xx/5xx, RPS",
+   "gridPos": {
+    "x": 16,
+    "y": 13,
+    "w": 8,
+    "h": 8
+   },
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prom"
+   },
+   "fieldConfig": {
+    "defaults": {
+     "custom": {
+      "fillOpacity": 12,
+      "lineWidth": 2
+     },
+     "unit": "reqps"
+    },
+    "overrides": []
+   },
+   "targets": [
+    {
+     "expr": "sum(rate(flexi_http_requests_total{status=~\"4..\"}[5m]))",
+     "refId": "A",
+     "legendFormat": "4xx"
+    },
+    {
+     "expr": "sum(rate(flexi_http_requests_total{status=~\"5..\"}[5m]))",
+     "refId": "B",
+     "legendFormat": "5xx"
+    }
+   ],
+   "id": 11
+  },
+  {
+   "type": "timeseries",
+   "title": "CPU контейнеров flexi",
+   "gridPos": {
+    "x": 0,
+    "y": 21,
+    "w": 12,
+    "h": 8
+   },
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prom"
+   },
+   "fieldConfig": {
+    "defaults": {
+     "custom": {
+      "fillOpacity": 12,
+      "lineWidth": 2
+     },
+     "unit": "percentunit"
+    },
+    "overrides": []
+   },
+   "targets": [
+    {
+     "expr": "sum(rate(container_cpu_usage_seconds_total{name=~\"flexi.*\"}[5m])) by (name)",
+     "refId": "A",
+     "legendFormat": "{{name}}"
+    }
+   ],
+   "id": 12
+  },
+  {
+   "type": "timeseries",
+   "title": "Память контейнеров flexi",
+   "gridPos": {
+    "x": 12,
+    "y": 21,
+    "w": 12,
+    "h": 8
+   },
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prom"
+   },
+   "fieldConfig": {
+    "defaults": {
+     "custom": {
+      "fillOpacity": 12,
+      "lineWidth": 2
+     },
+     "unit": "bytes"
+    },
+    "overrides": []
+   },
+   "targets": [
+    {
+     "expr": "container_memory_working_set_bytes{name=~\"flexi.*\"}",
+     "refId": "A",
+     "legendFormat": "{{name}}"
+    }
+   ],
+   "id": 13
+  }
+ ]
+}

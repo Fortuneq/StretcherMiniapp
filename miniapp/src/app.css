@@ -1400,3 +1400,18 @@ p {
 }
 .input:focus { border-color: var(--ink); }
 .sheet--save .btn { width: 100%; }
+
+/* Способы оплаты и юридическая строка на пэйволе */
+.paymethods { margin-bottom: 20px; }
+.paymethods__row { display: flex; flex-wrap: wrap; gap: 8px; }
+.paymethods__row .chip { flex: 1 1 auto; text-align: center; }
+.paymethods__fields { margin-top: 4px; }
+.paymethods__fields .input { margin: 10px 0 0; }
+.paywall__legal {
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+  margin: 22px 0 0;
+  line-height: 1.5;
+}
+.paywall__legal a { color: var(--ink-soft); }
