@@ -13,7 +13,8 @@ export function byCategory(cat) {
 }
 
 export function exerciseImg(image) {
-  return `${import.meta.env.BASE_URL}exercises/${image}`
+  // Иллюстрации пережаты в WebP; в данных исторически имена .png
+  return `${import.meta.env.BASE_URL}exercises/${image.replace(/\.png$/, '.webp')}`
 }
 
 // Описание техники: берём из словаря по name_en, затем из самого JSON,
