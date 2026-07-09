@@ -1,10 +1,10 @@
 import { NavLink } from 'react-router-dom'
 import { haptic } from '../lib/telegram'
-import { HomeIcon, BookmarkIcon, SparkleIcon, StatsIcon, GridIcon } from './Icons'
+import { HomeIcon, BodyIcon, SparkleIcon, StatsIcon, GridIcon } from './Icons'
 
 const tabs = [
-  { to: '/', label: 'Сегодня', Icon: HomeIcon },
-  { to: '/saved', label: 'Сохранённые', Icon: BookmarkIcon },
+  { to: '/', label: 'Что потянуть', Icon: BodyIcon },
+  { to: '/today', label: 'Сегодня', Icon: HomeIcon },
   { to: '/builder', label: 'Создать', Icon: SparkleIcon },
   { to: '/stats', label: 'Статистика', Icon: StatsIcon },
   { to: '/library', label: 'Практики', Icon: GridIcon },

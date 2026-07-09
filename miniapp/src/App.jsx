@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import TabBar from './components/TabBar'
+import BodyMap from './pages/BodyMap'
 import Today from './pages/Today'
 import Library from './pages/Library'
 import Saved from './pages/Saved'
@@ -38,7 +39,8 @@ export default function App() {
     <div className="app">
       <main className={isPlayer ? 'screen screen--player' : 'screen'}>
         <Routes>
-          <Route path="/" element={<Today />} />
+          <Route path="/" element={<BodyMap />} />
+          <Route path="/today" element={<Today />} />
           <Route path="/library" element={<Library />} />
           <Route path="/saved" element={<Saved />} />
           <Route path="/builder" element={<Builder />} />
@@ -47,7 +49,7 @@ export default function App() {
           <Route path="/player/:slug" element={<Player />} />
           <Route path="/paywall" element={<Paywall />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="*" element={<Today />} />
+          <Route path="*" element={<BodyMap />} />
         </Routes>
       </main>
       {!isPlayer && <TabBar />}

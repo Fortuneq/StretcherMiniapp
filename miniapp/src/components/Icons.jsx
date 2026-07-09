@@ -124,6 +124,15 @@ export function InfoIcon(props) {
   )
 }
 
+export function BodyIcon(props) {
+  return (
+    <svg {...base} {...props}>
+      <circle cx="12" cy="5" r="2.4" />
+      <path d="M12 8v6m0 0-3 6m3-6 3 6M6.5 10.5 12 9l5.5 1.5" />
+    </svg>
+  )
+}
+
 export function LockIcon(props) {
   return (
     <svg {...base} {...props}>
