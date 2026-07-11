@@ -3,6 +3,7 @@
 Аутентификация — подпись Telegram WebApp initData (заголовок Authorization: tma <initData>).
 Хранилище — SQLite. Платежи — абстракция провайдеров: сейчас Stars (XTR), позже ЮKassa.
 """
+import asyncio
 import hashlib
 import hmac
 import json
@@ -49,6 +50,9 @@ PLANS = {
 }
 
 app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
+
+# Общий клиент с пулом соединений — без TLS-хендшейка на каждый запрос
+http_client = httpx.AsyncClient(timeout=20)
 
 
 # --- БД ---
@@ -312,9 +316,8 @@ async def create_invoice(body: dict, user: sqlite3.Row = Depends(current_user)):
     provider = body.get("provider", "stars")
     if provider != "stars":  # ЮKassa подключим отдельным провайдером
         raise HTTPException(400, "provider not available")
-    async with httpx.AsyncClient() as client:
-        r = await client.post(
-            f"{TG_API}/createInvoiceLink",
+    r = await http_client.post(
+        f"{TG_API}/createInvoiceLink",
             json={
                 "title": f"Подписка stretcher · {plan['title']}",
                 "description": "Полный доступ ко всем практикам и конструктору",
@@ -389,14 +392,12 @@ async def create_yk_payment(plan, description, metadata, customer, return_url) -
             }],
         },
     }
-    async with httpx.AsyncClient() as client:
-        r = await client.post(
-            f"{YK_API}/payments",
-            json=payload,
-            auth=(YOOKASSA_SHOP_ID, YOOKASSA_SECRET_KEY),
-            headers={"Idempotence-Key": str(uuid.uuid4())},
-            timeout=20,
-        )
+    r = await http_client.post(
+        f"{YK_API}/payments",
+        json=payload,
+        auth=(YOOKASSA_SHOP_ID, YOOKASSA_SECRET_KEY),
+        headers={"Idempotence-Key": str(uuid.uuid4())},
+    )
     data = r.json()
     if r.status_code not in (200, 201) or "confirmation" not in data:
         raise HTTPException(502, f"yookassa: {data.get('description', r.status_code)}")
@@ -461,12 +462,10 @@ async def pay_yookassa(body: dict, user: sqlite3.Row = Depends(current_user)):
 async def settle_yk_payment(payment_id: str) -> int | None:
     """Проверяет платёж в ЮKassa; при успехе активирует подписку и возвращает
     tg_id покупателя. Идемпотентно."""
-    async with httpx.AsyncClient() as client:
-        r = await client.get(
-            f"{YK_API}/payments/{payment_id}",
-            auth=(YOOKASSA_SHOP_ID, YOOKASSA_SECRET_KEY),
-            timeout=20,
-        )
+    r = await http_client.get(
+        f"{YK_API}/payments/{payment_id}",
+        auth=(YOOKASSA_SHOP_ID, YOOKASSA_SECRET_KEY),
+    )
     payment = r.json()
     meta = payment.get("metadata", {})
     status = payment.get("status")
@@ -635,11 +634,12 @@ async def create_lead(body: dict):
     with db() as conn:
         conn.execute("UPDATE leads SET payment_id = ? WHERE id = ?", (data["id"], lead_id))
     utm_note = f", {utm}" if utm != "{}" else ""
-    await notify_admin(
+    # уведомление в фоне — не задерживаем редирект пользователя на оплату
+    asyncio.create_task(notify_admin(
         f"🆕 Лид #{lead_id}: {name} ({contact}, {email}) — "
         f"{plan['title']}, {plan['rub']} ₽, "
         f"{'юрлицо ' + str(org_name) if buyer_type == 'company' else 'физлицо'}{utm_note}"
-    )
+    ))
     return {
         "payment_id": data["id"],
         "confirmation_url": data["confirmation"]["confirmation_url"],
@@ -671,8 +671,7 @@ async def lead_status(payment_id: str = ""):
 # --- Вебхук бота: платежи и /start ---
 
 async def tg_call(method: str, payload: dict) -> None:
-    async with httpx.AsyncClient() as client:
-        await client.post(f"{TG_API}/{method}", json=payload, timeout=15)
+    await http_client.post(f"{TG_API}/{method}", json=payload)
 
 
 async def notify_admin(text: str) -> None:
@@ -714,6 +713,8 @@ async def tg_webhook(
     request: Request,
     x_telegram_bot_api_secret_token: str = Header(""),
 ):
+    """Ответ бота уходит прямо в HTTP-ответе вебхука (поле method) —
+    без исходящего запроса к api.telegram.org, мгновенно для пользователя."""
     if WEBHOOK_SECRET and x_telegram_bot_api_secret_token != WEBHOOK_SECRET:
         raise HTTPException(403, "bad secret")
     update = await request.json()
@@ -721,15 +722,21 @@ async def tg_webhook(
     if pcq := update.get("pre_checkout_query"):
         payload = pcq.get("invoice_payload", "")
         ok = payload.startswith("sub:") and payload.split(":")[2] in PLANS
-        await tg_call("answerPreCheckoutQuery", {
+        return {
+            "method": "answerPreCheckoutQuery",
             "pre_checkout_query_id": pcq["id"],
             "ok": ok,
             **({} if ok else {"error_message": "Неизвестный тариф, попробуй ещё раз."}),
-        })
-        return {"ok": True}
+        }
 
     if message := update.get("message"):
         chat_id = message["chat"]["id"]
+
+        def reply(text, keyboard=None):
+            resp = {"method": "sendMessage", "chat_id": chat_id, "text": text}
+            if keyboard:
+                resp["reply_markup"] = {"inline_keyboard": keyboard}
+            return resp
 
         if sp := message.get("successful_payment"):
             _, tg_id, plan_id = sp["invoice_payload"].split(":")
@@ -738,11 +745,7 @@ async def tg_webhook(
                 sp["total_amount"], sp["currency"],
                 sp.get("telegram_payment_charge_id"),
             )
-            await tg_call("sendMessage", {
-                "chat_id": chat_id,
-                "text": "Подписка активна! Полный доступ открыт — хорошей практики 🤸",
-            })
-            return {"ok": True}
+            return reply("Подписка активна! Полный доступ открыт — хорошей практики 🤸")
 
         text = message.get("text") or ""
 
@@ -752,51 +755,38 @@ async def tg_webhook(
             if len(parts) == 2 and parts[1].startswith("act_"):
                 plan_id = redeem_lead(parts[1].strip(), message["from"]["id"])
                 if plan_id:
-                    await tg_call("sendMessage", {
-                        "chat_id": chat_id,
-                        "text": (f"Оплата найдена — подписка «{PLANS[plan_id]['title']}» "
-                                 "активирована! Полный доступ открыт 🤸"),
-                        "reply_markup": {"inline_keyboard": [[
-                            {"text": "Открыть приложение", "web_app": {"url": APP_URL}}
-                        ]]},
-                    })
-                else:
-                    await tg_call("sendMessage", {
-                        "chat_id": chat_id,
-                        "text": ("Код активации не найден или уже использован. "
-                                 "Если ты оплатил на сайте — напиши нам, разберёмся."),
-                    })
-                return {"ok": True}
-            await tg_call("sendMessage", {
-                "chat_id": chat_id,
-                "text": (
-                    "Привет! Я stretcher — растяжка на каждый день.\n"
-                    "Первые сутки — полный доступ бесплатно.\n\n"
-                    "Используя сервис, вы принимаете оферту и правила сервиса, "
-                    "политику обработки персональных данных и даёте согласие на "
-                    "обработку персональных данных (документы — по кнопкам ниже).\n"
-                    "Удалить свои данные можно в любой момент командой /delete_me."
-                ),
-                "reply_markup": {"inline_keyboard": [
+                    return reply(
+                        f"Оплата найдена — подписка «{PLANS[plan_id]['title']}» "
+                        "активирована! Полный доступ открыт 🤸",
+                        [[{"text": "Открыть приложение", "web_app": {"url": APP_URL}}]],
+                    )
+                return reply(
+                    "Код активации не найден или уже использован. "
+                    "Если ты оплатил на сайте — напиши нам, разберёмся."
+                )
+            return reply(
+                "Привет! Я stretcher — растяжка на каждый день.\n"
+                "Первые сутки — полный доступ бесплатно.\n\n"
+                "Используя сервис, вы принимаете оферту и правила сервиса, "
+                "политику обработки персональных данных и даёте согласие на "
+                "обработку персональных данных (документы — по кнопкам ниже).\n"
+                "Удалить свои данные можно в любой момент командой /delete_me.",
+                [
                     [{"text": "Открыть приложение", "web_app": {"url": APP_URL}}],
                     [{"text": "📄 Оферта и правила сервиса", "url": f"{DOCS_URL}oferta.html"}],
                     [{"text": "🔒 Политика обработки ПДн", "url": f"{DOCS_URL}privacy.html"}],
                     [{"text": "📝 Согласие на обработку ПДн", "url": f"{DOCS_URL}consent.html"}],
-                ]},
-            })
-            return {"ok": True}
+                ],
+            )
 
         if text.startswith("/delete_me"):
             delete_user_data(message["from"]["id"], "delete_me")
-            await tg_call("sendMessage", {
-                "chat_id": chat_id,
-                "text": (
-                    "Персональные данные удалены: профиль, подписка и сохранённые "
-                    "программы стёрты. Дальнейшее использование приложения станет "
-                    "возможным после повторного принятия оферты и политики ПДн — "
-                    "просто открой приложение заново."
-                ),
-            })
+            return reply(
+                "Персональные данные удалены: профиль, подписка и сохранённые "
+                "программы стёрты. Дальнейшее использование приложения станет "
+                "возможным после повторного принятия оферты и политики ПДн — "
+                "просто открой приложение заново."
+            )
     return {"ok": True}
 
 

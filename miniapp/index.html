@@ -11,7 +11,9 @@
     <link rel="icon" href="./icon-192.png" type="image/png" />
     <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
     <link rel="manifest" href="./manifest.webmanifest" />
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="preload" as="image" href="./body/f-front.webp" />
+    <!-- SDK Telegram хостим у себя: без блокирующего запроса к telegram.org -->
+    <script src="./telegram-web-app.js"></script>
   </head>
   <body>
     <div id="root"></div>
