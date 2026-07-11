@@ -29,7 +29,7 @@ sudo docker run -d --name stretcher-app-new \
   stretcher-webapp
 # ждём готовности нового API, затем мгновенная подмена имён (docker DNS)
 for i in $(seq 1 20); do
-  sudo docker exec community-proxy-1 wget -qO /dev/null http://stretcher-api-new:8080/api/health && break
+  sudo docker exec community-proxy-1 wget -qO /dev/null http://stretcher-api-new:8080/api/health 2>/dev/null && break
   sleep 1
 done
 sudo docker rm -f stretcher-api stretcher-app 2>/dev/null || true
