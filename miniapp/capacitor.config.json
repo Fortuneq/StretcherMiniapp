@@ -1,9 +1,0 @@
-{
-  "appId": "com.flexi.stretch",
-  "appName": "stretcher",
-  "webDir": "dist",
-  "backgroundColor": "#f7f5f1",
-  "android": {
-    "allowMixedContent": false
-  }
-}
