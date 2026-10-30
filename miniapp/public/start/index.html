@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>stretcher — растяжка на каждый день · подписка</title>
+  <meta name="description" content="Программы растяжки в Telegram: 60+ практик, конструктор, статистика. Подписка от 250 ₽/мес.">
+  <link rel="icon" href="../icon.svg">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <header class="hero">
+    <div class="hero__logo">st</div>
+    <h1>Растяжка на каждый день —<br>прямо в Telegram</h1>
+    <p>61 программа для спины, шеи, бёдер и всего тела. Плеер с таймером,
+    конструктор своих программ, статистика и стрики. Без установки приложений.</p>
+    <a class="btn" href="#buy">Оформить подписку</a>
+    <p class="hero__try">Или попробуй бесплатно: <a href="https://t.me/stretcher_robot">@stretcher_robot</a> — первые сутки полный доступ</p>
+  </header>
+
+  <section class="features">
+    <div class="feature">
+      <img src="../exercises/image_00077.webp" alt="">
+      <h3>61 программа</h3>
+      <p>Утро, офис, спина, шпагат, после бега — от 3 до 30 минут.</p>
+    </div>
+    <div class="feature">
+      <img src="../exercises/image_00013.webp" alt="">
+      <h3>Свои программы</h3>
+      <p>Собери растяжку из 140 упражнений с иллюстрациями и описаниями.</p>
+    </div>
+    <div class="feature">
+      <img src="../exercises/image_00023.webp" alt="">
+      <h3>Прогресс и стрики</h3>
+      <p>Флексометр, история практик и напоминание не прервать серию.</p>
+    </div>
+  </section>
+
+  <section class="buy" id="buy">
+    <h2>Подписка</h2>
+    <div class="plans" id="plans">
+      <label class="plan"><input type="radio" name="plan" value="month">
+        <span class="plan__t">1 месяц</span><span class="plan__p">600 ₽</span><span class="plan__m">полная цена</span></label>
+      <label class="plan"><input type="radio" name="plan" value="quarter">
+        <span class="plan__t">3 месяца</span><span class="plan__p">1200 ₽</span><span class="plan__m">400 ₽/мес · −33%</span></label>
+      <label class="plan is-hot"><input type="radio" name="plan" value="year" checked>
+        <span class="plan__t">1 год <em>выгодно</em></span><span class="plan__p">3000 ₽</span><span class="plan__m">250 ₽/мес · −58%</span></label>
+    </div>
+
+    <form id="leadform" autocomplete="on">
+      <div class="seg" id="buyer">
+        <button type="button" class="seg__b is-active" data-v="individual">Физ. лицо</button>
+        <button type="button" class="seg__b" data-v="company">Юр. лицо / ИП</button>
+      </div>
+      <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off">
+      <input type="text" name="name" placeholder="Имя" required maxlength="120">
+      <input type="text" name="contact" placeholder="Telegram (@ник) или телефон" required maxlength="120">
+      <input type="email" name="email" placeholder="E-mail — на него придёт чек" required maxlength="120">
+      <div id="orgfields" hidden>
+        <input type="text" name="org_name" placeholder="Название организации" maxlength="120">
+        <input type="text" name="inn" placeholder="ИНН (10 цифр)" inputmode="numeric" maxlength="10" pattern="\d{10}">
+      </div>
+      <button class="btn btn--submit" type="submit" id="paybtn">Оплатить</button>
+      <p class="err" id="err" hidden></p>
+      <p class="legal">Нажимая «Оплатить», вы принимаете
+        <a href="../docs/oferta.html" target="_blank">оферту и правила сервиса</a>,
+        <a href="../docs/privacy.html" target="_blank">политику обработки ПДн</a> и даёте
+        <a href="../docs/consent.html" target="_blank">согласие на обработку ПДн</a>.
+        Оплата через ЮKassa. После оплаты пришлём ссылку для активации доступа в Telegram.</p>
+    </form>
+  </section>
+
+  <footer>
+    <p>stretcher · <a href="https://t.me/stretcher_robot">@stretcher_robot</a> ·
+    <a href="../docs/oferta.html">оферта</a> · <a href="../docs/privacy.html">политика ПДн</a></p>
+  </footer>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
